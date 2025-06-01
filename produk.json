@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "amount": "50",
+    "unit": "Instagram Followers",
+    "price": 15000,
+    "discount": "20% OFF",
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 2,
+    "amount": "100",
+    "unit": "Instagram Followers",
+    "price": 25000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 3,
+    "amount": "250",
+    "unit": "Instagram Followers",
+    "price": 30000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 4,
+    "amount": "500",
+    "unit": "Instagram Followers",
+    "price": 40000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 5,
+    "amount": "1.000",
+    "unit": "Instagram Followers",
+    "price": 50000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 6,
+    "amount": "2.500",
+    "unit": "Instagram Followers",
+    "price": 60000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 7,
+    "amount": "5.000",
+    "unit": "Instagram Followers",
+    "price": 70000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 8,
+    "amount": "10.000",
+    "unit": "Instagram Followers",
+    "price": 80000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  },
+  {
+    "id": 9,
+    "amount": "20.000",
+    "unit": "Instagram Followers",
+    "price": 90000,
+    "discount": null,
+    "features": [
+      "High quality followers",
+      "Instant start",
+      "24/7 support"
+    ]
+  }
+]
