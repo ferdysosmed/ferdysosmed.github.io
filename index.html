@@ -1,421 +1,287 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+ <!DOCTYPE html>
+ <html lang="id">
+ <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instagram Followers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dekko&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <title>Diamond Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212; /* Latar belakang gelap */
+      color: #fff; /* Teks putih */
       margin: 0;
-      font-family: 'Dekko', sans-serif;
-      background-color: #0a0a0a;
-      color: white;
-      user-select: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Memastikan body memenuhi tinggi viewport */
     }
 
-    .animated-bg {
-      position: fixed;
+    header {
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: -1;
-      opacity: 0.4;
-      filter: blur(2px);
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .out-top {
-      animation: rotate 20s linear infinite;
-      transform-origin: 13px 25px;
-    }
-
-    .in-top {
-      animation: rotate 10s linear infinite;
-      transform-origin: 13px 25px;
-    }
-
-    .out-bottom {
-      animation: rotate 25s linear infinite;
-      transform-origin: 84px 93px;
-    }
-
-    .in-bottom {
-      animation: rotate 15s linear infinite;
-      transform-origin: 84px 93px;
-    }
-
-    .sticky-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #121212;
+      background-color: #333; /* Header lebih gelap */
+      z-index: 1000;
       display: flex;
       align-items: center;
-      padding: 10px 20px;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 15px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Bayangan lebih gelap */
     }
 
-    .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
+    header img {
+      height: 30px;
       margin-right: 10px;
     }
 
-    .title {
-      font-size: 20px;
-      color: white;
-      font-weight: bold;
-    }
-
-    /* WhatsApp icon styles */
-    .whatsapp-icon {
-      margin-left: auto;
-      color: #25D366;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      transition: transform 0.3s ease;
-    }
-
-    .whatsapp-icon:hover {
-      transform: scale(1.2);
-      color: #1ebe57;
+    header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0;
     }
 
     .container {
-      padding: 100px 40px 40px 40px;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
+      padding: 20px;
+      flex: 1; /* Memastikan container mengambil sisa ruang vertikal */
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
-      margin-bottom: 40px;
     }
 
-    .product {
-      background-color: #121212;
-      border: 1px solid #222;
-      border-radius: 10px;
+    .product-card {
+      background: #444; /* Kartu produk lebih gelap */
+      border-radius: 12px;
       padding: 20px;
-      text-align: center;
-      position: relative;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* Bayangan lebih gelap */
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .product:hover:not(.selected) {
-      background-color: #800080;
-      transform: scale(1.05);
-      color: white;
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5); /* Bayangan lebih gelap saat hover */
     }
 
-    .product.selected {
-      background-color: #e6007e;
-      color: white;
-    }
-
-    .product.selected .discount {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: black;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-    }
-
-    .product h2 {
-      margin: 10px 0 5px;
-      font-size: 28px;
-    }
-
-    .product p {
-      font-size: 14px;
-    }
-
-    .discount {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: black;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-    }
-
-    .product-detail {
-      background-color: #111;
-      padding: 30px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .product-detail h2 {
+    .product-card h2 {
+      margin-top: 0;
       font-size: 24px;
-      margin-bottom: 10px;
+      font-weight: 600;
     }
 
-    .detail-discount {
-      background-color: #e6007e;
+    .price-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price-icon {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .prices {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .new-price {
+      font-size: 20px;
+      color: #00EFFF;
+      font-weight: 600;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #aaa; /* Warna lebih redup untuk harga lama */
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .info {
+      margin-top: 10px;
+    }
+
+    .disc {
+      background: #FF4136; /* Merah */
       padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.9em;
+      border-radius: 99px;
+      font-size: 14px;
+      margin-right: 5px;
+      color: #fff; /* Teks putih untuk kontras */
+      font-weight: 600;
+    }
+
+    a.instant {
+      background: #eee; /* Tombol lebih gelap */
+      padding: 5px 10px;
+      border-radius: 99px;
+      font-size: 14px;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
       display: inline-block;
-      margin-bottom: 10px;
     }
 
-    .price {
-      font-size: 32px;
-      font-weight: bold;
-      margin: 20px 0;
+    a.instant:hover {
+      background: #ddd; /* Efek hover lebih gelap */
     }
 
-    .buy-button {
-      background-color: #e6007e;
-      border: none;
-      color: white;
-      padding: 15px 30px;
-      font-size: 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      outline: none;
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
     }
 
-    .buy-button:hover {
-      background-color: #b30065;
-    }
-
-    .features {
-      margin-top: 20px;
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .features li {
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 100px 20px 20px 20px;
+    /* Responsive scaling untuk ukuran kecil tetap 2 kolom, tapi mengecil */
+    @media (max-width: 768px) {
+      .product-card {
+        padding: 15px;
       }
 
-      h1 {
-        font-size: 24px;
+      .product-card h2 {
+        font-size: 18px;
       }
 
-      .product-grid {
-        grid-template-columns: 1fr;
+      .price-icon {
+        width: 35px;
+        height: 35px;
       }
 
-      .product h2 {
-        font-size: 22px;
+      .new-price {
+        font-size: 16px;
       }
 
-      .product p {
+      .old-price {
         font-size: 12px;
       }
 
-      .product-detail h2 {
+      .disc,
+      a.instant {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      header h1 {
         font-size: 20px;
       }
 
-      .price {
-        font-size: 24px;
+      header img {
+        height: 24px;
       }
+    }
 
-      .buy-button {
-        width: 100%;
+    @media (max-width: 480px) {
+      .product-card {
         padding: 12px;
+      }
+
+      .product-card h2 {
+        font-size: 16px;
+      }
+
+      .price-icon {
+        width: 30px;
+        height: 30px;
+      }
+
+      .new-price {
         font-size: 14px;
       }
 
-      .features li {
-        font-size: 14px;
+      .old-price {
+        font-size: 11px;
       }
-    }
 
-    .scroll-buttons {
-      position: fixed;
-      right: 20px;
-      bottom: 40px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
+      .disc,
+      a.instant {
+        font-size: 11px;
+        padding: 3px 6px;
+      }
 
-    .scroll-buttons.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
+      header h1 {
+        font-size: 18px;
+      }
 
-    .scroll-button {
-      background-color: #e6007e;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 10px;
-      font-size: 28px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    .scroll-button:hover {
-      background-color: #b30065;
+      header img {
+        height: 20px;
+      }
     }
   </style>
-</head>
-<body>
-  <!-- Background SVG Animation -->
-  <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80" class="animated-bg">
-    <path fill="#9b5de5" class="out-top" d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z"/>
-    <path fill="#f15bb5" class="in-top" d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z"/>
-    <path fill="#00bbf9" class="out-bottom" d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z"/>
-    <path fill="#00f5d4" class="in-bottom" d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z"/>
-  </svg>
+  <!-- Moment Timezone -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js"></script>
+ </head>
+ <body>
 
   <!-- Sticky Header -->
-  <header class="sticky-header">
-    <img src="https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true" alt="Logo" class="logo" />
-    <span class="title">FERDY SOSMED</span>
-    <a href="https://wa.me/62895637181265" target="_blank" class="whatsapp-icon" title="Hubungi via WhatsApp">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
-        <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
-      </svg>
-    </a>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="icon" />
+    <h1>Diamond Shop</h1>
   </header>
 
   <div class="container">
-    <h1>Instagram Followers</h1>
-    <div class="product-grid" id="productGrid"></div>
-    <div class="product-detail" id="productDetail"></div>
+    <div class="product-grid" id="productGrid">
+      <!-- Produk akan dimuat dari produk.json -->
+    </div>
   </div>
 
-  <!-- Scroll Buttons -->
-  <div class="scroll-buttons" id="scrollButtons">
-    <button class="scroll-button" id="backToTop" title="Back to Top">
-      <span class="material-symbols-outlined">arrow_upward</span>
-    </button>
-    <button class="scroll-button" id="backToBottom" title="Back to Bottom">
-      <span class="material-symbols-outlined">arrow_downward</span>
-    </button>
-  </div>
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year"></span> YanaMiku All Rights Reserved
+  </footer>
 
   <script>
-    function formatPrice(price) {
-      return 'Rp ' + price.toFixed(2);
+    // Fungsi untuk mendapatkan tahun saat ini
+    function getYear() {
+      return moment.tz('Asia/Jakarta').format('YYYY');
     }
 
-    function renderProducts(products) {
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      products.forEach((prod, index) => {
-        const div = document.createElement('div');
-        div.classList.add('product');
-        if (index === 0) div.classList.add('selected');
-        div.dataset.id = prod.id;
-        div.innerHTML = `
-          ${prod.discount ? `<span class="discount">${prod.discount}</span>` : ''}
-          <h2>${prod.amount}</h2>
-          <p>${prod.unit}</p>
-        `;
-        div.addEventListener('click', () => selectProduct(prod.id, products));
-        grid.appendChild(div);
-      });
-    }
+    // Set tahun saat halaman dimuat
+    document.getElementById('year').textContent = getYear();
 
-    function renderDetail(product) {
-      const detail = document.getElementById('productDetail');
-      detail.innerHTML = `
-        <h2>${product.amount} ${product.unit}</h2>
-        ${product.discount ? `<span class="detail-discount">${product.discount}</span>` : ''}
-        <p class="price">${formatPrice(product.price)}</p>
-        <button class="buy-button">Buy ${product.amount} ${product.unit}</button>
-        <ul class="features">
-          ${product.features.map(f => `<li>✔ ${f}</li>`).join('')}
-        </ul>
-      `;
-    }
-
-    function selectProduct(id, products) {
-      document.querySelectorAll('.product').forEach(prodEl => {
-        prodEl.classList.toggle('selected', prodEl.dataset.id == id);
-      });
-      const product = products.find(p => p.id == id);
-      if (product) renderDetail(product);
-    }
-
-    fetch('produk.json')
+    fetch('produk.json', { cache: "no-cache" })
       .then(response => response.json())
-      .then(products => {
-        renderProducts(products);
-        if (products.length > 0) renderDetail(products[0]);
+      .then(data => {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+
+        data.forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'product-card';
+
+          // Kondisi untuk menampilkan atau menyembunyikan bubble diskon
+          const diskonBubble = product.diskon && product.diskon > 0 ? `<span class="disc">Disc ${product.diskon}%</span>` : '';
+
+          card.innerHTML = `
+            <h2>${product.jumlah} Diamonds</h2>
+            <div class="price-wrapper">
+              <img src="${product.ikon}" alt="icon" class="price-icon" />
+              <div class="prices">
+                <span class="old-price">Rp ${product.harga_awal.toLocaleString('id-ID')}</span>
+                <span class="new-price">Rp ${product.harga_diskon.toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+            <div class="info">
+              ${diskonBubble}
+              <a href="${product.link}" class="instant" target="_blank" rel="noopener noreferrer">BUY</a>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
       })
-      .catch(err => {
-        console.error('Gagal load produk.json:', err);
-        document.getElementById('productGrid').innerHTML = '<p>Error loading products.</p>';
+      .catch(error => {
+        console.error('Gagal memuat produk:', error);
+        document.getElementById('productGrid').innerHTML = '<p>Gagal memuat produk. Silakan coba lagi nanti.</p>';
       });
-
-    document.addEventListener('copy', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-
-    const scrollButtons = document.getElementById('scrollButtons');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 200) {
-        scrollButtons.classList.add('show');
-      } else {
-        scrollButtons.classList.remove('show');
-      }
-    });
-
-    document.getElementById('backToTop').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    document.getElementById('backToBottom').addEventListener('click', () => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    });
   </script>
-</body>
-</html>
+ </body>
+ </html>
+ 
