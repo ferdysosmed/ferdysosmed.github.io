@@ -1,110 +1,40 @@
 [
   {
-    "id": 1,
-    "amount": "50",
-    "unit": "Instagram Followers",
-    "price": 15000,
-    "discount": "20% OFF",
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 50,
+    "harga_awal": 8000,
+    "harga_diskon": 6394,
+    "diskon": 20,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   },
   {
-    "id": 2,
-    "amount": "100",
-    "unit": "Instagram Followers",
-    "price": 25000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 70,
+    "harga_awal": 10182,
+    "harga_diskon": 8795,
+    "diskon": 14
   },
   {
-    "id": 3,
-    "amount": "250",
-    "unit": "Instagram Followers",
-    "price": 30000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 100,
+    "harga_awal": 14883,
+    "harga_diskon": 12796,
+    "diskon": 14
   },
   {
-    "id": 4,
-    "amount": "500",
-    "unit": "Instagram Followers",
-    "price": 40000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 140,
+    "harga_awal": 20364,
+    "harga_diskon": 17598,
+    "diskon": 14
   },
   {
-    "id": 5,
-    "amount": "1.000",
-    "unit": "Instagram Followers",
-    "price": 50000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 210,
+    "harga_awal": 30546,
+    "harga_diskon": 26404,
+    "diskon": 14
   },
   {
-    "id": 6,
-    "amount": "2.500",
-    "unit": "Instagram Followers",
-    "price": 60000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
-  },
-  {
-    "id": 7,
-    "amount": "5.000",
-    "unit": "Instagram Followers",
-    "price": 70000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
-  },
-  {
-    "id": 8,
-    "amount": "10.000",
-    "unit": "Instagram Followers",
-    "price": 80000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
-  },
-  {
-    "id": 9,
-    "amount": "20.000",
-    "unit": "Instagram Followers",
-    "price": 90000,
-    "discount": null,
-    "features": [
-      "High quality followers",
-      "Instant start",
-      "24/7 support"
-    ]
+    "jumlah": 300,
+    "harga_awal": 46297,
+    "harga_diskon": 38412,
+    "diskon": 17
   }
 ]
