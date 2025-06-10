@@ -11,30 +11,40 @@
     "jumlah": 70,
     "harga_awal": 10182,
     "harga_diskon": 8795,
-    "diskon": 14
+    "diskon": 14,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   },
   {
     "jumlah": 100,
     "harga_awal": 14883,
     "harga_diskon": 12796,
-    "diskon": 14
+    "diskon": 14,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   },
   {
     "jumlah": 140,
     "harga_awal": 20364,
     "harga_diskon": 17598,
-    "diskon": 14
+    "diskon": 14,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   },
   {
     "jumlah": 210,
     "harga_awal": 30546,
     "harga_diskon": 26404,
-    "diskon": 14
+    "diskon": 14,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   },
   {
     "jumlah": 300,
     "harga_awal": 46297,
     "harga_diskon": 38412,
-    "diskon": 17
+    "diskon": 17,
+    "ikon": "https://github.com/YanaMiku-Project/database-public/blob/main/image/logo.jpg?raw=true",
+    "link": "https://wa.me/6285793589243"
   }
 ]
