@@ -1,147 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>TikTok dan Instagram</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Services</title>
   <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      background-color: #121212;
-    }
-
-    .container {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .container h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-      color: #00ff99;
-    }
-
-    .container p {
-      font-size: 16px;
-      color: #ccc;
-      max-width: 800px;
-      margin: 0 auto 30px auto;
-    }
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 0 20px 40px 20px;
-    }
-
-    .product {
-      background-color: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 255, 128, 0.1);
-      transition: transform 0.2s ease;
-      color: #ddd;
-      padding: 20px;
-      box-sizing: border-box;
-      width: 90%;
-      max-width: 300px;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 255, 128, 0.2);
-    }
-
-    .product img {
-      width: 100%;
-      transition: all 0.3s ease;
-      clip-path: polygon(0 100%, 0 0, 100% 0, 100% 70%);
-    }
-
-    .product img:hover {
-      clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
-      transform: scale(1.1);
-    }
-
-    .product h2 {
-      font-size: 20px;
-      margin-top: 15px;
-      color: #90ee90;
-    }
-
-    .product span {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    .product a.price {
-      display: inline-block;
-      margin-top: 25px;
-      text-align: center;
-      font-size: 18px;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, #00ff99, #00cc66);
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      transition: 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 255, 128, 0.3);
-    }
-
-    .product a.price:hover {
-      background: linear-gradient(135deg, #00cc66, #00ff99);
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 255, 128, 0.4);
-    }
-
-    /* Responsive Breakpoints */
-    @media (min-width: 600px) {
-      .product {
-        width: 45%;
-      }
-    }
-
-    @media (min-width: 900px) {
-      .product {
-        width: 30%;
-      }
-    }
-
-    @media (min-width: 1600px) {
-      .product {
-        width: 22%;
-      }
-    }
-
-    @media (min-width: 2560px) {
-      .product {
-        width: 18%;
-      }
-    }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 30px; background: #fff; }
+    h2 { color: #333; }
+    a { display: block; margin: 10px; color: #2196F3; font-size: 20px; text-decoration: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-  <div class="products">
-    <div class="product">
-      <img src="https://assets.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p3/75/2025/01/21/ilustrasi-logo-instagram-4180803046.jpg" alt="Instagram Service">
-      <h2>Instagram Boost</h2>
-      <a href="/instagram" class="price">Lihat Layanan</a>
-    </div>
-
-    <div class="product">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE96XgM3awNlkKJosR4WOeZEoX8WThz3JkwA&s" alt="TikTok Service">
-      <h2>TikTok Boost</h2>
-      <a href="/tiktok" class="price">Lihat Layanan</a>
-    </div>
-  </div>
+  <h2>Pilih Layanan TikTok</h2>
+  <a href="like.html">Like</a>
+  <a href="view.html">View</a>
+  <a href="share.html">Share</a>
+  <a href="../index.html">← Kembali</a>
 </body>
 </html>
