@@ -6,40 +6,76 @@
   <title>Keranjang</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
     .cart-item {
       display: flex;
       justify-content: space-between;
-      padding: 8px;
-      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
     }
     .cart-item button {
       background: red;
       color: white;
       border: none;
       padding: 4px 8px;
+      border-radius: 4px;
       cursor: pointer;
     }
     .total {
       font-weight: bold;
+      font-size: 18px;
       margin-top: 20px;
     }
-    .whatsapp-button {
-      display: inline-block;
+    .btn-group {
       margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .whatsapp-button {
       background-color: green;
       color: white;
       padding: 10px 20px;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      flex: 1;
+    }
+    .back-button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: bold;
+      flex: 1;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🛒 Keranjang Belanja</h1>
+    <p class="description">Berikut adalah produk yang telah kamu pilih. Kamu bisa hapus, kembali, atau langsung beli sekarang via WhatsApp.</p>
     <div id="cart-list"></div>
     <p class="total">Total: Rp <span id="total-price">0</span></p>
-    <a id="whatsapp-link" class="whatsapp-button" href="#" target="_blank">Pesan via WhatsApp</a>
+    <div class="btn-group">
+      <a id="whatsapp-link" class="whatsapp-button" href="#" target="_blank">Beli Sekarang</a>
+      <a href="index.html" onclick="location.href=this.href; return false;" class="back-button">⬅ Kembali</a>
+    </div>
   </div>
 
   <script>
