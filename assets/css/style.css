@@ -20,15 +20,15 @@ h1, h2 {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .button {
-  background-color: #00c853; /* Hijau terang */
+  background-color: #00c853;
   color: white;
-  border: none;
   padding: 10px 20px;
+  border: none;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  text-align: center;
 }
 .service-card {
   background-color: #222;
@@ -48,15 +48,15 @@ h1, h2 {
   margin-top: 15px;
 }
 .add-to-cart {
-  background-color: #00c853; /* Hijau terang */
+  background-color: #00c853;
   color: white;
-  border: none;
   padding: 10px 20px;
+  border: none;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .add-to-cart:hover {
