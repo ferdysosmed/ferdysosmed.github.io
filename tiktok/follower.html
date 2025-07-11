@@ -15,6 +15,20 @@
     }
     .service-card .add-to-cart {
         margin-left: 0; /* Hapus margin kiri yang mungkin ada dari style.css */
+        /* Memastikan warna latar belakang tombol "Tambah ke Keranjang" adalah hijau */
+        background-color: #00c853; /* Warna hijau yang sama dengan tombol "Pesan" */
+        color: white; /* Pastikan teks tetap putih */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .service-card .add-to-cart:hover {
+        background-color: #007e33; /* Hijau gelap saat hover */
     }
   </style>
 </head>
@@ -219,7 +233,6 @@
   </div>
   <script src="../assets/js/cart.js"></script>
   <script>
-    // Removed the getGeminiContentSuggestion function and its event listener
     document.addEventListener('DOMContentLoaded', () => {
       // Any existing DOMContentLoaded logic can go here if needed
     });
