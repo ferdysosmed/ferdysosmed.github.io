@@ -47,10 +47,8 @@ h1, h2 {
   gap: 10px;
   margin-top: 15px;
 }
-
-/* Tombol Tambah ke Keranjang */
 .add-to-cart {
-  background-color: #00c851; /* Hijau terang */
+  background-color: #00c853; /* Hijau terang */
   color: white;
   border: none;
   padding: 10px 20px;
