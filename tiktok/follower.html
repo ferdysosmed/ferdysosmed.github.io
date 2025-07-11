@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Follower TikTok</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Penyesuaian untuk tombol Pesan dan Tambah ke Keranjang agar berdampingan */
+    .service-card .button,
+    .service-card .add-to-cart {
+      display: inline-block; /* Agar berdampingan */
+      width: auto; /* Otomatis menyesuaikan konten */
+      margin-right: 10px; /* Jarak antara tombol */
+    }
+    .service-card .add-to-cart {
+        margin-left: 0; /* Hapus margin kiri yang mungkin ada dari style.css */
+    }
+  </style>
 </head>
 <body>
   <!-- 🔼 ICON KERANJANG DI POJOK KANAN BAWAH TENGAH -->
@@ -206,5 +218,11 @@
     <a href="index.html" class="button">Kembali</a>
   </div>
   <script src="../assets/js/cart.js"></script>
+  <script>
+    // Removed the getGeminiContentSuggestion function and its event listener
+    document.addEventListener('DOMContentLoaded', () => {
+      // Any existing DOMContentLoaded logic can go here if needed
+    });
+  </script>
 </body>
 </html>
