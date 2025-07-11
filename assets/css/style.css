@@ -19,17 +19,23 @@ h1, h2 {
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
 .button {
-  background-color: #00c853;
+  background-color: #00c851;     /* hijau terang */
   color: white;
-  padding: 10px 20px;
-  border: none;
+  font-weight: bold;
+  padding: 10px 18px;
   border-radius: 8px;
+  font-size: 14px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 10px;
-  text-align: center;
+  transition: background-color 0.3s ease;
 }
+
+.button:hover {
+  background-color: #007e33;     /* hijau gelap saat hover */
+}
+
 .service-card {
   background-color: #222;
   padding: 15px;
