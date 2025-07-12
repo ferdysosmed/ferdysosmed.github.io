@@ -43,14 +43,14 @@ h1, h2 {
   color: white;
   text-align: center;
   flex: 1;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.add-to-cart, .button:hover {
+.add-to-cart:hover, .button:hover {
   background-color: #007e33; /* Hijau gelap saat hover */
 }
