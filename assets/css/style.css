@@ -24,9 +24,9 @@ h1, h2 {
   background-color: #00c851;     /* hijau terang */
   color: white;
   font-weight: bold;
-  padding: 8px 14px;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.3s ease;
