@@ -42,13 +42,17 @@ h1, h2 {
   background-color: #00c853;
   color: white;
   text-align: center;
-  flex: 1;
-  padding: 10px;
+  /* flex: 1; removed as it's not needed with fixed width/padding */
+  padding: 12px 20px; /* Increased padding for better size */
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 16px; /* Adjusted font size for better readability */
+  display: inline-block; /* Ensures padding and width apply correctly */
+  min-width: 120px; /* Minimum width to prevent being too small */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 
 .add-to-cart:hover, .button:hover {
