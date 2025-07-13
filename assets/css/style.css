@@ -49,24 +49,38 @@ h1, h2 {
   gap: 10px;
   margin-top: 15px;
 }
-
-.add-to-cart, .button {
-  background-color: #00c853;
-  color: white;
-  text-align: center;
-  /* flex: 1; removed as it's not needed with fixed width/padding */
-  padding: 12px 20px; /* Increased padding for better size */
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 16px; /* Adjusted font size for better readability */
-  display: inline-block; /* Ensures padding and width apply correctly */
-  min-width: 120px; /* Minimum width to prevent being too small */
-  box-sizing: border-box; /* Include padding in the element's total width and height */
+/* Merapikan tombol pesan & tambah ke keranjang */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.add-to-cart:hover, .button:hover {
-  background-color: #007e33; /* Hijau gelap saat hover */
+.button,
+.add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00c851;
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover,
+.add-to-cart:hover {
+  background-color: #007e33;
+}
+
+/* Hilangkan bayangan tombol default browser */
+.add-to-cart {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }
