@@ -25,17 +25,27 @@ h1, h2 {
   padding: 15px;
   border-radius: 10px;
   margin: 10px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Membuat service-card sebagai flex container */
+  flex-direction: column; /* Item di dalamnya akan tersusun vertikal */
+  justify-content: space-between; /* Beri ruang antara item secara vertikal */
+  align-items: center; /* Pusatkan item secara horizontal */
+  text-align: center; /* Memastikan teks di tengah */
 }
 
-/* Tambahan baru untuk menampung tombol-tombol */
+/* Tambahan baru untuk menampung tombol-tombol di follower.html */
 .service-card .button-container {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+
+/* Tambahan baru untuk konten di dalam service-card (misal di index (5).html) */
+.service-card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Jarak antara teks dan tombol */
+  align-items: center; /* Pusatkan teks dan tombol */
+  width: 100%;
 }
 
 .icon {
@@ -43,44 +53,53 @@ h1, h2 {
   vertical-align: middle;
   margin-right: 10px;
 }
+
+/* Gaya untuk grid tombol di halaman utama (index (3).html) */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
   margin-top: 15px;
 }
-/* Merapikan tombol pesan & tambah ke keranjang */
+
+/* Merapikan tombol pesan & tambah ke keranjang (untuk index (3).html - Pilih Platform) */
 .button-group {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: column; /* Mengatur tombol TikTok dan Instagram ke bawah */
+  gap: 8px; /* Jarak vertikal antar tombol */
   margin-top: 10px;
 }
 
 .button,
 .add-to-cart {
-  display: flex;
+  display: flex; /* Untuk memusatkan konten di dalam tombol (gambar + teks) */
   align-items: center;
   justify-content: center;
-  background-color: #00c851;
+  background-color: #00c853; /* Warna hijau yang sama */
   color: white;
   font-weight: bold;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 12px 20px; /* Padding standar untuk tombol */
+  border-radius: 6px; /* Menggunakan border-radius konsisten */
+  font-size: 16px; /* Menggunakan font-size konsisten */
   text-decoration: none;
   transition: background-color 0.3s ease;
+  width: 100%; /* Agar tombol mengisi lebar penuh di dalam kontainernya */
+  box-sizing: border-box; /* Penting untuk perhitungan lebar */
+  border: none; /* Menghilangkan border default */
+  outline: none; /* Menghilangkan outline saat focus */
+  box-shadow: none; /* Menghilangkan shadow default */
+  cursor: pointer;
 }
+
 
 .button:hover,
 .add-to-cart:hover {
   background-color: #007e33;
 }
 
-/* Hilangkan bayangan tombol default browser */
-.add-to-cart {
-  border: none;
-  outline: none;
-  box-shadow: none;
-  cursor: pointer;
+/* Gaya tambahan untuk grid layanan TikTok (dari index (5).html) */
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dua kolom yang sama */
+  gap: 15px; /* Jarak antar item grid */
 }
