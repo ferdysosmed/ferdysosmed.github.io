@@ -1,76 +1,45 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Layanan TikTok</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <style>
-    /* Add basic styling for two columns */
-    .service-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr; /* Two equal columns */
-      gap: 15px; /* Space between grid items */
-    }
-
-    .service-card {
-      /* Ensure cards take full width within their grid column */
-      width: 100%;
-      box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    }
-
-    /* Adjust button styling for better fit if needed */
-    .service-card .button {
-      padding: 8px 12px;
-      font-size: 0.9em;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>Layanan TikTok</h1>
-    <div class="bubble">
-      <p>Pilih layanan TikTok yang ingin kamu boost:</p>
+    <p class="desc">Pilih layanan TikTok yang ingin kamu boost:</p>
 
-      <div class="service-grid">
-        <div class="service-card">
-          <strong>Promo</strong><br>
-          <a href="promo.html" class="button">Lihat Promo</a>
-        </div>
-        
-        <div class="service-card">
-          <strong>Like</strong><br>
-          <a href="like.html" class="button">Lihat Harga</a>
-        </div>
-
-        <div class="service-card">
-          <strong>View</strong><br>
-          <a href="view.html" class="button">Lihat Harga</a>
-        </div>
-
-        <div class="service-card">
-          <strong>Share</strong><br>
-          <a href="share.html" class="button">Lihat Harga</a>
-        </div>
-
-        <div class="service-card">
-          <strong>Follower</strong><br>
-          <a href="follower.html" class="button">Lihat Harga</a>
-        </div>
-
-        <div class="service-card">
-          <strong>Komentar</strong><br>
-          <a href="komentar.html" class="button">Lihat Harga</a>
-        </div>
-
-        <div class="service-card">
-          <strong>Save</strong><br>
-          <a href="save.html" class="button">Lihat Harga</a>
-        </div>
+    <div class="button-grid">
+      <div class="service-card">
+        <p class="service-title">Promo</p>
+        <a href="promo.html" class="button">Lihat Promo</a>
       </div>
-
-      <br>
-      <a href="../index.html" class="button">Kembali</a>
+      <div class="service-card">
+        <p class="service-title">Like</p>
+        <a href="like.html" class="button">Lihat Harga</a>
+      </div>
+      <div class="service-card">
+        <p class="service-title">View</p>
+        <a href="view.html" class="button">Lihat Harga</a>
+      </div>
+      <div class="service-card">
+        <p class="service-title">Share</p>
+        <a href="share.html" class="button">Lihat Harga</a>
+      </div>
+      <div class="service-card">
+        <p class="service-title">Follower</p>
+        <a href="follower.html" class="button">Lihat Harga</a>
+      </div>
+      <div class="service-card">
+        <p class="service-title">Komentar</p>
+        <a href="komentar.html" class="button">Lihat Harga</a>
+      </div>
+      <div class="service-card">
+        <p class="service-title">Save</p>
+        <a href="save.html" class="button">Lihat Harga</a>
+      </div>
     </div>
   </div>
 </body>
