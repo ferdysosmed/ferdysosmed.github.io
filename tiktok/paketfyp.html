@@ -7,6 +7,28 @@
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+  <div style="
+  position: fixed;
+  bottom: 80px;  /* Naik sedikit dari bawah */
+  right: 20px;
+  z-index: 9999;
+">
+  <a href="../cart.html" style="position: relative; display: inline-block;">
+    <img src="../assets/img/keranjang.png" alt="Keranjang" style="width: 65px; height: 65px;">
+    <span id="cart-count" style="
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      font-size: 14px;
+      border-radius: 50%;
+      padding: 3px 7px;
+      font-weight: bold;
+      display: none;
+    "></span>
+  </a>
+  </div>
   <div class="container">
     <h1>Paket FYP TikTok</h1>
     <div class="bubble">
@@ -16,74 +38,125 @@
           <p><strong>Paket Starter</strong><br>
              100 Like + 1.000 View<br>
              Harga : Rp 2.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Starter">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Starter+=+Rp+2.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Starter" data-price="2000">Tambah ke Keranjang</button>
+          </div>
         </div>
         
         <div class="service-card">
           <p><strong>Paket Basic</strong><br>
              200 Like + 5.000 View + 100 Save<br>
              Harga : Rp 5.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Basic">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Basic+=+Rp+5.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Basic" data-price="5000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
           <p><strong>Paket Standard</strong><br>
-             300 Like + 10.000 View + 200 Save + 50 Share<br>
-             Harga : Rp 9.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Standard">Pesan</a>
+             300 Like + 10.000 View + 200 Save + 50 Share + 10 Komentar Random / Custom<br>
+             Harga : Rp 10.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Standard+=+Rp+10.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Standard" data-price="10000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
-          <p><strong>Paket Pro</strong><br>
-             400 Like + 20.000 View + 300 Save + 100 Share + 10 Komentar Random / Custom<br>
+          <p><strong>Paket Medium</strong><br>
+             400 Like + 20.000 View + 300 Save + 100 Share + 20 Komentar Random / Custom<br>
              Harga : Rp 15.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Pro">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Medium+=+Rp+15.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Medium" data-price="15000">Tambah ke Keranjang</button>
+          </div>
         </div>
-        
+
         <div class="service-card">
-          <p><strong>Paket Expert</strong><br>
-             500 Like + 30.000 View + 400 Save + 150 Share + 20 Komentar Random / Custom<br>
-             Harga : Rp 19.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Expert">Pesan</a>
+          <p><strong>Paket Advanced</strong><br>
+             500 Like + 30.000 View + 400 Save + 150 Share + 25 Komentar Random / Custom<br>
+             Harga : Rp 25.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Advanced+=+Rp+25.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Advanced" data-price="25000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
           <p><strong>Paket Ultimate</strong><br>
              600 Like + 40.000 View + 500 Save + 200 Share + 30 Komentar Random / Custom<br>
-             Harga : Rp 29.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Ultimate">Pesan</a>
+             Harga : Rp 30.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Ultimate+=+Rp+30.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Ultimate" data-price="30000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
           <p><strong>Paket Super</strong><br>
              700 Like + 50.000 View + 600 Save + 250 Share + 40 Komentar Random / Custom<br>
              Harga : Rp 35.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Super">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Super+=+Rp+35.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Super" data-price="35000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
           <p><strong>Paket Super Boost</strong><br>
              800 Like + 60.000 View + 700 Save + 300 Share + 50 Komentar Random / Custom<br>
              Harga : Rp 39.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+SuperBoost">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+SuperBoost+=+Rp+39.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Super Boost" data-price="39000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
         <div class="service-card">
           <p><strong>Paket VIP</strong><br>
              900 Like + 70.000 View + 800 Save + 350 Share + 60 Komentar Random / Custom<br>
              Harga : Rp 49.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+VIP">Pesan</a>
-        </div>
-        
-        <div class="service-card">
-          <p><strong>Paket VVIP</strong><br>
-             1.000 Like + 80.000 View + 900 Save + 400 Share + 70 Komentar Random / Custom<br>
-             Harga : Rp 55.000</p>
-          <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+VVIP">Pesan</a>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+VIP+=+Rp+49.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok VIP" data-price="49000">Tambah ke Keranjang</button>
+          </div>
         </div>
 
+        <div class="service-card">
+          <p><strong>Paket Pro</strong><br>
+             1.000 Like + 80.000 View + 900 Save + 400 Share + 70 Komentar Random / Custom<br>
+             Harga : Rp 59.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Pro+=+Rp+59.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Pro" data-price="59000">Tambah ke Keranjang</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <p><strong>Paket Premium</strong><br>
+             1.200 Like + 90.000 View + 1.000 Save + 450 Share + 80 Komentar Random / Custom<br>
+             Harga : Rp 69.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Premium+=+Rp+69.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Premium" data-price="69000">Tambah ke Keranjang</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <p><strong>Paket Platinum</strong><br>
+             1.500 Like + 100.000 View + 1.200 Save + 500 Share + 100 Komentar Random / Custom<br>
+             Harga : Rp 89.000</p>
+          <div class="button-container">
+            <a class="button" href="https://wa.me/6289676930992?text=Order+TikTok+Paket+FYP+Platinum+=+Rp+89.000">Pesan</a>
+            <button class="add-to-cart" data-product="Paket FYP TikTok Platinum" data-price="89000">Tambah ke Keranjang</button>
+          </div>
+        </div>
+      <br>
+      <a href="../index.html" class="button">Kembali</a>
     </div>
-    <a href="promo.html" class="button">Kembali</a>
   </div>
+  <script src="../assets/js/cart.js"></script>
 </body>
 </html>
