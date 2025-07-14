@@ -7,6 +7,28 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   </head>
 <body>
+  <div style="
+  position: fixed;
+  bottom: 80px;  /* Naik sedikit dari bawah */
+  right: 20px;
+  z-index: 9999;
+">
+  <a href="../cart.html" style="position: relative; display: inline-block;">
+    <img src="../assets/img/keranjang.png" alt="Keranjang" style="width: 65px; height: 65px;">
+    <span id="cart-count" style="
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      font-size: 14px;
+      border-radius: 50%;
+      padding: 3px 7px;
+      font-weight: bold;
+      display: none;
+    "></span>
+  </a>
+  </div>
   <div class="container">
     <h1>Layanan TikTok</h1>
     <div class="bubble">
@@ -67,5 +89,6 @@
       <a href="../index.html" class="button">Kembali</a>
     </div>
   </div>
+  <script src="../assets/js/cart.js"></script>
 </body>
 </html>
