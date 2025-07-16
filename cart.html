@@ -120,7 +120,7 @@
 
       list.innerHTML = "";
       let total = 0;
-      let message = "Halo kak, saya ingin memesan:%0A";
+      let message = "Halo kak, saya ingin memesan :%0A";
 
       cart.forEach((item, i) => {
         total += item.price;
@@ -136,7 +136,7 @@
       });
 
       totalEl.textContent = total.toLocaleString();
-      message += `%0ATotal: Rp ${total.toLocaleString()}`;
+      message += `%0ATotal : Rp ${total.toLocaleString()}`;
       waBtn.href = `https://wa.me/6289676930992?text=${message}`;
     }
 
