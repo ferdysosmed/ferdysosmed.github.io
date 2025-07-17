@@ -3,466 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ferdysosmed | Suntik Sosmed Terbaik</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    :root {
-      --primary-color: #BB86FC; /* Ungu terang untuk Dark Mode */
-      --secondary-color: #03DAC6; /* Teal untuk aksen */
-      --background-color: #121212; /* Abu-abu gelap (hampir hitam) */
-      --card-background: #1E1E1E; /* Abu-abu sedikit lebih terang dari background */
-      --text-color: #E0E0E0; /* Putih keabu-abuan */
-      --light-text-color: #A0A0A0; /* Abu-abu terang */
-      --border-radius: 12px;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Bayangan lebih gelap */
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 960px;
-      margin: 30px auto;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    h1 {
-      text-align: center;
-      color: var(--primary-color);
-      font-size: 2.8em;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
-      /* Typewriter Effect CSS */
-      font-family: 'Space Mono', monospace; /* Font monospasi untuk efek ketik */
-      overflow: hidden; /* Sembunyikan overflow teks */
-      white-space: nowrap; /* Pastikan teks tetap dalam satu baris */
-      margin: 0 auto; /* Tengah secara horizontal */
-      letter-spacing: .15em; /* Efek spasi antar huruf */
-      animation:
-        typing 3.5s steps(20, end), /* Animasi ketik */
-        blink-caret .75s step-end infinite; /* Animasi kursor */
-      width: 20ch; /* Lebar sesuai jumlah karakter "ferdysosmed.com" */
-      border-right: .15em solid var(--primary-color); /* Kursor */
-    }
-
-    /* Animasi Typewriter */
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 20ch }
-    }
-
-    /* Animasi kursor berkedip */
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: var(--primary-color); }
-    }
-
-    .section-bubble {
-      background-color: var(--card-background);
-      padding: 30px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      text-align: center;
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .section-bubble:hover {
-      transform: translateY(-5px);
-    }
-
-    h2 {
-      color: var(--primary-color);
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      position: relative;
-      padding-bottom: 10px;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background-color: var(--secondary-color);
-      border-radius: 5px;
-    }
-
-    p {
-      color: var(--light-text-color);
-      margin-bottom: 15px;
-    }
-
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 30px;
-      background-color: var(--primary-color);
-      color: var(--background-color); /* Teks tombol lebih gelap */
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1em;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      min-width: 180px;
-    }
-
-    .button:hover {
-      background-color: #9D5BFF; /* Sedikit lebih gelap dari primary */
-      transform: translateY(-3px);
-    }
-
-    /* Style khusus untuk ikon Font Awesome di tombol */
-    .button i.fa-brands, .button i.fa-solid {
-        font-size: 1.5em; /* Ukuran ikon */
-        color: var(--background-color); /* Warna ikon agar kontras dengan tombol */
-    }
-    .button .fa-tiktok {
-        color: #EE1D52; /* Warna khas TikTok */
-    }
-    .button .fa-instagram {
-        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 1.6em; /* Sedikit lebih besar untuk Instagram */
-    }
-
-    /* Styles for the new "Why Choose Us" table list */
-    .feature-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 kolom atau lebih */
-        gap: 15px;
-        margin-top: 20px;
-        text-align: left; /* Teks di dalam kartu tetap rata kiri */
-    }
-
-    .feature-item {
-        background-color: var(--background-color); /* Latar belakang item fitur */
-        padding: 20px;
-        border-radius: var(--border-radius);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Bayangan lebih ringan */
-        display: flex;
-        align-items: flex-start; /* Icon rata atas */
-        gap: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.05); /* Border halus */
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-    .feature-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); /* Bayangan lebih dalam saat hover */
-    }
-
-    .feature-item .icon-wrapper {
-        font-size: 2em; /* Ukuran ikon */
-        color: var(--secondary-color); /* Warna ikon */
-        line-height: 1; /* Pastikan ikon tidak terlalu tinggi */
-    }
-
-    .feature-item .feature-content h3 {
-        margin-top: 0;
-        margin-bottom: 5px;
-        color: var(--primary-color);
-        font-size: 1.15em;
-    }
-
-    .feature-item .feature-content p {
-        margin: 0;
-        color: var(--light-text-color);
-        font-size: 0.95em;
-    }
-
-    .testimoni-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .testimoni-grid .button {
-      background-color: #333333; /* Warna tombol testimoni yang lebih gelap */
-      color: var(--primary-color);
-      border: 1px solid var(--primary-color);
-      font-weight: 500;
-      font-size: 0.95em;
-      padding: 10px 15px;
-      min-width: unset;
-    }
-
-    .testimoni-grid .button:hover {
-      background-color: var(--primary-color);
-      color: var(--background-color);
-    }
-
-    .cart-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 9999;
-      animation: bounce 2s infinite ease-in-out;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .cart-float a {
-      position: relative;
-      display: block;
-      transition: transform 0.2s ease;
-    }
-
-    .cart-float a:hover {
-      transform: scale(1.05);
-    }
-
-    /* Menggunakan Font Awesome untuk ikon keranjang */
-    .cart-float i.fa-shopping-cart {
-      font-size: 60px; /* Ukuran ikon */
-      color: var(--primary-color); /* Warna ikon */
-      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
-    }
-
-    #cart-count {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: var(--secondary-color);
-      color: var(--background-color);
-      font-size: 13px;
-      border-radius: 50%;
-      padding: 4px 8px;
-      font-weight: bold;
-      display: none; /* Akan diatur oleh JS */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-
-    /* Wave Divider Styles */
-    .wave-divider {
-      width: 100%;
-      height: 20px; /* Tinggi gelombang */
-      background:
-        repeating-linear-gradient(-45deg,
-          var(--secondary-color) 0 5px, /* Warna gelombang */
-          transparent 5px 10px),
-        repeating-linear-gradient(45deg,
-          var(--secondary-color) 0 5px,
-          transparent 5px 10px);
-      background-size: 20px 20px; /* Ukuran pola gelombang */
-      margin: 20px 0; /* Jarak atas dan bawah */
-      opacity: 0.6; /* Sedikit transparan agar tidak terlalu mencolok */
-    }
-
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-        width: 17ch;
-      }
-      @keyframes typing {
-        from { width: 0 }
-        to { width: 17ch }
-      }
-
-      h2 {
-        font-size: 1.5em;
-      }
-
-      .button-group {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .button {
-        width: 80%;
-        max-width: 300px;
-      }
-
-      .feature-list {
-        grid-template-columns: 1fr; /* Satu kolom untuk mobile */
-      }
-
-      .testimoni-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      }
-
-      .cart-float {
-        bottom: 20px;
-        right: 20px;
-      }
-
-      .cart-float i.fa-shopping-cart {
-        font-size: 50px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        width: 95%;
-        padding: 15px;
-      }
-
-      h1 {
-        font-size: 1.8em;
-        width: 15ch;
-      }
-      @keyframes typing {
-        from { width: 0 }
-        to { width: 15ch }
-      }
-
-      h2 {
-        font-size: 1.3em;
-      }
-
-      .section-bubble {
-        padding: 20px;
-      }
-    }
-  </style>
+  <title>ferdysosmed | Suntik Sosmed</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="cart-float">
-    <a href="/cart.html">
-      <i class="fa-solid fa-shopping-cart"></i>
-      <span id="cart-count">0</span>
-    </a>
+  <div style="
+  position: fixed;
+  bottom: 80px;  /* Naik sedikit dari bawah */
+  right: 20px;
+  z-index: 9999;
+">
+  <a href="/cart.html" style="position: relative; display: inline-block;">
+    <img src="/assets/img/keranjang.png" alt="Keranjang" style="width: 65px; height: 65px;">
+    <span id="cart-count" style="
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      font-size: 14px;
+      border-radius: 50%;
+      padding: 3px 7px;
+      font-weight: bold;
+      display: none;
+    "></span>
+  </a>
   </div>
-
   <div class="container">
-    <h1 id="typewriter-text">ferdysosmed.com</h1>
-    <p style="text-align: center; font-size: 1.1em; color: var(--text-color);">
-      Tingkatkan kehadiran online Anda dengan layanan suntik sosial media kami!
-    </p>
+    <h1>ferdysosmed</h1>
 
-    <div class="wave-divider"></div>
-
-    <div class="section-bubble">
+    <div class="bubble">
       <h2>Tentang Kami</h2>
-      <p>Kami adalah penyedia layanan terkemuka untuk meningkatkan <strong>TikTok</strong> dan <strong>Instagram</strong> Anda. Dapatkan peningkatan followers, likes, views, dan komentar dengan cepat, aman, dan harga yang sangat terjangkau!</p>
-      <p>Layanan kami cocok untuk personal, kreator konten, hingga Anda yang ingin menjadi reseller sukses.</p>
+      <p>Kami menyediakan layanan suntik sosial media TikTok dan Instagram yang murah, cepat, dan aman! Cocok untuk personal, kreator, hingga reseller!</p>
     </div>
 
-    <div class="wave-divider"></div>
-
-    <div class="section-bubble">
-      <h2>Pilih Platform Favorit Anda</h2>
-      <p>Mulai tingkatkan akun sosial media Anda sekarang. Pilih platform yang ingin Anda optimasi:</p>
+    <div class="bubble">
+      <h2>Pilih Platform</h2>
+      <p>Klik salah satu sosmed dibawah yang ingin Anda suntik</p>
       <div class="button-group">
         <a href="tiktok/index.html" class="button">
-          <i class="fa-brands fa-tiktok"></i> <strong>TikTok</strong>
+          <img src="assets/img/tiktok.png" class="icon"> <strong>TikTok</strong>
         </a>
         <a href="instagram/index.html" class="button">
-          <i class="fa-brands fa-instagram"></i> <strong>Instagram</strong>
+          <img src="assets/img/instagram.png" class="icon"> <strong>Instagram</strong>
         </a>
       </div>
     </div>
 
-    <div class="wave-divider"></div>
-
-    <div class="section-bubble">
-      <h2>Kenapa Harus ferdysosmed?</h2>
-      <div class="feature-list">
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-gem"></i></div>
-          <div class="feature-content">
-            <h3>Layanan Berkualitas Tinggi</h3>
-            <p>Hasil nyata dan permanen untuk pertumbuhan akun Anda.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
-          <div class="feature-content">
-            <h3>Proses Cepat & Aman</h3>
-            <p>Pesanan diproses instan tanpa risiko, akun Anda tetap aman.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-lock"></i></div>
-          <div class="feature-content">
-            <h3>Privasi Terjaga 100%</h3>
-            <p>Data Anda aman bersama kami karena menggunakan API.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-headset"></i></div>
-          <div class="feature-content">
-            <h3>Dukungan Penuh 24/7</h3>
-            <p>Tim kami siap membantu Anda kapan saja Anda butuhkan.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
-          <div class="feature-content">
-            <h3>Anti Drop & Permanen</h3>
-            <p>Pertumbuhan organik yang stabil, hasil tidak mudah hilang.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-face-smile"></i></div>
-          <div class="feature-content">
-            <h3>Pelayanan Ramah</h3>
-            <p>Kami selalu siap mendengarkan dan melayani kebutuhan Anda.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-clock-rotate-left"></i></div>
-          <div class="feature-content">
-            <h3>Fast Respon</h3>
-            <p>Tidak perlu menunggu lama, kami siap melayani Anda.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <div class="icon-wrapper"><i class="fa-solid fa-tags"></i></div>
-          <div class="feature-content">
-            <h3>Harga Murah Kualitas Tinggi</h3>
-            <p>Penawaran terbaik dengan kualitas premium di kelasnya.</p>
-          </div>
-        </div>
-      </div>
+    <div class="bubble">
+      <h2>Kenapa Pilih Kami?</h2>
+      <ul>
+        <li>✅ Layanan Berkualitas Tinggi</li>
+        <li>✅ Proses Cepat dan Aman</li>
+        <li>✅ Privasi Terjaga 100%</li>
+        <li>✅ Dukungan Penuh 24/7</li>
+        <li>✅ Anti Drop dan Permanen</li>
+        <li>✅ Pelayanan yang Ramah</li>
+        <li>✅ Fast Respon</li>
+        <li>✅ Harga Murah Kualitas Tinggi</li>
+      </ul>
     </div>
 
-    <div class="wave-divider"></div>
+    <div class="bubble">
+      <h2>Testimoni</h2>
+      <p>Silakan cek kumpulan testimoni dari pelanggan kami melalui sorotan Instagram berikut.  
+      Setiap sorotan berisi hingga 100 testimoni nyata dari pembeli:</p>
 
-    <div class="section-bubble">
-      <h2>Ribuan Testimoni Nyata!</h2>
-      <p>Kami bangga dengan kepuasan pelanggan kami. Cek langsung kumpulan testimoni dari ribuan pembeli kami melalui sorotan Instagram di bawah ini. Setiap sorotan berisi hingga 100 testimoni asli!</p>
-
-      <div class="testimoni-grid">
+      <div class="button-grid">
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMxMDQ0OTM1MDgzMTMw?story_media_id=3390599550871519175_67087909457&igsh=ZjlhZ3F4a2RobWN0" target="_blank">Sorotan 1</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODkxMjAyMzU0MDI4Njk2?story_media_id=3395676510681223209_67087909457&igsh=MWFwZmF4aXBtdDhsOA==" target="_blank">Sorotan 2</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MzI1NjY1NzA2MTc2MTg0?story_media_id=3402896280476219091_67087909457&igsh=MXFkeDY2dHA4eXZyag==" target="_blank">Sorotan 3</a>
@@ -471,22 +78,13 @@
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTIwNTkyOTgxOTc0NTY0?story_media_id=3463080987180579138_67087909457&igsh=MXAwMDlneGNucG8wMQ==" target="_blank">Sorotan 6</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDcyMjY3Nzg3587927?story_media_id=3476909865812362031_67087909457&igsh=aHNvMHFtNGw0NGp4" target="_blank">Sorotan 7</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDU2Mzg5NzAyODk1NTY1?story_media_id=3498597086914968003_67087909457&igsh=eXgyemNjaXpoM3ll" target="_blank">Sorotan 8</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg1MjE3ODU3594205?story_media_id=3579829348339474219_67087909457&igsh=MXJoYzNnZXQzb25raw==" target="_blank">Sorotan 9</a>
+        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg1MjE3ODU3NTk0MjA1?story_media_id=3579829348339474219_67087909457&igsh=MXJoYzNnZXQzb25raw==" target="_blank">Sorotan 9</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDA2NjE4NTM2NTY3NTM1?story_media_id=3608744909123107724_67087909457&igsh=ZnhzaXU2dWRobnoy" target="_blank">Sorotan 10</a>
         <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ0NzU3NzA0NTQ2NDc3?story_media_id=3654455669027458370_67087909457&igsh=MXNiNmsyd2FpbXo0Nw==" target="_blank">Sorotan 11</a>
       </div>
     </div>
 
   </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cartCountElement = document.getElementById('cart-count');
-      const currentCartCount = localStorage.getItem('cartItemCount') || 0;
-      if (currentCartCount > 0) {
-        cartCountElement.textContent = currentCartCount;
-        cartCountElement.style.display = 'block';
-      }
-    });
-  </script>
+  <script src="/assets/js/cart.js"></script>
 </body>
 </html>
