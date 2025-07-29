@@ -24,9 +24,9 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.textContent = message;
   toast.style.position = "fixed";
-  toast.style.bottom = "30px";
+  toast.style.top = "50%"; // Diubah dari bottom
   toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
+  toast.style.transform = "translate(-50%, -50%)"; // Diubah untuk centering vertikal & horizontal
   toast.style.backgroundColor = "#28a745";
   toast.style.color = "white";
   toast.style.padding = "12px 20px";
