@@ -54,7 +54,6 @@
       background-color: #28a745; /* Warna hijau */
       color: white;
       padding: 12px 25px;
-      /* PERUBAHAN DI SINI: Mengubah bentuk menjadi persegi dengan sudut melengkung */
       border-radius: 8px; 
       font-weight: bold;
       text-align: center;
@@ -69,6 +68,17 @@
       opacity: 1;
       visibility: visible;
       transform: translate(-50%, 0);
+    }
+    
+    /* CSS UNTUK TEKS PERINGATAN */
+    .warning-text {
+      font-size: 12px;
+      color: #888;
+      text-align: left;
+      line-height: 1.5;
+      /* PERUBAHAN MARGIN */
+      margin-top: -5px; /* Mengurangi jarak dari input field di atas */
+      margin-bottom: 15px; /* Memberi jarak ke tombol konfirmasi di bawah */
     }
   </style>
 </head>
@@ -91,6 +101,10 @@
           placeholder="https://"
           required
         />
+        <!-- TEKS PERINGATAN DIPINDAHKAN KE SINI -->
+        <p class="warning-text">
+          Akun harus dalam mode publik. Jika akun private, pesanan otomatis gagal tanpa garansi atau refund. Kami tidak bertanggung jawab atas kesalahan tersebut.
+        </p>
         <button type="submit" class="confirm-button">Konfirmasi Pesanan</button>
       </form>
     </div>
@@ -160,7 +174,10 @@
           localStorage.setItem("cart", JSON.stringify(cart));
           
           showToast('Produk berhasil ditambahkan ke keranjang kuning');
-          updateCartIcon();
+          // Fungsi updateCartIcon() diasumsikan ada di file cart.js
+          if (typeof updateCartIcon === 'function') {
+            updateCartIcon();
+          }
           
           setTimeout(() => {
             history.back();
