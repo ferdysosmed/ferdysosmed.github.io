@@ -55,7 +55,7 @@
         display: block;
         color: #aaa;
         margin-top: 4px;
-        word-break: break-all; /* Agar link panjang tidak merusak layout */
+        word-break: break-all;
     }
     .cart-item button {
       background: red;
@@ -93,10 +93,16 @@
     .whatsapp-button:hover, .back-button:hover {
       background-color: #007e33;
     }
-    .empty-cart {
+    .empty-cart-container {
         text-align: center;
         padding: 40px 20px;
         color: #888;
+    }
+    .empty-cart-container .back-button {
+        display: inline-block;
+        flex: none;
+        width: 200px;
+        margin-top: 20px;
     }
   </style>
 </head>
@@ -107,10 +113,18 @@
     
     <div id="cart-list"></div>
     
+    <!-- PERUBAHAN: Div baru untuk kondisi keranjang kosong -->
+    <div id="empty-cart-info" style="display: none;">
+        <div class="empty-cart-container">
+            <p>Keranjang Anda masih kosong.</p>
+            <a href="index.html" class="back-button">Kembali Belanja</a>
+        </div>
+    </div>
+    
     <div id="cart-summary" style="display: none;">
         <p class="total">Total Harga : Rp <span id="total-price">0</span></p>
         <div class="btn-group">
-          <a href="index.html" class="back-button">Kembali</a>
+          <a href="index.html" class="back-button">Tambah Lainnya</a>
           <a id="whatsapp-link" class="whatsapp-button" href="#" target="_blank">Beli Sekarang</a>
         </div>
     </div>
@@ -127,28 +141,33 @@
       const totalEl = document.getElementById("total-price");
       const waBtn = document.getElementById("whatsapp-link");
       const summaryEl = document.getElementById("cart-summary");
+      // PERUBAHAN: Ambil elemen div keranjang kosong
+      const emptyCartEl = document.getElementById("empty-cart-info");
 
-      list.innerHTML = ""; // Kosongkan daftar sebelum diisi ulang
+      list.innerHTML = ""; 
 
       if (cart.length === 0) {
-        list.innerHTML = '<p class="empty-cart">Keranjang Anda masih kosong.</p>';
+        // PERUBAHAN: Tampilkan div keranjang kosong dan sembunyikan yang lain
+        list.innerHTML = ''; // Pastikan list benar-benar kosong
         summaryEl.style.display = 'none';
+        emptyCartEl.style.display = 'block';
         return;
       }
       
+      // PERUBAHAN: Sembunyikan div keranjang kosong jika ada isinya
       summaryEl.style.display = 'block';
+      emptyCartEl.style.display = 'none';
+      
       let total = 0;
-      let message = "Halo kak, saya mau order beberapa layanan.n\n";
+      let message = "Halo kak, saya mau order beberapa layanan:\n\n";
 
       cart.forEach((item, i) => {
         total += item.price;
-        // Susun pesan untuk setiap item
         message += `*Layanan ${i + 1}*\n`;
         message += `- Produk : ${item.product}\n`;
         message += `- Harga : Rp ${item.price.toLocaleString('id-ID')}\n`;
         message += `- Link Target : ${item.link}\n\n`;
 
-        // Tampilkan setiap item di halaman keranjang
         const div = document.createElement("div");
         div.className = "cart-item";
         div.innerHTML = `
@@ -163,17 +182,16 @@
       });
 
       totalEl.textContent = total.toLocaleString('id-ID');
-      message += `*Total Pembayaran: Rp ${total.toLocaleString('id-ID')}*`;
+      message += `*Total Pembayaran : Rp ${total.toLocaleString('id-ID')}*`;
       
-      // Atur link WhatsApp dengan pesan yang sudah diformat
       waBtn.href = `https://wa.me/6289676930992?text=${encodeURIComponent(message)}`;
     }
 
     function removeItem(index) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1); // Hapus item dari array
-      localStorage.setItem("cart", JSON.stringify(cart)); // Simpan kembali ke localStorage
-      updateCartDisplay(); // Perbarui tampilan keranjang
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartDisplay();
     }
   </script>
   <div style="text-align: center; padding: 20px 0; margin-top: 30px; color: #555; font-size: 14px;">
