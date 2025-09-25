@@ -173,7 +173,7 @@
           cart.push({ product: product, price: price, link: targetLink });
           localStorage.setItem("cart", JSON.stringify(cart));
           
-          showToast('Produk berhasil ditambahkan ke keranjang kuning');
+          showToast('Produk berhasil ditambahkan, cek keranjang kuning untuk melihat pesanan Anda');
           // Fungsi updateCartIcon() diasumsikan ada di file cart.js
           if (typeof updateCartIcon === 'function') {
             updateCartIcon();
