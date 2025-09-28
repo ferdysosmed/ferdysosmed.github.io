@@ -61,13 +61,14 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
+      /* Animasi saat muncul dari bawah */
+      transition: opacity 0.5s, visibility 0.5s, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
     }
 
     .toast-popup.show {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, 0);
+      transform: translate(-50%, 0); /* Berpindah ke posisi tengah */
     }
     
     /* CSS UNTUK TEKS PERINGATAN */
@@ -77,8 +78,8 @@
       text-align: left;
       line-height: 1.5;
       /* PERUBAHAN MARGIN */
-      margin-top: -5px; /* Mengurangi jarak dari input field di atas */
-      margin-bottom: 15px; /* Memberi jarak ke tombol konfirmasi di bawah */
+      margin-top: -5px; 
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -101,7 +102,7 @@
           placeholder="Masukkan url/link/username disini"
           required
         />
-        <!-- TEKS PERINGATAN DIPINDAHKAN KE SINI -->
+        <!-- TEKS PERINGATAN -->
         <p class="warning-text">
           Note : Akun harus dalam mode publik. Jika akun private, pesanan otomatis gagal tanpa garansi atau refund. Kami tidak bertanggung jawab atas kesalahan tersebut, akun boleh diprivatekan kembali setelah pesanan selesai. 
         </p>
@@ -111,15 +112,10 @@
     <a href="javascript:history.back()" class="button" style="text-align:center; display:block; margin-top:15px;">Kembali</a>
   </div>
 
-  <!-- Ini diasumsikan adalah file cart.js. Karena tidak ada file ini, 
-       fungsi updateCartIcon() di bawah tidak akan berfungsi kecuali Anda menambahkan 
-       implementasinya di sini. Namun, karena kita akan me-refresh halaman, 
-       fungsi ini sebenarnya tidak diperlukan lagi untuk kasus ini.
-  <script src="assets/js/cart.js"></script> 
-  -->
-  <div id="toast-container"></div>
+  <!-- Hapus link ke cart.js karena updateCartIcon tidak akan berfungsi di sini dan reload halaman lebih efektif -->
+  <!-- <script src="assets/js/cart.js"></script> -->
   <script>
-    // Fungsi untuk menampilkan notifikasi popup (Tidak berubah)
+    // Fungsi untuk menampilkan notifikasi popup
     function showToast(message) {
       const oldToast = document.querySelector('.toast-popup');
       if (oldToast) {
@@ -135,11 +131,11 @@
         toast.classList.add("show");
       }, 100);
 
+      // Sembunyikan dan hapus toast setelah 2.5 detik
       setTimeout(() => {
         toast.classList.remove("show");
-        // Hapus elemen toast setelah transisi selesai
         setTimeout(() => toast.remove(), 500); 
-      }, 2500); // Tampilkan selama 2.5 detik
+      }, 2500); 
     }
 
 
@@ -149,8 +145,7 @@
       const price = parseInt(params.get('price'), 10);
       const action = params.get('action');
 
-      // Simpan URL halaman sebelumnya. Ini penting.
-      // document.referrer memberikan URL dari halaman yang membawa pengguna ke halaman ini.
+      // Ambil URL halaman sebelumnya. Ini penting untuk navigasi yang benar.
       const previousPageUrl = document.referrer; 
 
       if (!product || !price || !action) {
@@ -164,10 +159,10 @@
       document.getElementById('link-form').addEventListener('submit', function (e) {
         e.preventDefault();
         
-        // Ganti alert() dengan notifikasi kustom atau toast jika Anda ingin menghindari pop-up bawaan browser.
         const targetLink = document.getElementById('target-link').value.trim();
 
         if (!targetLink) {
+          // Ganti alert dengan toast
           showToast('Link target tidak boleh kosong!');
           return;
         }
@@ -189,32 +184,25 @@
           localStorage.setItem("cart", JSON.stringify(cart));
           
           // 2. Tampilkan notifikasi
-          showToast('Produk berhasil ditambahkan ke keranjang kuning, halaman akan dimuat ulang...');
+          showToast('Produk berhasil ditambahkan ke keranjang kuning. Kembali ke halaman sebelumnya dan memperbarui...');
           
           // 3. Alihkan kembali ke halaman sebelumnya dan REFRESH
-          // Beri waktu lebih lama agar pengguna sempat membaca toast (misal 3.5 detik)
-          const refreshDelay = 3500; 
+          // Beri waktu yang cukup (misalnya 3 detik) agar pengguna sempat membaca toast sebelum navigasi.
+          const refreshDelay = 3000; 
 
           setTimeout(() => {
             if (previousPageUrl) {
-                // Menggunakan window.location.replace untuk mengganti halaman saat ini di history
-                // Ini mencegah pengguna kembali ke halaman ini dengan tombol 'Back' lagi
+                // Menggunakan window.location.replace() untuk:
+                // a) Mengarahkan ke halaman sebelumnya (previousPageUrl)
+                // b) Memastikan halaman tersebut dimuat ulang sepenuhnya (refresh)
+                // Ini menggantikan history.back() yang tidak selalu me-refresh halaman.
                 window.location.replace(previousPageUrl);
-                // Setelah mengganti lokasi, muat ulang halaman tersebut.
-                // NOTE: Sebagian besar browser akan menjalankan ini setelah navigasi selesai.
-                // Jika halaman sebelumnya sudah memuat, trik ini akan memaksa muat ulang.
-                // Cara yang lebih andal adalah menambahkan parameter di URL, tapi ini lebih sederhana.
-                window.location.reload(true); 
-
             } else {
-                // Fallback jika document.referrer tidak ada (misalnya, diakses langsung)
+                // Fallback jika tidak ada document.referrer
                 history.back();
             }
+            // Karena menggunakan replace(), tidak perlu lagi memanggil window.location.reload()
           }, refreshDelay); 
-          
-          // Karena kita me-refresh halaman, kita tidak perlu memanggil updateCartIcon() di sini.
-          // Halaman yang dimuat ulang akan menjalankan inisialisasi ikon keranjang dari awal.
-
         }
       });
     });
