@@ -173,7 +173,7 @@
           cart.push({ product: product, price: price, link: targetLink });
           localStorage.setItem("cart", JSON.stringify(cart));
           
-          showToast('Produk berhasil ditambahkan, klik keranjang kuning untuk melihat pesanan Anda');
+          showToast('Produk berhasil ditambahkan ke keranjang kuning, klik keranjang kuning untuk melihat pesanan Anda');
           // Fungsi updateCartIcon() diasumsikan ada di file cart.js
           if (typeof updateCartIcon === 'function') {
             updateCartIcon();
@@ -181,7 +181,7 @@
           
           setTimeout(() => {
             history.back();
-          }, 3500);
+          }, 4500);
         }
       });
     });
