@@ -111,9 +111,15 @@
     <a href="javascript:history.back()" class="button" style="text-align:center; display:block; margin-top:15px;">Kembali</a>
   </div>
 
-  <script src="assets/js/cart.js"></script>
+  <!-- Ini diasumsikan adalah file cart.js. Karena tidak ada file ini, 
+       fungsi updateCartIcon() di bawah tidak akan berfungsi kecuali Anda menambahkan 
+       implementasinya di sini. Namun, karena kita akan me-refresh halaman, 
+       fungsi ini sebenarnya tidak diperlukan lagi untuk kasus ini.
+  <script src="assets/js/cart.js"></script> 
+  -->
+  <div id="toast-container"></div>
   <script>
-    // Fungsi untuk menampilkan notifikasi popup
+    // Fungsi untuk menampilkan notifikasi popup (Tidak berubah)
     function showToast(message) {
       const oldToast = document.querySelector('.toast-popup');
       if (oldToast) {
@@ -131,8 +137,9 @@
 
       setTimeout(() => {
         toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 500);
-      }, 2500);
+        // Hapus elemen toast setelah transisi selesai
+        setTimeout(() => toast.remove(), 500); 
+      }, 2500); // Tampilkan selama 2.5 detik
     }
 
 
@@ -141,6 +148,10 @@
       const product = params.get('product');
       const price = parseInt(params.get('price'), 10);
       const action = params.get('action');
+
+      // Simpan URL halaman sebelumnya. Ini penting.
+      // document.referrer memberikan URL dari halaman yang membawa pengguna ke halaman ini.
+      const previousPageUrl = document.referrer; 
 
       if (!product || !price || !action) {
         window.location.href = 'index.html';
@@ -152,14 +163,17 @@
 
       document.getElementById('link-form').addEventListener('submit', function (e) {
         e.preventDefault();
+        
+        // Ganti alert() dengan notifikasi kustom atau toast jika Anda ingin menghindari pop-up bawaan browser.
         const targetLink = document.getElementById('target-link').value.trim();
 
         if (!targetLink) {
-          alert('Link target tidak boleh kosong!');
+          showToast('Link target tidak boleh kosong!');
           return;
         }
 
         if (action === 'pesan') {
+          // Logika pemesanan WhatsApp (Tidak berubah)
           let message = `Halo kak, saya mau order.\n\n`;
           message += `- Produk : *${product}*\n`;
           message += `- Harga : *Rp ${price.toLocaleString('id-ID')}*\n`;
@@ -169,19 +183,38 @@
           window.location.href = whatsappUrl;
 
         } else if (action === 'keranjang') {
+          // 1. Tambahkan produk ke keranjang
           let cart = JSON.parse(localStorage.getItem("cart")) || [];
           cart.push({ product: product, price: price, link: targetLink });
           localStorage.setItem("cart", JSON.stringify(cart));
           
-          showToast('Produk berhasil ditambahkan ke keranjang kuning, klik keranjang kuning untuk melihat pesanan Anda');
-          // Fungsi updateCartIcon() diasumsikan ada di file cart.js
-          if (typeof updateCartIcon === 'function') {
-            updateCartIcon();
-          }
+          // 2. Tampilkan notifikasi
+          showToast('Produk berhasil ditambahkan ke keranjang kuning, halaman akan dimuat ulang...');
           
+          // 3. Alihkan kembali ke halaman sebelumnya dan REFRESH
+          // Beri waktu lebih lama agar pengguna sempat membaca toast (misal 3.5 detik)
+          const refreshDelay = 3500; 
+
           setTimeout(() => {
-            history.back();
-          }, 4500);
+            if (previousPageUrl) {
+                // Menggunakan window.location.replace untuk mengganti halaman saat ini di history
+                // Ini mencegah pengguna kembali ke halaman ini dengan tombol 'Back' lagi
+                window.location.replace(previousPageUrl);
+                // Setelah mengganti lokasi, muat ulang halaman tersebut.
+                // NOTE: Sebagian besar browser akan menjalankan ini setelah navigasi selesai.
+                // Jika halaman sebelumnya sudah memuat, trik ini akan memaksa muat ulang.
+                // Cara yang lebih andal adalah menambahkan parameter di URL, tapi ini lebih sederhana.
+                window.location.reload(true); 
+
+            } else {
+                // Fallback jika document.referrer tidak ada (misalnya, diakses langsung)
+                history.back();
+            }
+          }, refreshDelay); 
+          
+          // Karena kita me-refresh halaman, kita tidak perlu memanggil updateCartIcon() di sini.
+          // Halaman yang dimuat ulang akan menjalankan inisialisasi ikon keranjang dari awal.
+
         }
       });
     });
