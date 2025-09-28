@@ -184,11 +184,11 @@
           localStorage.setItem("cart", JSON.stringify(cart));
           
           // 2. Tampilkan notifikasi
-          showToast('Produk berhasil ditambahkan ke keranjang kuning. Kembali ke halaman sebelumnya dan memperbarui...');
+          showToast('Produk berhasil ditambahkan ke keranjang kuning.');
           
           // 3. Alihkan kembali ke halaman sebelumnya dan REFRESH
           // Beri waktu yang cukup (misalnya 3 detik) agar pengguna sempat membaca toast sebelum navigasi.
-          const refreshDelay = 3000; 
+          const refreshDelay = 2500; 
 
           setTimeout(() => {
             if (previousPageUrl) {
