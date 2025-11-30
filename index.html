@@ -32,13 +32,25 @@
                         cardbg: '#1e293b',
                     },
                     animation: {
+                        'bounce-slow': 'bounce 3s infinite',
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'slide-up': 'slideUp 0.4s ease-out forwards',
+                        'pop-in': 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'shake': 'shake 0.3s ease-in-out',
                     },
                     keyframes: {
                         slideUp: {
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        popIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '25%': { transform: 'translateX(-5px)' },
+                            '75%': { transform: 'translateX(5px)' },
                         }
                     }
                 }
@@ -51,21 +63,12 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         .glass {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
         .dark .glass {
-            background: rgba(15, 23, 42, 0.85);
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-        .animate-shake {
-            animation: shake 0.3s ease-in-out;
+            background: rgba(15, 23, 42, 0.9);
         }
     </style>
 </head>
@@ -75,6 +78,15 @@
     <script>
         // --- KONFIGURASI ---
         const NO_WHATSAPP = "6289676930992"; 
+
+        // --- DATA TESTIMONI (DIPASTIKAN ADA) ---
+        const testimonials = [
+            { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
+            { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
+            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views! Makasih min!", stars: 5 },
+            { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
+            { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
+        ];
 
         // --- DATA PRODUK LENGKAP ---
         const products = [
@@ -116,7 +128,7 @@
             { id: 217, category: 'premium', type: 'Editor', name: 'CapCut Pro', price: 20000, desc: '✅ Unlock Semua Efek Pro<br>✅ Transisi & Filter Premium<br>✅ Auto Caption & Remove BG', icon: 'fa-solid fa-scissors', reqLink: false, warranty: 'full_garansi' },
             { id: 218, category: 'premium', type: 'AI', name: 'Gemini AI Advanced', price: 30000, desc: '✅ Model AI Google Tercanggih (Ultra 1.0)<br>✅ Analisis Data Kompleks<br>✅ Integrasi Google Workspace', icon: 'fa-brands fa-google', reqLink: false, warranty: 'full_garansi' },
             { id: 219, category: 'premium', type: 'Storage', name: 'Google Drive Unlimited', price: 40000, desc: '✅ Penyimpanan Awan Tanpa Batas<br>✅ Team Drive Shared<br>✅ Aman & Terenkripsi', icon: 'fa-brands fa-google-drive', reqLink: false, warranty: 'full_garansi' },
-            { id: 220, category: 'premium', type: 'Streaming', name: 'YouTube Premium Indiv', price: 10000, desc: '✅ Nonton Bebas Iklan<br>✅ Putar di Latar Belakang<br>✅ Download Offline', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
+            { id: 220, category: 'premium', type: 'Streaming', name: 'YouTube Premium Indiv', price: 10000, desc: '✅ Nonton Bebas Iklan<br>✅ Background Play<br>✅ YouTube Music Premium', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
             { id: 221, category: 'premium', type: 'Streaming', name: 'YouTube Prem FamHead', price: 15000, desc: '✅ Fitur Kepala Keluarga (Admin)<br>✅ Invite 5 Anggota<br>✅ Semua Benefit Premium', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
 
             // --- INSTAGRAM REGULER ---
@@ -134,17 +146,10 @@
             { id: 12, category: 'tiktok', type: 'View', name: '1.000 View TikTok', price: 1000, desc: 'Views termurah.', icon: 'fa-solid fa-eye', reqLink: true, warranty: 'no_refill' },
         ];
 
-        // --- TESTIMONI ---
-        const testimonials = [
-            { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
-            { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
-            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views! Makasih min!", stars: 5 },
-            { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
-            { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
-        ];
-
         let cart = [];
         let currentFilter = 'all';
+        let currentSuperFilter = 'all'; 
+        let searchQuery = '';
         let tempProductId = null; 
         let currentQty = 1;
 
@@ -157,12 +162,26 @@
             const container = document.getElementById('product-container');
             container.innerHTML = '';
             
-            const filtered = currentFilter === 'all' 
-                ? products 
-                : products.filter(p => p.category === currentFilter);
+            // 1. Super Filter (Dari Popup)
+            let filtered = products;
+            if(currentSuperFilter === 'sosmed') {
+                filtered = products.filter(p => p.category !== 'premium');
+            } else if (currentSuperFilter === 'premium') {
+                filtered = products.filter(p => p.category === 'premium');
+            }
+
+            // 2. Filter Kategori (Tabs)
+            if (searchQuery === '') {
+                if (currentFilter !== 'all') {
+                    filtered = filtered.filter(p => p.category === currentFilter);
+                }
+            } else {
+                // 3. Search Query
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery));
+            }
 
             if(filtered.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-10 opacity-50"><i class="fa-solid fa-box-open text-4xl mb-2"></i><br>Produk belum tersedia.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-12 opacity-50"><i class="fa-solid fa-magnifying-glass text-4xl mb-3 text-gray-300"></i><p class="text-sm">Produk tidak ditemukan.</p></div>`;
                 return;
             }
 
@@ -171,7 +190,7 @@
                 let borderColor = 'border-gray-200 dark:border-gray-700';
                 let typeBg = 'bg-gray-100 dark:bg-gray-700 text-gray-500';
 
-                // LOGIKA WARNA & IKON
+                // LOGIKA WARNA
                 if (p.category === 'instagram') {
                     iconColor = 'text-pink-500';
                     borderColor = 'border-pink-200 dark:border-pink-900';
@@ -201,7 +220,6 @@
                     `;
                 }
                 
-                // LOGIKA DESKRIPSI (Hanya FYP)
                 let descHtml = '';
                 if(p.category === 'fyp') {
                     descHtml = `<p class="text-xs text-gray-600 dark:text-gray-300 mb-3 leading-relaxed border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 mt-2 font-medium">${p.desc}</p>`;
@@ -243,11 +261,29 @@
             });
         }
 
-        // --- FILTER ---
+        // --- RENDER TESTIMONI (FIXED) ---
+        function renderTestimonials() {
+            const container = document.getElementById('testi-container');
+            container.innerHTML = ''; // Reset container
+            testimonials.forEach(t => {
+                let stars = '';
+                for(let i=0; i<5; i++) stars += `<i class="fa-solid fa-star text-yellow-400"></i>`; // Warna bintang kuning
+                
+                container.innerHTML += `
+                    <div class="min-w-[280px] md:min-w-[320px] bg-white dark:bg-cardbg p-5 rounded-2xl border border-gray-100 dark:border-gray-700 snap-center shadow-sm">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-md">${t.name.charAt(0)}</div>
+                            <div><h4 class="font-bold text-sm dark:text-white line-clamp-1">${t.name}</h4><p class="text-[10px] text-gray-400 uppercase tracking-wide">${t.role}</p></div>
+                        </div>
+                        <div class="text-xs mb-2 flex gap-1">${stars}</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 italic leading-relaxed">"${t.text}"</p>
+                    </div>`;
+            });
+        }
+
+        // --- FILTER & SEARCH ---
         function setFilter(category) {
             currentFilter = category;
-            
-            // FITUR AUTO SCROLL (Scroll ke paling atas saat ganti kategori)
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -261,7 +297,7 @@
                     else if(category === 'premium') btn.className = baseClass + 'bg-amber-500 text-white shadow-lg shadow-amber-500/30 border-transparent';
                     else if(category === 'fyp') {
                         btn.className = baseClass + 'bg-black text-white dark:bg-white dark:text-black shadow-lg shadow-gray-500/30 border-transparent';
-                        if(icon) icon.className = 'fa-solid fa-rocket mr-1'; // Ikon FYP jadi putih/hitam ikut teks
+                        if(icon) icon.className = 'fa-solid fa-rocket mr-1'; 
                     }
                     else btn.className = baseClass + 'bg-brand text-white shadow-lg shadow-indigo-500/30 border-transparent';
                 } else {
@@ -276,7 +312,32 @@
             renderProducts();
         }
 
-        // --- WARRANTY LOGIC ---
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.toLowerCase();
+            renderProducts();
+        }
+
+        function toggleFilterModal() {
+            const modal = document.getElementById('filter-modal');
+            if(modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function applySuperFilter(type) {
+            currentSuperFilter = type;
+            setFilter('all'); 
+            
+            const icon = document.getElementById('filter-icon');
+            if(type === 'all') icon.className = 'fa-solid fa-sliders';
+            else icon.className = 'fa-solid fa-filter text-brand';
+
+            toggleFilterModal();
+        }
+
+        // --- WARRANTY ---
         function showWarranty(type) {
             const modal = document.getElementById('warranty-modal');
             const title = document.getElementById('warranty-title');
@@ -284,34 +345,13 @@
             
             modal.classList.remove('hidden');
             
-            if (type === 'no_refill') {
-                title.innerText = "Garansi: No Refill";
-                content.innerHTML = `
-                    <p class="mb-2"><strong>Ketentuan:</strong></p>
-                    <ul class="list-disc pl-4 space-y-1">
-                        <li>Layanan ini <strong>TIDAK BERGARANSI</strong> isi ulang jika terjadi penurunan (drop).</li>
-                        <li>Cocok untuk tes layanan atau kebutuhan jangka pendek.</li>
-                        <li>Pastikan akun tidak diprivate.</li>
-                    </ul>`;
-            } else if (type === '30_hari') {
-                title.innerText = "Garansi: 30 Hari Refill";
-                content.innerHTML = `
-                    <p class="mb-2"><strong>Ketentuan:</strong></p>
-                    <ul class="list-disc pl-4 space-y-1">
-                        <li>Kami menjamin isi ulang (refill) jika followers/likes turun >20% dalam 30 hari.</li>
-                        <li>Garansi HANGUS jika mengganti username atau mem-private akun.</li>
-                        <li>Proses refill maksimal 1x24 jam setelah lapor.</li>
-                    </ul>`;
-            } else if (type === 'full_garansi') {
-                title.innerText = "Garansi: Full Garansi (Premium)";
-                content.innerHTML = `
-                    <p class="mb-2"><strong>Ketentuan Aplikasi Premium:</strong></p>
-                    <ul class="list-disc pl-4 space-y-1">
-                        <li>Garansi aktif selama masa durasi sewa (1 Bulan / Lifetime).</li>
-                        <li>Jika akun bermasalah (screen limit, password salah), akan diganti akun baru.</li>
-                        <li>Dilarang mengubah email/password akun sharing (Garansi Hangus).</li>
-                    </ul>`;
-            }
+            let text = '';
+            if (type === 'no_refill') text = `<ul class="list-disc pl-4 space-y-1"><li>Layanan ini <strong>TIDAK BERGARANSI</strong> (No Refill).</li><li>Pastikan akun publik (tidak private).</li></ul>`;
+            else if (type === '30_hari') text = `<ul class="list-disc pl-4 space-y-1"><li>Garansi isi ulang (refill) 30 hari jika drop >20%.</li><li>Garansi hangus jika ganti username/private akun.</li></ul>`;
+            else if (type === 'full_garansi') text = `<ul class="list-disc pl-4 space-y-1"><li>Garansi aktif selama durasi sewa.</li><li>Akun bermasalah diganti baru.</li><li>Dilarang ubah data akun sharing.</li></ul>`;
+            
+            title.innerText = "Info Garansi";
+            content.innerHTML = text;
         }
 
         function closeWarranty() {
@@ -345,7 +385,6 @@
             document.getElementById('custom-comment-area').value = '';
             document.getElementById('custom-comment-area').classList.add('hidden');
             
-            // LOGIKA HILANGKAN INPUT LINK UNTUK PREMIUM
             if (product.reqLink === false) {
                  document.getElementById('target-container').classList.add('hidden');
             } else {
@@ -445,7 +484,7 @@
             type === 'custom' ? area.classList.remove('hidden') : area.classList.add('hidden');
         }
 
-        // --- CART LOGIC ---
+        // --- CART ---
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
@@ -530,30 +569,6 @@
             window.open(`https://wa.me/${NO_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        // --- UTILS ---
-        function renderTestimonials() {
-            const container = document.getElementById('testi-container');
-            const testimonials = [
-                { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
-                { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
-                { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views!", stars: 5 },
-                { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
-                { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
-            ];
-            testimonials.forEach(t => {
-                let stars = '';
-                for(let i=0; i<5; i++) stars += `<i class="fa-solid fa-star ${i < t.stars ? 'text-yellow-400' : 'text-gray-300'}"></i>`;
-                container.innerHTML += `
-                    <div class="min-w-[280px] md:min-w-[320px] bg-white dark:bg-cardbg p-5 rounded-2xl border border-gray-100 dark:border-gray-700 snap-center">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-md">${t.name.charAt(0)}</div>
-                            <div><h4 class="font-bold text-sm dark:text-white line-clamp-1">${t.name}</h4><p class="text-[10px] text-gray-400 uppercase tracking-wide">${t.role}</p></div>
-                        </div>
-                        <div class="text-xs mb-2 flex gap-1">${stars}</div>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 italic leading-relaxed">"${t.text}"</p>
-                    </div>`;
-            });
-        }
         function toggleCart() {
             const modal = document.getElementById('cart-modal');
             const content = document.getElementById('cart-content');
@@ -599,31 +614,61 @@
                     <p class="text-[10px] text-gray-500 font-medium">Suntik Sosmed No.1</p>
                 </div>
             </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:text-brand hover:bg-gray-100 dark:hover:bg-slate-700 transition"><i id="theme-icon" class="fa-solid fa-moon text-lg"></i></button>
-                <div class="relative cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" onclick="toggleCart()">
+            
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/6289676930992" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full text-green-500 bg-green-50 dark:bg-slate-800 hover:bg-green-100 transition shadow-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </a>
+                <button onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-full text-gray-500 hover:text-brand hover:bg-gray-100 dark:hover:bg-slate-700 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+                <div class="relative cursor-pointer w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" onclick="toggleCart()">
                     <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-2xl text-yellow-500"></i>
-                    <span id="cart-badge" class="absolute top-1 right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300 border border-white dark:border-darkbg">0</span>
+                    <span id="cart-badge" class="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300 border border-white dark:border-darkbg">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- CONTENT -->
-    <main class="max-w-md mx-auto pt-20 px-4 space-y-8">
-        <!-- Hero -->
-        <div class="text-center space-y-2">
+    <main class="max-w-md mx-auto pt-20 px-4 space-y-6">
+        
+        <!-- HERO -->
+        <div class="text-center space-y-2 mt-4">
             <div class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 px-3 py-1 rounded-full">
                 <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
                 <span class="text-[10px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">Terjual 5.000+ Pesanan</span>
             </div>
             <h2 class="text-3xl font-black text-gray-800 dark:text-white leading-tight">Bikin Sosmedmu <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-500">Makin Rame!</span></h2>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Pilih layanan Instagram & TikTok favoritmu. Proses otomatis, aman, dan bergaransi.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Pusat kebutuhan digital terlengkap. Layanan suntik sosmed instan & aplikasi premium bergaransi.</p>
         </div>
 
-        <!-- Filter & Produk -->
-        <section id="produk">
-            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 sticky top-16 z-30 bg-gray-50/95 dark:bg-darkbg/95 py-3 backdrop-blur-sm -mx-4 px-4 items-center">
+        <!-- KEUNGGULAN (MOVED HERE) -->
+        <div class="grid grid-cols-3 gap-2">
+            <div class="bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-blue-100 dark:border-slate-700"><i class="fa-solid fa-bolt text-brand text-xl mb-1"></i><p class="text-[10px] font-bold">Proses Cepat</p></div>
+            <div class="bg-green-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-green-100 dark:border-slate-700"><i class="fa-solid fa-shield-halved text-green-500 text-xl mb-1"></i><p class="text-[10px] font-bold">100% Aman</p></div>
+            <div class="bg-purple-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-purple-100 dark:border-slate-700"><i class="fa-solid fa-headset text-purple-500 text-xl mb-1"></i><p class="text-[10px] font-bold">CS 24/7</p></div>
+        </div>
+
+        <!-- SEARCH & FILTER BAR -->
+        <div class="sticky top-16 z-30 bg-gray-50/95 dark:bg-darkbg/95 backdrop-blur-md py-2 -mx-4 px-4 space-y-2 shadow-sm">
+            <div class="flex gap-2">
+                <!-- Search Input RAPIH (Centered Icon) -->
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass text-gray-400 text-xs"></i>
+                    </div>
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari layanan (e.g Netflix, Followers)..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-cardbg border border-gray-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-brand dark:text-white transition-all">
+                </div>
+                
+                <!-- Tombol Filter Popup -->
+                <button onclick="toggleFilterModal()" class="bg-white dark:bg-cardbg border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-white w-10 rounded-xl flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-700 transition shadow-sm active:scale-95">
+                    <i id="filter-icon" class="fa-solid fa-sliders"></i>
+                </button>
+            </div>
+
+            <!-- Kategori Tabs -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
                 <button onclick="setFilter('all')" data-category="all" class="filter-btn">Semua</button>
                 <button onclick="setFilter('promo')" data-category="promo" class="filter-btn"><i class="fa-solid fa-fire text-red-500 mr-1"></i> Promo</button>
                 <button onclick="setFilter('fyp')" data-category="fyp" class="filter-btn"><i class="fa-brands fa-tiktok text-black dark:text-white mr-1"></i> Paket FYP</button>
@@ -631,10 +676,12 @@
                 <button onclick="setFilter('instagram')" data-category="instagram" class="filter-btn"><i class="fa-brands fa-instagram"></i> Instagram</button>
                 <button onclick="setFilter('tiktok')" data-category="tiktok" class="filter-btn"><i class="fa-brands fa-tiktok"></i> TikTok</button>
             </div>
-            <div id="product-container" class="grid grid-cols-1 gap-3"></div>
-        </section>
+        </div>
 
-        <!-- Tutorial, Testi, Syarat -->
+        <!-- PRODUCT GRID -->
+        <div id="product-container" class="grid grid-cols-1 gap-3 min-h-[300px]"></div>
+
+        <!-- Tutorial -->
         <section class="bg-white dark:bg-cardbg rounded-2xl p-5 border border-gray-100 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-4 flex items-center gap-2 dark:text-white"><i class="fa-solid fa-list-ol text-brand"></i> Tutorial Order</h3>
             <div class="space-y-4 relative before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-gray-700">
@@ -644,6 +691,7 @@
             </div>
         </section>
 
+        <!-- Testimoni -->
         <section>
             <h3 class="font-bold text-lg mb-4 dark:text-white">Apa Kata Mereka?</h3>
             <div id="testi-container" class="flex overflow-x-auto gap-3 no-scrollbar pb-4 -mx-4 px-4 snap-x"></div>
@@ -671,6 +719,31 @@
             <div><p>&copy; 2025 Ferdy Sosmed. All rights reserved.</p><p class="mt-1">Made for GitHub Pages</p></div>
         </footer>
     </main>
+
+    <!-- NEW FILTER POPUP MODAL -->
+    <div id="filter-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
+        <div onclick="toggleFilterModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+        <div class="bg-white dark:bg-cardbg w-full max-w-xs rounded-2xl p-5 relative z-10 shadow-2xl animate-pop-in">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg dark:text-white">Filter Kategori</h3>
+                <button onclick="toggleFilterModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-slate-700 text-gray-500 hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-2">
+                <button onclick="applySuperFilter('all')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                    <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Semua Produk</span>
+                    <i class="fa-solid fa-layer-group text-gray-400 group-hover:text-brand"></i>
+                </button>
+                <button onclick="applySuperFilter('sosmed')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                    <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Suntik Sosmed</span>
+                    <i class="fa-solid fa-users text-gray-400 group-hover:text-brand"></i>
+                </button>
+                <button onclick="applySuperFilter('premium')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                    <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Aplikasi Premium</span>
+                    <i class="fa-solid fa-crown text-gray-400 group-hover:text-brand"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- DRAWER INPUT -->
     <div id="input-drawer" class="hidden fixed inset-0 z-50 flex items-end justify-center">
@@ -700,7 +773,7 @@
                     </div>
                 </div>
 
-                <!-- Input Link (Di Bawah Quantity sesuai Request) -->
+                <!-- Input Link -->
                 <div id="target-container">
                     <label id="target-label" class="block text-xs font-bold text-gray-500 mb-1">Link / Username Target</label>
                     <input type="text" id="target-input" placeholder="Masukkan Link atau Username..." class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand dark:text-white transition-all">
