@@ -79,15 +79,6 @@
         // --- KONFIGURASI ---
         const NO_WHATSAPP = "6289676930992"; 
 
-        // --- DATA TESTIMONI (DIPASTIKAN ADA) ---
-        const testimonials = [
-            { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
-            { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
-            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views! Makasih min!", stars: 5 },
-            { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
-            { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
-        ];
-
         // --- DATA PRODUK LENGKAP ---
         const products = [
             // --- KATEGORI PROMO ---
@@ -128,7 +119,7 @@
             { id: 217, category: 'premium', type: 'Editor', name: 'CapCut Pro', price: 20000, desc: '✅ Unlock Semua Efek Pro<br>✅ Transisi & Filter Premium<br>✅ Auto Caption & Remove BG', icon: 'fa-solid fa-scissors', reqLink: false, warranty: 'full_garansi' },
             { id: 218, category: 'premium', type: 'AI', name: 'Gemini AI Advanced', price: 30000, desc: '✅ Model AI Google Tercanggih (Ultra 1.0)<br>✅ Analisis Data Kompleks<br>✅ Integrasi Google Workspace', icon: 'fa-brands fa-google', reqLink: false, warranty: 'full_garansi' },
             { id: 219, category: 'premium', type: 'Storage', name: 'Google Drive Unlimited', price: 40000, desc: '✅ Penyimpanan Awan Tanpa Batas<br>✅ Team Drive Shared<br>✅ Aman & Terenkripsi', icon: 'fa-brands fa-google-drive', reqLink: false, warranty: 'full_garansi' },
-            { id: 220, category: 'premium', type: 'Streaming', name: 'YouTube Premium Indiv', price: 10000, desc: '✅ Nonton Bebas Iklan<br>✅ Background Play<br>✅ YouTube Music Premium', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
+            { id: 220, category: 'premium', type: 'Streaming', name: 'YouTube Premium Indiv', price: 10000, desc: '✅ Nonton Bebas Iklan<br>✅ Putar di Latar Belakang<br>✅ Download Offline', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
             { id: 221, category: 'premium', type: 'Streaming', name: 'YouTube Prem FamHead', price: 15000, desc: '✅ Fitur Kepala Keluarga (Admin)<br>✅ Invite 5 Anggota<br>✅ Semua Benefit Premium', icon: 'fa-brands fa-youtube', reqLink: false, warranty: 'full_garansi' },
 
             // --- INSTAGRAM REGULER ---
@@ -144,6 +135,15 @@
             { id: 10, category: 'tiktok', type: 'Save', name: '100 Save TikTok', price: 1000, desc: 'Sinyal algoritma positif.', icon: 'fa-solid fa-bookmark', reqLink: true, warranty: 'no_refill' },
             { id: 11, category: 'tiktok', type: 'Share', name: '100 Share TikTok', price: 1500, desc: 'Tingkatkan viralitas.', icon: 'fa-solid fa-share', reqLink: true, warranty: 'no_refill' },
             { id: 12, category: 'tiktok', type: 'View', name: '1.000 View TikTok', price: 1000, desc: 'Views termurah.', icon: 'fa-solid fa-eye', reqLink: true, warranty: 'no_refill' },
+        ];
+
+        // --- TESTIMONI ---
+        const testimonials = [
+            { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
+            { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
+            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views! Makasih min!", stars: 5 },
+            { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
+            { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
         ];
 
         let cart = [];
@@ -226,7 +226,7 @@
                 }
 
                 const card = `
-                <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div onclick="openInputDrawer(${p.id})" class="cursor-pointer bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300">
                     <div class="absolute top-0 right-0 px-2 py-1 rounded-bl-lg text-[10px] font-bold uppercase ${typeBg}">
                         ${p.type}
                     </div>
@@ -267,7 +267,7 @@
             container.innerHTML = ''; // Reset container
             testimonials.forEach(t => {
                 let stars = '';
-                for(let i=0; i<5; i++) stars += `<i class="fa-solid fa-star text-yellow-400"></i>`; // Warna bintang kuning
+                for(let i=0; i<5; i++) stars += `<i class="fa-solid fa-star text-yellow-400"></i>`; 
                 
                 container.innerHTML += `
                     <div class="min-w-[280px] md:min-w-[320px] bg-white dark:bg-cardbg p-5 rounded-2xl border border-gray-100 dark:border-gray-700 snap-center shadow-sm">
@@ -312,8 +312,29 @@
             renderProducts();
         }
 
+        // --- NEW SEARCH LOGIC WITH 'X' BUTTON ---
         function handleSearch() {
-            searchQuery = document.getElementById('search-input').value.toLowerCase();
+            const searchInput = document.getElementById('search-input');
+            const clearBtn = document.getElementById('clear-search');
+            
+            searchQuery = searchInput.value.toLowerCase();
+            
+            if(searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            
+            renderProducts();
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('search-input');
+            const clearBtn = document.getElementById('clear-search');
+            
+            searchInput.value = '';
+            searchQuery = '';
+            clearBtn.classList.add('hidden');
             renderProducts();
         }
 
@@ -658,7 +679,12 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fa-solid fa-magnifying-glass text-gray-400 text-xs"></i>
                     </div>
-                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari layanan (e.g Netflix, Followers)..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-cardbg border border-gray-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-brand dark:text-white transition-all">
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari layanan (e.g Netflix, Followers)..." class="w-full pl-9 pr-8 py-2 rounded-xl bg-white dark:bg-cardbg border border-gray-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-brand dark:text-white transition-all">
+                    
+                    <!-- NEW: CLEAR SEARCH BUTTON -->
+                    <button id="clear-search" onclick="clearSearch()" class="absolute inset-y-0 right-2 flex items-center text-gray-400 hover:text-red-500 hidden transition">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
                 </div>
                 
                 <!-- Tombol Filter Popup -->
@@ -681,7 +707,7 @@
         <!-- PRODUCT GRID -->
         <div id="product-container" class="grid grid-cols-1 gap-3 min-h-[300px]"></div>
 
-        <!-- Tutorial -->
+        <!-- Tutorial, Testi, Syarat -->
         <section class="bg-white dark:bg-cardbg rounded-2xl p-5 border border-gray-100 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-4 flex items-center gap-2 dark:text-white"><i class="fa-solid fa-list-ol text-brand"></i> Tutorial Order</h3>
             <div class="space-y-4 relative before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-gray-700">
@@ -691,7 +717,6 @@
             </div>
         </section>
 
-        <!-- Testimoni -->
         <section>
             <h3 class="font-bold text-lg mb-4 dark:text-white">Apa Kata Mereka?</h3>
             <div id="testi-container" class="flex overflow-x-auto gap-3 no-scrollbar pb-4 -mx-4 px-4 snap-x"></div>
@@ -720,24 +745,24 @@
         </footer>
     </main>
 
-    <!-- NEW FILTER POPUP MODAL -->
+    <!-- NEW FILTER POPUP MODAL (FIXED DARK MODE BORDER) -->
     <div id="filter-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
         <div onclick="toggleFilterModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-        <div class="bg-white dark:bg-cardbg w-full max-w-xs rounded-2xl p-5 relative z-10 shadow-2xl animate-pop-in">
+        <div class="bg-white dark:bg-cardbg w-full max-w-xs rounded-2xl p-5 relative z-10 shadow-2xl animate-pop-in border border-transparent dark:border-slate-700">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="font-bold text-lg dark:text-white">Filter Kategori</h3>
                 <button onclick="toggleFilterModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-slate-700 text-gray-500 hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="space-y-2">
-                <button onclick="applySuperFilter('all')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                <button onclick="applySuperFilter('all')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group border border-transparent dark:border-slate-700">
                     <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Semua Produk</span>
                     <i class="fa-solid fa-layer-group text-gray-400 group-hover:text-brand"></i>
                 </button>
-                <button onclick="applySuperFilter('sosmed')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                <button onclick="applySuperFilter('sosmed')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group border border-transparent dark:border-slate-700">
                     <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Suntik Sosmed</span>
                     <i class="fa-solid fa-users text-gray-400 group-hover:text-brand"></i>
                 </button>
-                <button onclick="applySuperFilter('premium')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group">
+                <button onclick="applySuperFilter('premium')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 transition group border border-transparent dark:border-slate-700">
                     <span class="text-sm font-semibold dark:text-white group-hover:text-brand">Aplikasi Premium</span>
                     <i class="fa-solid fa-crown text-gray-400 group-hover:text-brand"></i>
                 </button>
