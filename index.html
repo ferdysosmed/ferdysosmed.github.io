@@ -8,7 +8,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome (Versi Stabil) -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
@@ -44,14 +44,13 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .dark .glass {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.8);
         }
     </style>
 </head>
@@ -60,56 +59,59 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- KONFIGURASI ---
-        const NO_WHATSAPP = "6289676930992"; // GANTI NOMOR DI SINI
+        const NO_WHATSAPP = "6289676930992"; 
 
         // --- DATA PRODUK LENGKAP ---
-        // Tips: 'icon' sekarang berisi class lengkap agar tidak error (kotak silang)
         const products = [
-            // --- KATEGORI PROMO (Pindahan dari IG/TikTok + Promo Baru) ---
-            { id: 101, category: 'promo', platform: 'mix', type: 'HOT DEAL', name: 'Paket Sultan (1k IG + 1k TikTok)', price: 75000, icon: 'fa-solid fa-fire', oldPrice: 100000, reqLink: true },
-            { id: 102, category: 'promo', platform: 'instagram', type: 'FLASH SALE', name: '5000 Views IG Reels', price: 9000, icon: 'fa-solid fa-bolt', oldPrice: 15000, reqLink: true },
-            { id: 103, category: 'promo', platform: 'instagram', type: 'IG PROMO', name: '100 Follower Instagram Promo', price: 10000, icon: 'fa-brands fa-instagram', oldPrice: 15000, reqLink: true },
-            { id: 104, category: 'promo', platform: 'instagram', type: 'IG PROMO', name: '1.000 Like Instagram Promo', price: 25000, icon: 'fa-solid fa-heart', oldPrice: 35000, reqLink: true },
+            // --- KATEGORI PROMO ---
+            { id: 101, category: 'promo', type: 'HOT DEAL', name: 'Paket Sultan (1k IG + 1k TikTok)', price: 75000, desc: 'Followers mix quality, proses cepat.', icon: 'fa-solid fa-fire', oldPrice: 100000, reqLink: true },
+            { id: 102, category: 'promo', type: 'FLASH SALE', name: '5000 Views IG Reels', price: 9000, desc: 'Meningkatkan jangkauan reels.', icon: 'fa-solid fa-bolt', oldPrice: 15000, reqLink: true },
+            { id: 103, category: 'promo', type: 'IG PROMO', name: '100 Follower Instagram Promo', price: 10000, desc: 'Harga termurah, cocok untuk tes.', icon: 'fa-brands fa-instagram', oldPrice: 15000, reqLink: true },
+            { id: 104, category: 'promo', type: 'IG PROMO', name: '1.000 Like Instagram Promo', price: 25000, desc: 'Likes postingan, masuk instan.', icon: 'fa-solid fa-heart', oldPrice: 35000, reqLink: true },
 
-            // --- KATEGORI PAKET FYP TIKTOK (BARU) ---
-            { id: 301, category: 'fyp', platform: 'tiktok', type: 'VIRAL V1', name: 'Paket FYP Basic (10k View + 500 Like)', price: 20000, icon: 'fa-brands fa-tiktok', reqLink: true },
-            { id: 302, category: 'fyp', platform: 'tiktok', type: 'VIRAL V2', name: 'Paket FYP Super (50k View + 2k Like)', price: 85000, icon: 'fa-solid fa-rocket', reqLink: true },
-            { id: 303, category: 'fyp', platform: 'tiktok', type: 'VIRAL V3', name: 'Paket FYP Ultimate (100k View + 5k Like)', price: 150000, icon: 'fa-solid fa-burst', reqLink: true },
+            // --- KATEGORI PAKET FYP TIKTOK (BARU & LENGKAP) ---
+            { id: 301, category: 'fyp', type: 'FYP V1', name: 'Paket Starter', price: 2500, desc: '100 Like + 1.000 View', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 302, category: 'fyp', type: 'FYP V2', name: 'Paket Basic', price: 7000, desc: '200 Like + 5.000 View + 100 Save', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 303, category: 'fyp', type: 'FYP V3', name: 'Paket Standard', price: 14000, desc: '300 Like + 10k View + 200 Save + 100 Share', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 304, category: 'fyp', type: 'FYP V4', name: 'Paket Medium', price: 27000, desc: '400 Like + 20k View + 300 Save + 100 Share + 10 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 305, category: 'fyp', type: 'FYP V5', name: 'Paket Advanced', price: 39000, desc: '500 Like + 30k View + 400 Save + 300 Share + 20 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 306, category: 'fyp', type: 'FYP V6', name: 'Paket Ultimate', price: 52000, desc: '600 Like + 40k View + 500 Save + 400 Share + 30 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 307, category: 'fyp', type: 'FYP V7', name: 'Paket Super', price: 61000, desc: '700 Like + 50k View + 600 Save + 300 Share + 40 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 308, category: 'fyp', type: 'FYP V8', name: 'Paket Super Boost', price: 74000, desc: '800 Like + 60k View + 700 Save + 400 Share + 50 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 309, category: 'fyp', type: 'FYP V9', name: 'Paket VIP', price: 86000, desc: '900 Like + 70k View + 800 Save + 500 Share + 60 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 310, category: 'fyp', type: 'FYP MAX', name: 'Paket Platinum', price: 99000, desc: '1k Like + 80k View + 900 Save + 600 Share + 70 Komen', icon: 'fa-solid fa-crown', reqLink: true, isComment: true },
 
             // --- INSTAGRAM REGULER ---
-            { id: 1, category: 'instagram', type: 'Follower', name: '100 Follower High Quality', price: 8000, icon: 'fa-solid fa-user-plus', reqLink: true },
-            { id: 3, category: 'instagram', type: 'Likes', name: '100 Like Instan', price: 3000, icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 5, category: 'instagram', type: 'Views', name: '1.000 View Reels/Video', price: 5000, icon: 'fa-solid fa-eye', reqLink: true },
-            { id: 6, category: 'instagram', type: 'Comments', name: '10 Komentar Custom', price: 3000, icon: 'fa-solid fa-comment-dots', reqLink: true, isComment: true }, 
+            { id: 1, category: 'instagram', type: 'Follower', name: '100 Follower HQ', price: 8000, desc: 'Akun profil foto, drop rendah.', icon: 'fa-solid fa-user-plus', reqLink: true },
+            { id: 3, category: 'instagram', type: 'Likes', name: '100 Like Instan', price: 3000, desc: 'Masuk kilat, aman 100%.', icon: 'fa-solid fa-heart', reqLink: true },
+            { id: 5, category: 'instagram', type: 'Views', name: '1.000 View Reels', price: 5000, desc: 'View global, bantu jangkauan.', icon: 'fa-solid fa-eye', reqLink: true },
+            { id: 6, category: 'instagram', type: 'Comments', name: '10 Komentar Custom', price: 3000, desc: 'Isi komentar sesuka hati.', icon: 'fa-solid fa-comment-dots', reqLink: true, isComment: true }, 
             
             // --- TIKTOK REGULER ---
-            { id: 7, category: 'tiktok', type: 'Followers', name: '100 Followers TikTok', price: 8000, icon: 'fa-solid fa-user-plus', reqLink: true },
-            { id: 8, category: 'tiktok', type: 'Likes', name: '1000 Likes TikTok', price: 12000, icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 9, category: 'tiktok', type: 'Views', name: '10k Views TikTok', price: 10000, icon: 'fa-solid fa-eye', reqLink: true },
-            { id: 10, category: 'tiktok', type: 'Share', name: '500 Share TikTok', price: 15000, icon: 'fa-solid fa-share', reqLink: true },
-            { id: 11, category: 'tiktok', type: 'Saves', name: '1000 Saves TikTok', price: 10000, icon: 'fa-solid fa-bookmark', reqLink: true },
-            { id: 12, category: 'tiktok', type: 'Comments', name: '20 Komentar Random', price: 15000, icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
+            { id: 7, category: 'tiktok', type: 'Followers', name: '100 Followers TikTok', price: 8000, desc: 'Followers pasif, proses cepat.', icon: 'fa-brands fa-tiktok', reqLink: true },
+            { id: 8, category: 'tiktok', type: 'Likes', name: '1000 Likes TikTok', price: 12000, desc: 'Like video permanen.', icon: 'fa-solid fa-heart', reqLink: true },
+            { id: 9, category: 'tiktok', type: 'Views', name: '10k Views TikTok', price: 10000, desc: 'View video biar kelihatan rame.', icon: 'fa-solid fa-eye', reqLink: true },
+            { id: 12, category: 'tiktok', type: 'Comments', name: '20 Komentar Random', price: 15000, desc: 'Komentar acak positif.', icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
 
             // --- PREMIUM ---
-            { id: 201, category: 'premium', type: 'Streaming', name: 'Netflix Sharing 1 Bulan', price: 25000, icon: 'fa-solid fa-film', reqLink: false },
-            { id: 202, category: 'premium', type: 'Design', name: 'Canva Pro Admin (Lifetime)', price: 35000, icon: 'fa-solid fa-paintbrush', reqLink: true, labelLink: 'Email Canva' },
-            { id: 203, category: 'premium', type: 'Streaming', name: 'Spotify Individual 1 Bulan', price: 15000, icon: 'fa-brands fa-spotify', reqLink: false },
+            { id: 201, category: 'premium', type: 'Streaming', name: 'Netflix Sharing 1 Bulan', price: 25000, desc: 'Profile lock, resolusi 4K.', icon: 'fa-solid fa-film', reqLink: false },
+            { id: 202, category: 'premium', type: 'Design', name: 'Canva Pro Admin (Life)', price: 35000, desc: 'Undang via email, garansi.', icon: 'fa-solid fa-paintbrush', reqLink: true, labelLink: 'Email Canva' },
+            { id: 203, category: 'premium', type: 'Streaming', name: 'Spotify Indiv 1 Bulan', price: 15000, desc: 'Akun privat, full garansi.', icon: 'fa-brands fa-spotify', reqLink: false },
         ];
 
-        // --- DATA TESTIMONI (DITAMBAH) ---
+        // --- DATA TESTIMONI ---
         const testimonials = [
             { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
             { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
-            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP, beneran videoku tembus 50k views dalam 2 jam. Makasih min!", stars: 5 },
-            { name: "Budi Santoso", role: "Content Creator", text: "Harga termurah se-GitHub wkwk. Thanks min!", stars: 5 },
-            { name: "Dimas Pratama", role: "Selebgram", text: "Udah langganan dari lama, layanan gapernah mengecewakan. Top markotop.", stars: 5 },
-            { name: "Putri", role: "Personal", text: "Awalnya ragu, eh ternyata beneran masuk likenya.", stars: 4 },
+            { name: "Rina Amelia", role: "TikTok Affiliator", text: "Nyobain Paket FYP Platinum, videoku tembus 200k views! Makasih min!", stars: 5 },
+            { name: "Dimas Pratama", role: "Selebgram", text: "Layanan gapernah mengecewakan. Top markotop.", stars: 5 },
             { name: "Kevin", role: "Gamer", text: "Top up followers cepet banget prosesnya.", stars: 5 },
         ];
 
         let cart = [];
         let currentFilter = 'all';
         let tempProductId = null; 
+        let currentQty = 1; // Variabel jumlah pesanan
 
         function formatRupiah(angka) {
             return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -130,21 +132,18 @@
             }
 
             filtered.forEach(p => {
-                // Styling Warna & Border
                 let iconColor = 'text-gray-700 dark:text-gray-200';
                 let borderColor = 'border-gray-200 dark:border-gray-700';
                 let typeBg = 'bg-gray-100 dark:bg-gray-700 text-gray-500';
 
-                // Logika Warna Berdasarkan Kategori / Platform
-                if (p.category === 'instagram' || p.platform === 'instagram') {
+                if (p.category === 'instagram') {
                     iconColor = 'text-pink-500';
                     borderColor = 'border-pink-200 dark:border-pink-900';
-                } else if (p.category === 'tiktok' || p.category === 'fyp' || p.platform === 'tiktok') {
+                } else if (p.category === 'tiktok' || p.category === 'fyp') {
                     iconColor = 'text-black dark:text-white';
                     borderColor = 'border-gray-300 dark:border-gray-600';
                 } 
                 
-                // Override khusus kategori Promo & Premium
                 if (p.category === 'promo') {
                     iconColor = 'text-red-500';
                     borderColor = 'border-red-200 dark:border-red-900 ring-1 ring-red-100 dark:ring-red-900';
@@ -157,7 +156,6 @@
                      typeBg = 'bg-black text-white dark:bg-white dark:text-black';
                 }
 
-                // Tampilan Harga (Coret jika ada oldPrice)
                 let priceDisplay = `<span class="font-bold text-brand text-base">${formatRupiah(p.price)}</span>`;
                 if(p.oldPrice) {
                     priceDisplay = `
@@ -170,14 +168,13 @@
                 
                 const card = `
                 <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300">
-                    <!-- Label Tipe -->
                     <div class="absolute top-0 right-0 px-2 py-1 rounded-bl-lg text-[10px] font-bold uppercase ${typeBg}">
                         ${p.type}
                     </div>
 
-                    <div class="flex items-start gap-3 mb-3">
+                    <div class="flex items-start gap-3 mb-2">
                         <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-xl ${iconColor}">
-                            <i class="${p.icon}"></i> <!-- Menggunakan class lengkap dari data -->
+                            <i class="${p.icon}"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="font-bold text-sm leading-tight text-gray-800 dark:text-white mb-1 pr-4 line-clamp-2">${p.name}</h3>
@@ -187,13 +184,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- DESKRIPSI PRODUK (BARU) -->
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400 mb-3 line-clamp-2 min-h-[2.5em] leading-relaxed">
+                        ${p.desc}
+                    </p>
                     
                     <div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
                         <div class="flex flex-col">
                             <span class="text-[10px] text-gray-400">Harga</span>
                             ${priceDisplay}
                         </div>
-                        <button onclick="openInputDrawer(${p.id})" class="bg-brand hover:bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition active:scale-90 shadow-lg shadow-indigo-500/30">
+                        <button onclick="openInputDrawer(${p.id})" class="bg-brand hover:bg-indigo-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition active:scale-90 shadow-lg shadow-indigo-500/30">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -203,7 +205,6 @@
             });
         }
 
-        // --- RENDER TESTIMONI ---
         function renderTestimonials() {
             const container = document.getElementById('testi-container');
             testimonials.forEach(t => {
@@ -233,51 +234,60 @@
         function setFilter(category) {
             currentFilter = category;
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                // Reset styling default
                 let baseClass = 'filter-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border flex items-center gap-1 ';
                 
                 if(btn.dataset.category === category) {
-                    // Style Active
                     if(category === 'promo') btn.className = baseClass + 'bg-red-500 text-white shadow-lg shadow-red-500/30 border-transparent';
                     else if(category === 'premium') btn.className = baseClass + 'bg-amber-500 text-white shadow-lg shadow-amber-500/30 border-transparent';
                     else if(category === 'fyp') btn.className = baseClass + 'bg-black text-white dark:bg-white dark:text-black shadow-lg shadow-gray-500/30 border-transparent';
                     else btn.className = baseClass + 'bg-brand text-white shadow-lg shadow-indigo-500/30 border-transparent';
                 } else {
-                    // Style Inactive
                     btn.className = baseClass + 'bg-white text-gray-600 dark:bg-cardbg dark:text-gray-300 border-gray-200 dark:border-slate-700';
                 }
             });
             renderProducts();
         }
 
+        // --- QUANTITY LOGIC (BARU) ---
+        function changeQty(amount) {
+            currentQty += amount;
+            if (currentQty < 1) currentQty = 1;
+            document.getElementById('qty-display').innerText = currentQty;
+            
+            // Update harga total di drawer
+            if (tempProductId) {
+                const product = products.find(p => p.id === tempProductId);
+                const totalPrice = product.price * currentQty;
+                document.getElementById('input-product-price').innerText = formatRupiah(totalPrice);
+            }
+        }
+
         // --- DRAWER INPUT LOGIC ---
         function openInputDrawer(id) {
             tempProductId = id;
+            currentQty = 1; // Reset Qty saat buka baru
+            document.getElementById('qty-display').innerText = currentQty;
+
             const product = products.find(p => p.id === id);
             const drawer = document.getElementById('input-drawer');
             const content = document.getElementById('input-content');
             
-            // Set Info Produk
             document.getElementById('input-product-name').innerText = product.name;
             document.getElementById('input-product-price').innerText = formatRupiah(product.price);
 
-            // Reset Form
             document.getElementById('target-input').value = '';
             document.getElementById('custom-comment-area').value = '';
             document.getElementById('custom-comment-area').classList.add('hidden');
             
-            // Label Link
             const labelLink = product.labelLink ? product.labelLink : 'Link / Username Target';
             document.getElementById('target-label').innerText = labelLink;
 
-            // Visibility Input Link
             if (product.reqLink === false) {
                  document.getElementById('target-container').classList.add('hidden');
             } else {
                  document.getElementById('target-container').classList.remove('hidden');
             }
 
-            // Visibility Komentar
             const commentSection = document.getElementById('comment-options');
             if(product.isComment) {
                 commentSection.classList.remove('hidden');
@@ -287,7 +297,6 @@
                 commentSection.classList.add('hidden');
             }
 
-            // Open Drawer
             drawer.classList.remove('hidden');
             setTimeout(() => content.classList.remove('translate-y-full'), 10);
         }
@@ -319,7 +328,6 @@
             let commentType = 'N/A';
             let customComments = '';
 
-            // Validasi
             if(product.reqLink !== false && !targetVal.trim()) {
                 alert('Mohon isi Link/Username target!');
                 return;
@@ -342,15 +350,15 @@
                 target: targetVal || '-',
                 commentType: commentType,
                 customComments: customComments,
+                qty: currentQty, // Simpan Qty
                 cartId: Date.now()
             };
 
             cart.push(cartItem);
             updateCartUI();
-            showToast(`+ ${product.name}`);
+            showToast(`+ ${currentQty}x ${product.name}`);
             closeInputDrawer();
             
-            // Animasi Cart Icon
             const cartIcon = document.getElementById('cart-icon-nav');
             cartIcon.classList.add('animate-bounce');
             setTimeout(() => cartIcon.classList.remove('animate-bounce'), 1000);
@@ -369,8 +377,10 @@
             const floatingCount = document.getElementById('floating-count');
             const floatingBar = document.getElementById('floating-cart-bar');
 
-            // Badge & Floating Bar Visibility
-            badge.innerText = cart.length;
+            // Hitung total item berdasarkan Qty
+            let totalItemsCount = cart.reduce((acc, item) => acc + item.qty, 0);
+
+            badge.innerText = totalItemsCount;
             if(cart.length > 0) {
                 badge.classList.remove('scale-0');
                 floatingBar.classList.remove('translate-y-24'); 
@@ -379,7 +389,6 @@
                 floatingBar.classList.add('translate-y-24'); 
             }
 
-            // Render Cart Items
             let total = 0;
             cartList.innerHTML = '';
             
@@ -387,7 +396,8 @@
                 cartList.innerHTML = `<div class="text-center py-10 opacity-50"><i class="fa-solid fa-basket-shopping text-4xl mb-2"></i><p>Belum ada item</p></div>`;
             } else {
                 cart.forEach((item, index) => {
-                    total += item.price;
+                    let itemTotal = item.price * item.qty;
+                    total += itemTotal;
                     
                     let infoHtml = '';
                     if(item.target !== '-') infoHtml += `<p class="text-[10px] text-gray-500 truncate"><i class="fa-solid fa-link text-[9px]"></i> ${item.target}</p>`;
@@ -396,13 +406,13 @@
                     cartList.innerHTML += `
                         <div class="flex justify-between items-start p-3 bg-gray-50 dark:bg-slate-800 rounded-lg mb-2 border border-gray-100 dark:border-gray-700">
                             <div class="flex items-center gap-3 overflow-hidden">
-                                <div class="w-8 h-8 rounded bg-white dark:bg-slate-700 flex items-center justify-center text-brand flex-shrink-0">
-                                    <i class="fa-solid fa-check"></i>
+                                <div class="w-8 h-8 rounded bg-white dark:bg-slate-700 flex items-center justify-center text-brand flex-shrink-0 font-bold text-xs">
+                                    ${item.qty}x
                                 </div>
                                 <div class="min-w-0">
                                     <h4 class="text-xs font-bold dark:text-white truncate">${item.name}</h4>
                                     ${infoHtml}
-                                    <p class="text-[10px] text-brand font-bold mt-0.5">${formatRupiah(item.price)}</p>
+                                    <p class="text-[10px] text-brand font-bold mt-0.5">${formatRupiah(itemTotal)}</p>
                                 </div>
                             </div>
                             <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 p-2"><i class="fa-solid fa-trash-can"></i></button>
@@ -414,7 +424,7 @@
             const formattedTotal = formatRupiah(total);
             cartTotal.innerText = formattedTotal;
             floatingTotal.innerText = formattedTotal;
-            floatingCount.innerText = `${cart.length} Item`;
+            floatingCount.innerText = `${totalItemsCount} Item`;
         }
 
         function checkoutWhatsApp() {
@@ -423,9 +433,10 @@
             let total = 0;
             
             cart.forEach((item, index) => {
-                total += item.price;
-                message += `*${index + 1}. ${item.name}*\n`;
-                message += `   💰 Harga: ${formatRupiah(item.price)}\n`;
+                let itemTotal = item.price * item.qty;
+                total += itemTotal;
+                message += `*${index + 1}. ${item.name} (${item.qty}x)*\n`;
+                message += `   💰 Harga: ${formatRupiah(itemTotal)}\n`;
                 if(item.target !== '-') message += `   🔗 Target: ${item.target}\n`;
                 if(item.isComment) {
                     message += `   💬 Tipe: ${item.commentType}\n`;
@@ -442,7 +453,6 @@
             window.open(`https://wa.me/${NO_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        // Utils
         function toggleCart() {
             const modal = document.getElementById('cart-modal');
             const content = document.getElementById('cart-content');
@@ -497,11 +507,12 @@
                     <p class="text-[10px] text-gray-500 font-medium">Suntik Sosmed No.1</p>
                 </div>
             </div>
+            <!-- BUTTON DIPERBESAR SEDIKIT -->
             <div class="flex items-center gap-4">
-                <button onclick="toggleTheme()" class="text-gray-500 hover:text-brand transition"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
-                <div class="relative cursor-pointer" onclick="toggleCart()">
-                    <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-xl text-gray-700 dark:text-white transition"></i>
-                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+                <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:text-brand hover:bg-gray-100 dark:hover:bg-slate-700 transition"><i id="theme-icon" class="fa-solid fa-moon text-lg"></i></button>
+                <div class="relative cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" onclick="toggleCart()">
+                    <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-2xl text-yellow-500"></i> <!-- WARNA ICON DIUBAH JADI KUNING -->
+                    <span id="cart-badge" class="absolute top-1 right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300 border border-white dark:border-darkbg">0</span>
                 </div>
             </div>
         </div>
@@ -541,7 +552,6 @@
 
         <!-- FILTER & PRODUK -->
         <section id="produk">
-            <!-- Filter Menu -->
             <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 sticky top-16 z-30 bg-gray-50/95 dark:bg-darkbg/95 py-3 backdrop-blur-sm -mx-4 px-4 items-center">
                 <button onclick="setFilter('all')" data-category="all" class="filter-btn">Semua</button>
                 <button onclick="setFilter('promo')" data-category="promo" class="filter-btn"><i class="fa-solid fa-fire text-red-500 mr-1"></i> Promo</button>
@@ -551,29 +561,27 @@
                 <button onclick="setFilter('tiktok')" data-category="tiktok" class="filter-btn"><i class="fa-brands fa-tiktok"></i> TikTok</button>
             </div>
 
-            <div id="product-container" class="grid grid-cols-1 gap-3">
-                <!-- Products rendered here -->
-            </div>
+            <div id="product-container" class="grid grid-cols-1 gap-3"></div>
         </section>
 
-        <!-- TUTORIAL ORDER -->
+        <!-- TUTORIAL -->
         <section class="bg-white dark:bg-cardbg rounded-2xl p-5 border border-gray-100 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-4 flex items-center gap-2 dark:text-white"><i class="fa-solid fa-list-ol text-brand"></i> Tutorial Order</h3>
             <div class="space-y-4 relative before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-gray-700">
                 <div class="relative pl-8">
                     <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">1</span>
-                    <p class="text-xs font-bold dark:text-gray-200">Pilih Layanan</p>
-                    <p class="text-[10px] text-gray-500">Pilih paket suntik sosmed yang kamu butuhkan di katalog.</p>
+                    <p class="text-xs font-bold dark:text-gray-200">Pilih Layanan & Jumlah</p>
+                    <p class="text-[10px] text-gray-500">Pilih produk dan tentukan jumlah (Quantity) yang diinginkan.</p>
                 </div>
                 <div class="relative pl-8">
                     <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">2</span>
-                    <p class="text-xs font-bold dark:text-gray-200">Isi Target & Checkout</p>
-                    <p class="text-[10px] text-gray-500">Masukkan Link/Username target, lalu klik tombol keranjang.</p>
+                    <p class="text-xs font-bold dark:text-gray-200">Isi Target</p>
+                    <p class="text-[10px] text-gray-500">Masukkan Link/Username. Gunakan fitur quantity agar tidak perlu input berulang.</p>
                 </div>
                 <div class="relative pl-8">
                     <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">3</span>
-                    <p class="text-xs font-bold dark:text-gray-200">Kirim Format Order</p>
-                    <p class="text-[10px] text-gray-500">Anda akan diarahkan ke WA Admin, kirim pesan yang sudah otomatis terisi.</p>
+                    <p class="text-xs font-bold dark:text-gray-200">Checkout WA</p>
+                    <p class="text-[10px] text-gray-500">Kirim pesanan yang sudah terformat otomatis ke Admin.</p>
                 </div>
             </div>
         </section>
@@ -581,33 +589,41 @@
         <!-- TESTIMONI -->
         <section>
             <h3 class="font-bold text-lg mb-4 dark:text-white">Apa Kata Mereka?</h3>
-            <div id="testi-container" class="flex overflow-x-auto gap-3 no-scrollbar pb-4 -mx-4 px-4 snap-x">
-                <!-- Testimonial rendered here -->
-            </div>
+            <div id="testi-container" class="flex overflow-x-auto gap-3 no-scrollbar pb-4 -mx-4 px-4 snap-x"></div>
         </section>
 
-        <!-- SYARAT & KETENTUAN -->
+        <!-- SYARAT -->
         <section class="bg-white dark:bg-cardbg rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
             <div onclick="toggleAccordion('tnc-content')" class="p-4 flex justify-between items-center cursor-pointer bg-gray-50 dark:bg-slate-800/50">
                 <h3 class="font-bold text-sm dark:text-white">Syarat & Ketentuan</h3>
                 <i id="icon-tnc-content" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
             </div>
             <div id="tnc-content" class="hidden p-4 text-xs text-gray-500 dark:text-gray-400 space-y-2 leading-relaxed bg-white dark:bg-cardbg">
-                <p>1. Akun <b>TIDAK BOLEH DI-PRIVATE</b> selama proses pengerjaan.</p>
-                <p>2. Kesalahan input username/link oleh pembeli bukan tanggung jawab kami.</p>
-                <p>3. Dilarang ganti username selama proses.</p>
-                <p>4. Garansi berlaku jika drop lebih dari 20% dalam 30 hari (khusus layanan bergaransi).</p>
+                <p>1. Akun <b>TIDAK BOLEH DI-PRIVATE</b> selama proses.</p>
+                <p>2. Dilarang ganti username selama proses.</p>
+                <p>3. Kesalahan input data bukan tanggung jawab kami.</p>
+                <p>4. Garansi refill 30 hari untuk layanan bergaransi.</p>
             </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer class="text-center text-gray-400 text-[10px] py-6">
-            <p>&copy; 2024 Ferdysosmed. All rights reserved.</p>
-            <p class="mt-1">Made for GitHub Pages</p>
+        <!-- FOOTER DENGAN SOSMED LINK -->
+        <footer class="text-center text-gray-400 text-[10px] py-6 space-y-3">
+            <div class="flex justify-center gap-4">
+                <a href="https://instagram.com/ferdysosmed.official" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-pink-100 hover:text-pink-500 transition">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a href="https://tiktok.com/@ferdysosmed.official" target="_blank" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-gray-200 hover:text-black transition">
+                    <i class="fa-brands fa-tiktok text-lg"></i>
+                </a>
+            </div>
+            <div>
+                <p>&copy; 2024 Ferdysosmed. All rights reserved.</p>
+                <p class="mt-1">Made for GitHub Pages</p>
+            </div>
         </footer>
     </main>
 
-    <!-- DRAWER INPUT LINK (FOOTER POPUP) -->
+    <!-- DRAWER INPUT (DENGAN FITUR QUANTITY) -->
     <div id="input-drawer" class="hidden fixed inset-0 z-50 flex items-end justify-center">
         <div onclick="closeInputDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
         <div id="input-content" class="relative w-full max-w-md bg-white dark:bg-cardbg rounded-t-[2rem] p-6 pb-8 transform translate-y-full transition-transform duration-300 shadow-2xl">
@@ -618,8 +634,18 @@
                 <p id="input-product-price" class="text-brand font-bold">Rp 0</p>
             </div>
 
-            <!-- Form -->
             <div class="space-y-4">
+                <!-- FITUR QUANTITY -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2">Jumlah Pesanan (Quantity)</label>
+                    <div class="flex items-center gap-4">
+                        <button onclick="changeQty(-1)" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-white hover:bg-gray-200 font-bold transition">-</button>
+                        <span id="qty-display" class="font-bold text-xl w-8 text-center dark:text-white">1</span>
+                        <button onclick="changeQty(1)" class="w-10 h-10 rounded-xl bg-brand text-white hover:bg-indigo-600 font-bold transition shadow-lg shadow-indigo-500/20">+</button>
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-1">Gunakan fitur ini untuk order banyak sekaligus ke target yang sama.</p>
+                </div>
+
                 <div id="target-container">
                     <label id="target-label" class="block text-xs font-bold text-gray-500 mb-1">Link / Username Target</label>
                     <input type="text" id="target-input" placeholder="Masukkan Link atau Username..." class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand dark:text-white">
