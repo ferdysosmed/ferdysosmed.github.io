@@ -1,120 +1,489 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ferdysosmed | Suntik Sosmed</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferdy Sosmed - Jasa Suntik Sosmed Termurah</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Konfigurasi Tailwind Custom -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#6366f1', // Indigo
+                        darkbg: '#0f172a', 
+                        cardbg: '#1e293b',
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.7);
+        }
+    </style>
 </head>
-<body>
-  <div style="
-  position: fixed;
-  bottom: 80px;  /* Naik sedikit dari bawah */
-  right: 20px;
-  z-index: 9999;
-">
-  <a href="/cart.html" style="position: relative; display: inline-block;">
-    <img src="/assets/img/keranjang.png" alt="Keranjang" style="width: 65px; height: 65px;">
-    <span id="cart-count" style="
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: red;
-      color: white;
-      font-size: 14px;
-      border-radius: 50%;
-      padding: 3px 7px;
-      font-weight: bold;
-      display: none;
-    "></span>
-  </a>
-  </div>
-  <div class="container">
-    <h1>ferdysosmed</h1>
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-darkbg dark:text-gray-200 pb-20">
 
-    <div class="bubble">
-      <h2>Tentang Kami</h2>
-      <p>Kami adalah penyedia layanan penambah interaksi media sosial yang aman, cepat, dan terpercaya. Layanan kami mencakup penambahan like, follower, view, komentar, dan interaksi lainnya untuk membantu meningkatkan kredibilitas dan jangkauan akun Anda.</p>
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- KONFIGURASI ---
+        const NO_WHATSAPP = "6289676930992"; // GANTI NOMOR DI SINI
+
+        // --- DATA PRODUK (IG & TIKTOK) ---
+        const products = [
+            // INSTAGRAM
+            { id: 1, category: 'instagram', type: 'Follower', name: '100 Follower', price: 8000, icon: 'fa-user-plus' },
+            { id: 2, category: 'instagram', type: 'Follower Promo', name: '100 Follower Promo', price: 10000, icon: 'fa-users' },
+            { id: 3, category: 'instagram', type: 'Likes', name: '100 Like ', price: 3000, icon: 'fa-heart' },
+            { id: 4, category: 'instagram', type: 'Views', name: '1.000 Like Promo', price: 25000, icon: 'fa-eye' },
+            { id: 5, category: 'instagram', type: 'Comments', name: '1.000 View', price: 500, icon: 'fa-comment' },
+            { id: 6, category: 'instagram', type: 'Saves', name: '10 Komentar Custom/Random', price: 3000, icon: 'fa-bookmark' },
+            
+            // TIKTOK
+            { id: 7, category: 'tiktok', type: 'Followers', name: '100 Followers TikTok', price: 8000, icon: 'fa-user-plus' },
+            { id: 8, category: 'tiktok', type: 'Likes', name: '1000 Likes TikTok', price: 12000, icon: 'fa-heart' },
+            { id: 9, category: 'tiktok', type: 'Views', name: '10k Views TikTok', price: 10000, icon: 'fa-eye' },
+            { id: 10, category: 'tiktok', type: 'Share', name: '500 Share TikTok', price: 15000, icon: 'fa-share' },
+            { id: 11, category: 'tiktok', type: 'Saves', name: '1000 Saves TikTok', price: 10000, icon: 'fa-bookmark' },
+            { id: 12, category: 'tiktok', type: 'Comments', name: '20 Komentar Random', price: 15000, icon: 'fa-comment-dots' },
+        ];
+
+        // --- DATA TESTIMONI ---
+        const testimonials = [
+            { name: "Andi Saputra", role: "Selebgram", text: "Gila sih Ferdysosmed, order 10k views masuk dalam 5 menit! Recommended parah.", stars: 5 },
+            { name: "Siska Kohl", role: "Online Shop", text: "Followersnya awet, ga drop. Buat jualan jadi makin percaya diri.", stars: 5 },
+            { name: "Budi Santoso", role: "Content Creator", text: "Harga termurah se-GitHub wkwk. Thanks min!", stars: 5 },
+            { name: "Putri Amelia", role: "Personal", text: "Awalnya ragu, eh ternyata beneran masuk likenya.", stars: 4 },
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Render Produk
+        function renderProducts() {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+            
+            const filtered = currentFilter === 'all' 
+                ? products 
+                : products.filter(p => p.category === currentFilter);
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-10 opacity-50">Produk kosong.</div>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                // Tentukan warna icon berdasarkan kategori
+                let iconColor = p.category === 'instagram' ? 'text-pink-500' : 'text-black dark:text-white';
+                let borderColor = p.category === 'instagram' ? 'border-pink-200 dark:border-pink-900' : 'border-gray-200 dark:border-gray-700';
+                
+                const card = `
+                <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all">
+                    <!-- Label Tipe (Pojok Kanan) -->
+                    <div class="absolute top-0 right-0 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-bl-lg text-[10px] font-bold text-gray-500 uppercase">
+                        ${p.type}
+                    </div>
+
+                    <div class="flex items-start gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-xl ${iconColor}">
+                            <i class="fa-brands ${p.category === 'instagram' ? 'fa-instagram' : 'fa-tiktok'}"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-sm leading-tight text-gray-800 dark:text-white mb-1 pr-4">${p.name}</h3>
+                            <div class="flex items-center gap-1 text-xs text-yellow-400">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span class="text-gray-400 text-[10px] ml-1">(5.0)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto flex items-center justify-between pt-3 border-t dark:border-gray-700">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-gray-400">Harga</span>
+                            <span class="font-bold text-brand text-base">${formatRupiah(p.price)}</span>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="bg-brand hover:bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition active:scale-90 shadow-lg shadow-indigo-500/30">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // Render Testimoni
+        function renderTestimonials() {
+            const container = document.getElementById('testi-container');
+            testimonials.forEach(t => {
+                let stars = '';
+                for(let i=0; i<5; i++) {
+                    stars += `<i class="fa-solid fa-star ${i < t.stars ? 'text-yellow-400' : 'text-gray-300'}"></i>`;
+                }
+                
+                container.innerHTML += `
+                    <div class="min-w-[280px] md:min-w-[320px] bg-white dark:bg-cardbg p-5 rounded-2xl border border-gray-100 dark:border-gray-700 snap-center">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold">
+                                ${t.name.charAt(0)}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm dark:text-white">${t.name}</h4>
+                                <p class="text-xs text-gray-400">${t.role}</p>
+                            </div>
+                        </div>
+                        <div class="text-xs mb-2 flex gap-1">${stars}</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 italic">"${t.text}"</p>
+                    </div>
+                `;
+            });
+        }
+
+        function setFilter(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.category === category) {
+                    btn.classList.add('bg-brand', 'text-white', 'shadow-lg', 'shadow-indigo-500/30');
+                    btn.classList.remove('bg-white', 'text-gray-600', 'dark:bg-cardbg', 'dark:text-gray-300');
+                } else {
+                    btn.classList.remove('bg-brand', 'text-white', 'shadow-lg', 'shadow-indigo-500/30');
+                    btn.classList.add('bg-white', 'text-gray-600', 'dark:bg-cardbg', 'dark:text-gray-300');
+                }
+            });
+            renderProducts();
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartUI();
+            showToast(`+ ${product.name}`);
+            
+            // Animasi keranjang goyang
+            const cartIcon = document.getElementById('cart-icon-nav');
+            cartIcon.classList.add('animate-bounce');
+            setTimeout(() => cartIcon.classList.remove('animate-bounce'), 1000);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const cartList = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const floatingTotal = document.getElementById('floating-total');
+            const floatingCount = document.getElementById('floating-count');
+            const floatingBar = document.getElementById('floating-cart-bar');
+
+            // Update Badge & Floating Bar
+            badge.innerText = cart.length;
+            if(cart.length > 0) {
+                badge.classList.remove('scale-0');
+                floatingBar.classList.remove('translate-y-24'); // Munculkan bar bawah
+            } else {
+                badge.classList.add('scale-0');
+                floatingBar.classList.add('translate-y-24'); // Sembunyikan bar bawah
+            }
+
+            // Hitung Total
+            let total = 0;
+            cartList.innerHTML = '';
+            
+            if(cart.length === 0) {
+                cartList.innerHTML = `<div class="text-center py-10 opacity-50"><i class="fa-solid fa-basket-shopping text-4xl mb-2"></i><p>Belum ada item</p></div>`;
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    cartList.innerHTML += `
+                        <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-slate-800 rounded-lg mb-2 border border-gray-100 dark:border-gray-700">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded bg-white dark:bg-slate-700 flex items-center justify-center text-brand">
+                                    <i class="fa-brands ${item.category === 'instagram' ? 'fa-instagram' : 'fa-tiktok'}"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold dark:text-white line-clamp-1">${item.name}</h4>
+                                    <p class="text-[10px] text-gray-500">${formatRupiah(item.price)}</p>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 p-2"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    `;
+                });
+            }
+
+            const formattedTotal = formatRupiah(total);
+            cartTotal.innerText = formattedTotal;
+            floatingTotal.innerText = formattedTotal;
+            floatingCount.innerText = `${cart.length} Item`;
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let message = `Halo Ferdysosmed, saya mau order:\n\n`;
+            let total = 0;
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} - ${formatRupiah(item.price)}\n`;
+                total += item.price;
+            });
+            message += `\n*Total: ${formatRupiah(total)}*`;
+            message += `\n\nMohon diproses min, terima kasih!`;
+            window.open(`https://wa.me/${NO_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const content = document.getElementById('cart-content');
+            
+            if(modal.classList.contains('hidden')) {
+                // Open
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('translate-y-full');
+                }, 10);
+            } else {
+                // Close
+                content.classList.add('translate-y-full');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2000);
+        }
+
+        // Accordion Syarat & Ketentuan
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            el.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        window.onload = () => {
+            renderProducts();
+            renderTestimonials();
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            }
+        }
+    </script>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-40 glass border-b border-gray-200 dark:border-slate-800">
+        <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white text-lg">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="font-black text-lg tracking-tight leading-none dark:text-white">Ferdy<span class="text-brand">sosmed</span></h1>
+                    <p class="text-[10px] text-gray-500 font-medium">Suntik Sosmed No.1</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="text-gray-500 hover:text-brand transition"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+                <div class="relative cursor-pointer" onclick="toggleCart()">
+                    <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-xl text-gray-700 dark:text-white transition"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="max-w-md mx-auto pt-20 px-4 space-y-8">
+        
+        <!-- HERO & SOCIAL PROOF -->
+        <div class="text-center space-y-2">
+            <div class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 px-3 py-1 rounded-full">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-[10px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">Terjual 5.000+ Pesanan</span>
+            </div>
+            <h2 class="text-3xl font-black text-gray-800 dark:text-white leading-tight">Bikin Sosmedmu <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-500">Makin Rame!</span></h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Pilih layanan Instagram & TikTok favoritmu. Proses otomatis, aman, dan bergaransi.</p>
+        </div>
+
+        <!-- KENAPA KAMI (Grid) -->
+        <div class="grid grid-cols-3 gap-2">
+            <div class="bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-blue-100 dark:border-slate-700">
+                <i class="fa-solid fa-bolt text-brand text-xl mb-1"></i>
+                <p class="text-[10px] font-bold">Proses Cepat</p>
+            </div>
+            <div class="bg-green-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-green-100 dark:border-slate-700">
+                <i class="fa-solid fa-shield-halved text-green-500 text-xl mb-1"></i>
+                <p class="text-[10px] font-bold">100% Aman</p>
+            </div>
+            <div class="bg-purple-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-purple-100 dark:border-slate-700">
+                <i class="fa-solid fa-headset text-purple-500 text-xl mb-1"></i>
+                <p class="text-[10px] font-bold">CS 24/7</p>
+            </div>
+        </div>
+
+        <!-- FILTER & PRODUK -->
+        <section id="produk">
+            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 sticky top-16 z-30 bg-gray-50/95 dark:bg-darkbg/95 py-3 backdrop-blur-sm -mx-4 px-4">
+                <button onclick="setFilter('all')" data-category="all" class="filter-btn bg-brand text-white shadow-lg shadow-indigo-500/30 px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent">Semua</button>
+                <button onclick="setFilter('instagram')" data-category="instagram" class="filter-btn bg-white text-gray-600 dark:bg-cardbg dark:text-gray-300 px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-gray-200 dark:border-slate-700 flex items-center gap-1"><i class="fa-brands fa-instagram"></i> Instagram</button>
+                <button onclick="setFilter('tiktok')" data-category="tiktok" class="filter-btn bg-white text-gray-600 dark:bg-cardbg dark:text-gray-300 px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-gray-200 dark:border-slate-700 flex items-center gap-1"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+            </div>
+
+            <div id="product-container" class="grid grid-cols-1 gap-3">
+                <!-- Products rendered here -->
+            </div>
+        </section>
+
+        <!-- TUTORIAL ORDER -->
+        <section class="bg-white dark:bg-cardbg rounded-2xl p-5 border border-gray-100 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2 dark:text-white"><i class="fa-solid fa-list-ol text-brand"></i> Tutorial Order</h3>
+            <div class="space-y-4 relative before:absolute before:left-3 before:top-2 before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-gray-700">
+                <div class="relative pl-8">
+                    <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">1</span>
+                    <p class="text-xs font-bold dark:text-gray-200">Pilih Layanan</p>
+                    <p class="text-[10px] text-gray-500">Pilih paket suntik sosmed yang kamu butuhkan di katalog.</p>
+                </div>
+                <div class="relative pl-8">
+                    <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">2</span>
+                    <p class="text-xs font-bold dark:text-gray-200">Klik Beli & Checkout</p>
+                    <p class="text-[10px] text-gray-500">Item akan masuk keranjang, lalu klik Checkout WhatsApp.</p>
+                </div>
+                <div class="relative pl-8">
+                    <span class="absolute left-0 top-0 w-6 h-6 rounded-full bg-brand text-white text-xs flex items-center justify-center font-bold">3</span>
+                    <p class="text-xs font-bold dark:text-gray-200">Kirim Format Order</p>
+                    <p class="text-[10px] text-gray-500">Anda akan diarahkan ke WA Admin, kirim pesan yang sudah otomatis terisi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONI -->
+        <section>
+            <h3 class="font-bold text-lg mb-4 dark:text-white">Apa Kata Mereka?</h3>
+            <div id="testi-container" class="flex overflow-x-auto gap-3 no-scrollbar pb-4 -mx-4 px-4 snap-x">
+                <!-- Testimonial rendered here -->
+            </div>
+        </section>
+
+        <!-- SYARAT & KETENTUAN (Accordion) -->
+        <section class="bg-white dark:bg-cardbg rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+            <div onclick="toggleAccordion('tnc-content')" class="p-4 flex justify-between items-center cursor-pointer bg-gray-50 dark:bg-slate-800/50">
+                <h3 class="font-bold text-sm dark:text-white">Syarat & Ketentuan</h3>
+                <i id="icon-tnc-content" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </div>
+            <div id="tnc-content" class="hidden p-4 text-xs text-gray-500 dark:text-gray-400 space-y-2 leading-relaxed bg-white dark:bg-cardbg">
+                <p>1. Akun <b>TIDAK BOLEH DI-PRIVATE</b> selama proses pengerjaan.</p>
+                <p>2. Kesalahan input username/link oleh pembeli bukan tanggung jawab kami.</p>
+                <p>3. Dilarang ganti username selama proses.</p>
+                <p>4. Garansi berlaku jika drop lebih dari 20% dalam 30 hari (khusus layanan bergaransi).</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-gray-400 text-[10px] py-6">
+            <p>&copy; 2024 Ferdysosmed. All rights reserved.</p>
+            <p class="mt-1">Made for GitHub Pages</p>
+        </footer>
+    </main>
+
+    <!-- FLOATING CART BAR (Muncul jika ada isi) -->
+    <div id="floating-cart-bar" onclick="toggleCart()" class="fixed bottom-5 left-4 right-4 z-30 bg-gray-900 text-white p-4 rounded-2xl shadow-2xl flex justify-between items-center cursor-pointer transform translate-y-24 transition-transform duration-300">
+        <div class="flex flex-col">
+            <span id="floating-count" class="text-[10px] text-gray-400 font-bold uppercase">0 Item</span>
+            <span id="floating-total" class="font-bold text-lg">Rp 0</span>
+        </div>
+        <div class="bg-brand px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2">
+            Lihat Keranjang <i class="fa-solid fa-arrow-right"></i>
+        </div>
     </div>
 
-    <div class="bubble">
-      <h2>Pilih Platform</h2>
-      <p>Silakan pilih salah satu platform media sosial di bawah ini untuk melihat layanan yang tersedia.</p>
-      <div class="button-group">
-        <a href="tiktok/index.html" class="button">
-          <img src="assets/img/tiktok.png" class="icon"> <strong>TikTok</strong>
-        </a>
-        <a href="instagram/index.html" class="button">
-          <img src="assets/img/instagram.png" class="icon"> <strong>Instagram</strong>
-        </a>
-      </div>
+    <!-- MODAL CART (SLIDE UP) -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-50">
+        <div onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div id="cart-content" class="absolute bottom-0 w-full max-w-md left-1/2 -translate-x-1/2 bg-white dark:bg-cardbg rounded-t-3xl h-[80vh] flex flex-col transform translate-y-full transition-transform duration-300">
+            <!-- Handle -->
+            <div class="flex justify-center pt-3 pb-1" onclick="toggleCart()"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
+            
+            <div class="px-5 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <h2 class="font-bold text-lg dark:text-white">Keranjang Kamu</h2>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-3">
+                <!-- Items -->
+            </div>
+
+            <div class="p-5 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-cardbg pb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-500 text-sm">Total Tagihan</span>
+                    <span id="cart-total" class="font-bold text-xl text-brand">Rp 0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 transition active:scale-95">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Pesan Sekarang
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="bubble">
-      <h2>Kenapa Pilih Kami?</h2>
-      <ul>
-        <li>✅ Layanan Berkualitas Tinggi</li>
-        <li>✅ Proses Cepat dan Aman</li>
-        <li>✅ Privasi Terjaga 100%</li>
-        <li>✅ Dukungan Penuh 24/7</li>
-        <li>✅ Anti Drop dan Permanen</li>
-        <li>✅ Pelayanan yang Ramah</li>
-        <li>✅ Fast Respon</li>
-        <li>✅ Harga Murah Kualitas Tinggi</li>
-      </ul>
+    <!-- TOAST -->
+    <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] bg-gray-900 text-white px-4 py-2 rounded-full shadow-xl flex items-center gap-2 text-xs font-bold transition-all duration-300 translate-y-20 opacity-0 pointer-events-none whitespace-nowrap">
+        <i class="fa-solid fa-check-circle text-green-400"></i> <span id="toast-msg">Item added</span>
     </div>
 
-    <div class="bubble">
-      <h2>Testimoni</h2>
-      <p>Silakan cek kumpulan testimoni dari pelanggan kami melalui sorotan Instagram berikut.  
-      Setiap sorotan berisi hingga 100 testimoni nyata dari pembeli.</p>
-
-      <div class="button-grid">
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMxMDQ0OTM1MDgzMTMw?story_media_id=3390599550871519175_67087909457&igsh=ZjlhZ3F4a2RobWN0" target="_blank">Sorotan 1</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODkxMjAyMzU0MDI4Njk2?story_media_id=3395676510681223209_67087909457&igsh=MWFwZmF4aXBtdDhsOA==" target="_blank">Sorotan 2</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MzI1NjY1NzA2MTc2MTg0?story_media_id=3402896280476219091_67087909457&igsh=MXFkeDY2dHA4eXZyag==" target="_blank">Sorotan 3</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDU1NDgwODkxNjMyMjQ4?story_media_id=3408744675912079553_67087909457&igsh=MXBhdXRhZ2QxODA3OA==" target="_blank">Sorotan 4</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQzMTQ5NzMxMzEwNjIx?story_media_id=3446397580262496332_67087909457&igsh=MWR0bGNqeTY0cGVmdA==" target="_blank">Sorotan 5</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTIwNTkyOTgxOTc0NTY0?story_media_id=3463080987180579138_67087909457&igsh=MXAwMDlneGNucG8wMQ==" target="_blank">Sorotan 6</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDcyMjY3Nzg3NTg3OTI3?story_media_id=3476909865812362031_67087909457&igsh=aHNvMHFtNGw0NGp4" target="_blank">Sorotan 7</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDU2Mzg5NzAyODk1NTY1?story_media_id=3498597086914968003_67087909457&igsh=eXgyemNjaXpoM3ll" target="_blank">Sorotan 8</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg1MjE3ODU3NTk0MjA1?story_media_id=3579829348339474219_67087909457&igsh=MXJoYzNnZXQzb25raw==" target="_blank">Sorotan 9</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDA2NjE4NTM2NTY3NTM1?story_media_id=3608744909123107724_67087909457&igsh=ZnhzaXU2dWRobnoy" target="_blank">Sorotan 10</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ0NzU3NzA0NTQ2NDc3?story_media_id=3654455669027458370_67087909457&igsh=MXNiNmsyd2FpbXo0Nw==" target="_blank">Sorotan 11</a>
-        <a class="button" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MTUyMDM1MTM3NDg1?story_media_id=3690668727743496313_67087909457&igsh=anZjcHk5NWhpNHA=" target="_blank">Sorotan 12</a>
-      </div>
-    </div>
-
-    <div class="bubble">
-      <h2>Syarat dan Ketentuan</h2>
-      <p>Untuk informasi lengkap mengenai syarat dan ketentuan, mohon klik tombol yang tersedia di bawah.</p>
-      <a class="button" href="/syarat-dan-ketentuan.html" target="_blank">Syarat dan Ketentuan</a>
-    </div>
-
-    <div class="bubble">
-      <h2>Media Sosial Resmi Kami</h2>
-      <p>Ikuti akun media sosial resmi kami untuk mendapatkan informasi terbaru, promo, dan konten menarik lainnya.</p>
-      <div class="button-group">
-        <a href="https://www.tiktok.com/@ferdysosmedofficial" class="button" target="_blank">
-            <img src="assets/img/tiktok.png" class="icon"> <strong>@ferdysosmedofficial</strong>
-        </a>
-        <a href="https://www.instagram.com/ferdysosmed.official" class="button" target="_blank">
-            <img src="assets/img/instagram.png" class="icon"> <strong>@ferdysosmed.official</strong>
-        </a>
-      </div>
-    </div>
-
-    <div class="bubble">
-        <h2>Hubungi Kami</h2>
-        <p>Jika ada pertanyaan atau butuh bantuan, jangan ragu untuk menghubungi kami melalui WhatsApp.</p>
-        <a href="https://wa.me/6289676930992" class="button" target="_blank">
-            <img src="assets/img/whatsapp.png" class="icon" style="width:20px; height:20px; margin-right: 8px;"> <strong>Hubungi Kami</strong>
-        </a>
-    </div>
-
-  </div>
-  <script src="/assets/js/cart.js"></script>
-  <div style="text-align: center; padding: 20px 0; margin-top: 30px; color: #555; font-size: 14px;">
-  Hak Cipta © 2025 ferdysosmed
-  </div>
 </body>
+</html>
