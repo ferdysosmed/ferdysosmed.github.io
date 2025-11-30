@@ -63,40 +63,42 @@
 
         // --- DATA PRODUK LENGKAP ---
         const products = [
-            // --- KATEGORI PROMO ---
-            { id: 101, category: 'promo', type: 'HOT DEAL', name: 'Paket Sultan (1k IG + 1k TikTok)', price: 75000, desc: 'Followers mix quality, proses cepat.', icon: 'fa-solid fa-fire', oldPrice: 100000, reqLink: true },
-            { id: 102, category: 'promo', type: 'FLASH SALE', name: '5000 Views IG Reels', price: 9000, desc: 'Meningkatkan jangkauan reels.', icon: 'fa-solid fa-bolt', oldPrice: 15000, reqLink: true },
-            { id: 103, category: 'promo', type: 'IG PROMO', name: '100 Follower Instagram Promo', price: 10000, desc: 'Harga termurah, cocok untuk tes.', icon: 'fa-brands fa-instagram', oldPrice: 15000, reqLink: true },
-            { id: 104, category: 'promo', type: 'IG PROMO', name: '1.000 Like Instagram Promo', price: 25000, desc: 'Likes postingan, masuk instan.', icon: 'fa-solid fa-heart', oldPrice: 35000, reqLink: true },
+            // --- KATEGORI PROMO (Harga Diupdate) ---
+            { id: 101, category: 'promo', type: 'IG PROMO', name: '1.000 Follower Instagram', price: 10000, desc: 'Harga promo gila-gilaan! Bikin akunmu langsung terlihat kredibel dengan angka followers ribuan. Cocok untuk branding awal.', icon: 'fa-brands fa-instagram', oldPrice: 20000, reqLink: true },
+            { id: 102, category: 'promo', type: 'IG PROMO', name: '1.000 Like Instagram', price: 15000, desc: 'Tingkatkan engagement ratemu! Like sebanyak ini bikin postinganmu terlihat populer dan memancing like organik lainnya.', icon: 'fa-solid fa-heart', oldPrice: 25000, reqLink: true },
+            { id: 103, category: 'promo', type: 'TT PROMO', name: '100 Follower TikTok', price: 5000, desc: 'Paket hemat untuk nambah followers TikTok. Syarat wajib buat kamu yang mau ngejar fitur Live Streaming.', icon: 'fa-brands fa-tiktok', oldPrice: 8000, reqLink: true },
+            { id: 104, category: 'promo', type: 'TT PROMO', name: '1.000 Like TikTok', price: 10000, desc: 'Boom! 1000 Like instan buat videomu. Pancing algoritma TikTok biar videomu makin disebar ke beranda orang lain.', icon: 'fa-solid fa-heart', oldPrice: 15000, reqLink: true },
 
-            // --- KATEGORI PAKET FYP TIKTOK (BARU & LENGKAP) ---
-            { id: 301, category: 'fyp', type: 'FYP V1', name: 'Paket Starter', price: 2500, desc: '100 Like + 1.000 View', icon: 'fa-solid fa-rocket', reqLink: true },
-            { id: 302, category: 'fyp', type: 'FYP V2', name: 'Paket Basic', price: 7000, desc: '200 Like + 5.000 View + 100 Save', icon: 'fa-solid fa-rocket', reqLink: true },
-            { id: 303, category: 'fyp', type: 'FYP V3', name: 'Paket Standard', price: 14000, desc: '300 Like + 10k View + 200 Save + 100 Share', icon: 'fa-solid fa-rocket', reqLink: true },
-            { id: 304, category: 'fyp', type: 'FYP V4', name: 'Paket Medium', price: 27000, desc: '400 Like + 20k View + 300 Save + 100 Share + 10 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 305, category: 'fyp', type: 'FYP V5', name: 'Paket Advanced', price: 39000, desc: '500 Like + 30k View + 400 Save + 300 Share + 20 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 306, category: 'fyp', type: 'FYP V6', name: 'Paket Ultimate', price: 52000, desc: '600 Like + 40k View + 500 Save + 400 Share + 30 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 307, category: 'fyp', type: 'FYP V7', name: 'Paket Super', price: 61000, desc: '700 Like + 50k View + 600 Save + 300 Share + 40 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 308, category: 'fyp', type: 'FYP V8', name: 'Paket Super Boost', price: 74000, desc: '800 Like + 60k View + 700 Save + 400 Share + 50 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 309, category: 'fyp', type: 'FYP V9', name: 'Paket VIP', price: 86000, desc: '900 Like + 70k View + 800 Save + 500 Share + 60 Komen', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
-            { id: 310, category: 'fyp', type: 'FYP MAX', name: 'Paket Platinum', price: 99000, desc: '1k Like + 80k View + 900 Save + 600 Share + 70 Komen', icon: 'fa-solid fa-crown', reqLink: true, isComment: true },
+            // --- KATEGORI PAKET FYP TIKTOK ---
+            { id: 301, category: 'fyp', type: 'Starter', name: 'Paket Starter', price: 2500, desc: '100 Like + 1.000 View. Paket pemanasan buat mancing algoritma video baru tayang.', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 302, category: 'fyp', type: 'Basic', name: 'Paket Basic', price: 7000, desc: '200 Like + 5.000 View + 100 Save. Statistik video makin cantik, potensi FYP makin besar.', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 303, category: 'fyp', type: 'Standard', name: 'Paket Standard', price: 14000, desc: '300 Like + 10.000 View + 200 Save + 100 Share. Interaksi lengkap bikin TikTok melirik videomu.', icon: 'fa-solid fa-rocket', reqLink: true },
+            { id: 304, category: 'fyp', type: 'Medium', name: 'Paket Medium', price: 27000, desc: '400 Like + 20.000 View + 300 Save + 100 Share + 10 Komentar. Paket komplit biar videomu terlihat sangat aktif.', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 305, category: 'fyp', type: 'Advanced', name: 'Paket Advanced', price: 39000, desc: '500 Like + 30.000 View + 400 Save + 300 Share + 20 Komentar. Dorongan traffic masif untuk konten andalanmu.', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 306, category: 'fyp', type: 'Ultimate', name: 'Paket Ultimate', price: 52000, desc: '600 Like + 40.000 View + 500 Save + 400 Share + 30 Komentar. Dominasi beranda dengan statistik yang meyakinkan.', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 307, category: 'fyp', type: 'Super', name: 'Paket Super', price: 61000, desc: '700 Like + 50.000 View + 600 Save + 300 Share + 40 Komentar. Boost tingkat dewa, bikin videomu viral!', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 308, category: 'fyp', type: 'Boost', name: 'Paket Super Boost', price: 74000, desc: '800 Like + 60.000 View + 700 Save + 400 Share + 50 Komentar. Paket gila-gilaan untuk konten kreator serius.', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 309, category: 'fyp', type: 'VIP', name: 'Paket VIP', price: 86000, desc: '900 Like + 70.000 View + 800 Save + 500 Share + 60 Komentar. Layanan VIP untuk hasil yang maksimal.', icon: 'fa-solid fa-rocket', reqLink: true, isComment: true },
+            { id: 310, category: 'fyp', type: 'Platinum', name: 'Paket Platinum', price: 99000, desc: '1.000 Like + 80.000 View + 900 Save + 600 Share + 70 Komentar. Paket tertinggi! Siap-siap notif jebol.', icon: 'fa-solid fa-crown', reqLink: true, isComment: true },
 
-            // --- INSTAGRAM REGULER ---
-            { id: 1, category: 'instagram', type: 'Follower', name: '100 Follower HQ', price: 8000, desc: 'Akun profil foto, drop rendah.', icon: 'fa-solid fa-user-plus', reqLink: true },
-            { id: 3, category: 'instagram', type: 'Likes', name: '100 Like Instan', price: 3000, desc: 'Masuk kilat, aman 100%.', icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 5, category: 'instagram', type: 'Views', name: '1.000 View Reels', price: 5000, desc: 'View global, bantu jangkauan.', icon: 'fa-solid fa-eye', reqLink: true },
-            { id: 6, category: 'instagram', type: 'Comments', name: '10 Komentar Custom', price: 3000, desc: 'Isi komentar sesuka hati.', icon: 'fa-solid fa-comment-dots', reqLink: true, isComment: true }, 
+            // --- INSTAGRAM REGULER (Harga Diupdate) ---
+            { id: 1, category: 'instagram', type: 'Like', name: '100 Like Instagram', price: 2000, desc: 'Likes permanen dari akun global. Bikin postinganmu terlihat lebih disukai banyak orang.', icon: 'fa-solid fa-heart', reqLink: true },
+            { id: 2, category: 'instagram', type: 'View', name: '1.000 View Reel', price: 1000, desc: 'Views murah meriah! Tingkatkan angka tayangan reels kamu agar terlihat viral.', icon: 'fa-solid fa-eye', reqLink: true },
+            { id: 3, category: 'instagram', type: 'Follower', name: '100 Follower Instagram', price: 20000, desc: 'Followers High Quality. Akun profil foto, drop rate rendah, dan bergaransi.', icon: 'fa-solid fa-user-plus', reqLink: true },
+            { id: 4, category: 'instagram', type: 'Comment', name: '10 Komentar Instagram', price: 3000, desc: 'Komentar sesuai requestmu. Bisa untuk testimoni, pujian, atau pertanyaan pancingan.', icon: 'fa-solid fa-comment-dots', reqLink: true, isComment: true }, 
             
-            // --- TIKTOK REGULER ---
-            { id: 7, category: 'tiktok', type: 'Followers', name: '100 Followers TikTok', price: 8000, desc: 'Followers pasif, proses cepat.', icon: 'fa-brands fa-tiktok', reqLink: true },
-            { id: 8, category: 'tiktok', type: 'Likes', name: '1000 Likes TikTok', price: 12000, desc: 'Like video permanen.', icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 9, category: 'tiktok', type: 'Views', name: '10k Views TikTok', price: 10000, desc: 'View video biar kelihatan rame.', icon: 'fa-solid fa-eye', reqLink: true },
-            { id: 12, category: 'tiktok', type: 'Comments', name: '20 Komentar Random', price: 15000, desc: 'Komentar acak positif.', icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
+            // --- TIKTOK REGULER (Harga Diupdate) ---
+            { id: 7, category: 'tiktok', type: 'Like', name: '100 Like TikTok', price: 2000, desc: 'Likes cepat masuk. Membantu video kamu mendapatkan engagement awal yang bagus.', icon: 'fa-solid fa-heart', reqLink: true },
+            { id: 8, category: 'tiktok', type: 'Follower', name: '100 Follower TikTok', price: 6000, desc: 'Tambah followers biar akunmu makin trustworthy. Syarat live streaming jadi makin dekat.', icon: 'fa-brands fa-tiktok', reqLink: true },
+            { id: 9, category: 'tiktok', type: 'Comment', name: '10 Komentar TikTok', price: 3000, desc: 'Ramaikan kolom komentar videomu. Bisa request kata-kata sesuka hati.', icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
+            { id: 10, category: 'tiktok', type: 'Save', name: '100 Save TikTok', price: 1000, desc: 'Sinyal kuat untuk algoritma! Save menandakan videomu bermanfaat dan layak disebar.', icon: 'fa-solid fa-bookmark', reqLink: true },
+            { id: 11, category: 'tiktok', type: 'Share', name: '100 Share TikTok', price: 1500, desc: 'Tingkatkan viralitas video dengan jumlah share yang banyak.', icon: 'fa-solid fa-share', reqLink: true },
+            { id: 12, category: 'tiktok', type: 'View', name: '1.000 View TikTok', price: 1000, desc: 'Views termurah! Bikin videomu seolah-olah sudah ditonton ribuan orang dalam sekejap.', icon: 'fa-solid fa-eye', reqLink: true },
 
-            // --- PREMIUM ---
-            { id: 201, category: 'premium', type: 'Streaming', name: 'Netflix Sharing 1 Bulan', price: 25000, desc: 'Profile lock, resolusi 4K.', icon: 'fa-solid fa-film', reqLink: false },
-            { id: 202, category: 'premium', type: 'Design', name: 'Canva Pro Admin (Life)', price: 35000, desc: 'Undang via email, garansi.', icon: 'fa-solid fa-paintbrush', reqLink: true, labelLink: 'Email Canva' },
-            { id: 203, category: 'premium', type: 'Streaming', name: 'Spotify Indiv 1 Bulan', price: 15000, desc: 'Akun privat, full garansi.', icon: 'fa-brands fa-spotify', reqLink: false },
+            // --- PREMIUM (Harga Tetap) ---
+            { id: 201, category: 'premium', type: 'Streaming', name: 'Netflix Sharing 1 Bulan', price: 25000, desc: 'Nonton puas resolusi 4K UHD. Akun sharing legal, anti hold, dan bergaransi.', icon: 'fa-solid fa-film', reqLink: false },
+            { id: 202, category: 'premium', type: 'Design', name: 'Canva Pro Admin (Life)', price: 35000, desc: 'Upgrade akun pribadimu jadi Pro selamanya! Fitur lengkap, aset premium terbuka semua.', icon: 'fa-solid fa-paintbrush', reqLink: true, labelLink: 'Email Canva' },
+            { id: 203, category: 'premium', type: 'Streaming', name: 'Spotify Indiv 1 Bulan', price: 15000, desc: 'Dengarkan musik tanpa iklan, bisa skip unlimited. Akun privat bukan sharing.', icon: 'fa-brands fa-spotify', reqLink: false },
         ];
 
         // --- DATA TESTIMONI ---
@@ -111,7 +113,7 @@
         let cart = [];
         let currentFilter = 'all';
         let tempProductId = null; 
-        let currentQty = 1; // Variabel jumlah pesanan
+        let currentQty = 1;
 
         function formatRupiah(angka) {
             return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -139,12 +141,10 @@
                 if (p.category === 'instagram') {
                     iconColor = 'text-pink-500';
                     borderColor = 'border-pink-200 dark:border-pink-900';
-                } else if (p.category === 'tiktok' || p.category === 'fyp') {
+                } else if (p.category === 'tiktok') {
                     iconColor = 'text-black dark:text-white';
                     borderColor = 'border-gray-300 dark:border-gray-600';
-                } 
-                
-                if (p.category === 'promo') {
+                } else if (p.category === 'promo') {
                     iconColor = 'text-red-500';
                     borderColor = 'border-red-200 dark:border-red-900 ring-1 ring-red-100 dark:ring-red-900';
                     typeBg = 'bg-red-500 text-white animate-pulse-fast';
@@ -154,6 +154,7 @@
                     typeBg = 'bg-amber-500 text-white';
                 } else if (p.category === 'fyp') {
                      typeBg = 'bg-black text-white dark:bg-white dark:text-black';
+                     iconColor = 'text-black dark:text-white';
                 }
 
                 let priceDisplay = `<span class="font-bold text-brand text-base">${formatRupiah(p.price)}</span>`;
@@ -166,6 +167,12 @@
                     `;
                 }
                 
+                // LOGIKA DESKRIPSI: Hanya muncul di card jika kategori FYP
+                let descHtml = '';
+                if(p.category === 'fyp') {
+                    descHtml = `<p class="text-xs text-gray-600 dark:text-gray-300 mb-3 leading-relaxed border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 mt-2 font-medium">${p.desc}</p>`;
+                }
+
                 const card = `
                 <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300">
                     <div class="absolute top-0 right-0 px-2 py-1 rounded-bl-lg text-[10px] font-bold uppercase ${typeBg}">
@@ -185,10 +192,8 @@
                         </div>
                     </div>
 
-                    <!-- DESKRIPSI PRODUK (BARU) -->
-                    <p class="text-[11px] text-gray-500 dark:text-gray-400 mb-3 line-clamp-2 min-h-[2.5em] leading-relaxed">
-                        ${p.desc}
-                    </p>
+                    <!-- Deskripsi hanya untuk FYP (Sesuai Request) -->
+                    ${descHtml}
                     
                     <div class="mt-auto flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
                         <div class="flex flex-col">
@@ -248,13 +253,12 @@
             renderProducts();
         }
 
-        // --- QUANTITY LOGIC (BARU) ---
+        // --- QUANTITY LOGIC ---
         function changeQty(amount) {
             currentQty += amount;
             if (currentQty < 1) currentQty = 1;
             document.getElementById('qty-display').innerText = currentQty;
             
-            // Update harga total di drawer
             if (tempProductId) {
                 const product = products.find(p => p.id === tempProductId);
                 const totalPrice = product.price * currentQty;
@@ -265,7 +269,7 @@
         // --- DRAWER INPUT LOGIC ---
         function openInputDrawer(id) {
             tempProductId = id;
-            currentQty = 1; // Reset Qty saat buka baru
+            currentQty = 1; 
             document.getElementById('qty-display').innerText = currentQty;
 
             const product = products.find(p => p.id === id);
@@ -274,6 +278,9 @@
             
             document.getElementById('input-product-name').innerText = product.name;
             document.getElementById('input-product-price').innerText = formatRupiah(product.price);
+            
+            // Masukkan deskripsi ke drawer
+            document.getElementById('drawer-desc').innerText = product.desc;
 
             document.getElementById('target-input').value = '';
             document.getElementById('custom-comment-area').value = '';
@@ -339,7 +346,7 @@
                 if(isCustom) {
                     customComments = document.getElementById('custom-comment-area').value;
                     if(!customComments.trim()) {
-                        alert('Mohon isi daftar komentar custom anda!');
+                        alert('Mohon isi daftar komentar yang Anda inginkan, pisahkan dengan koma');
                         return;
                     }
                 }
@@ -350,7 +357,7 @@
                 target: targetVal || '-',
                 commentType: commentType,
                 customComments: customComments,
-                qty: currentQty, // Simpan Qty
+                qty: currentQty,
                 cartId: Date.now()
             };
 
@@ -377,7 +384,6 @@
             const floatingCount = document.getElementById('floating-count');
             const floatingBar = document.getElementById('floating-cart-bar');
 
-            // Hitung total item berdasarkan Qty
             let totalItemsCount = cart.reduce((acc, item) => acc + item.qty, 0);
 
             badge.innerText = totalItemsCount;
@@ -511,7 +517,7 @@
             <div class="flex items-center gap-4">
                 <button onclick="toggleTheme()" class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:text-brand hover:bg-gray-100 dark:hover:bg-slate-700 transition"><i id="theme-icon" class="fa-solid fa-moon text-lg"></i></button>
                 <div class="relative cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" onclick="toggleCart()">
-                    <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-2xl text-yellow-500"></i> <!-- WARNA ICON DIUBAH JADI KUNING -->
+                    <i id="cart-icon-nav" class="fa-solid fa-bag-shopping text-2xl text-yellow-500"></i>
                     <span id="cart-badge" class="absolute top-1 right-1 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300 border border-white dark:border-darkbg">0</span>
                 </div>
             </div>
@@ -617,35 +623,41 @@
                 </a>
             </div>
             <div>
-                <p>&copy; 2024 Ferdysosmed. All rights reserved.</p>
+                <p>&copy; 2025 Ferdy Sosmed. All rights reserved.</p>
                 <p class="mt-1">Made for GitHub Pages</p>
             </div>
         </footer>
     </main>
 
-    <!-- DRAWER INPUT (DENGAN FITUR QUANTITY) -->
+    <!-- DRAWER INPUT (DESKRIPSI DETAIL ADA DI SINI) -->
     <div id="input-drawer" class="hidden fixed inset-0 z-50 flex items-end justify-center">
         <div onclick="closeInputDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
         <div id="input-content" class="relative w-full max-w-md bg-white dark:bg-cardbg rounded-t-[2rem] p-6 pb-8 transform translate-y-full transition-transform duration-300 shadow-2xl">
             <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-6"></div>
             
-            <div class="mb-6 border-b border-gray-100 dark:border-gray-700 pb-4">
+            <div class="mb-4 border-b border-gray-100 dark:border-gray-700 pb-4">
                 <h3 id="input-product-name" class="font-bold text-lg dark:text-white pr-8">Nama Produk</h3>
                 <p id="input-product-price" class="text-brand font-bold">Rp 0</p>
+            </div>
+
+            <!-- DESKRIPSI DETAIL PRODUK (POSISI DI ATAS QUANTITY) -->
+            <div class="mb-5 bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl border border-blue-100 dark:border-slate-700">
+                <p class="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1"><i class="fa-solid fa-circle-info"></i> Info Produk</p>
+                <p id="drawer-desc" class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed"></p>
             </div>
 
             <div class="space-y-4">
                 <!-- FITUR QUANTITY -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-500 mb-2">Jumlah Pesanan (Quantity)</label>
+                    <label class="block text-xs font-bold text-gray-500 mb-2">Jumlah Pesanan</label>
                     <div class="flex items-center gap-4">
                         <button onclick="changeQty(-1)" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-white hover:bg-gray-200 font-bold transition">-</button>
                         <span id="qty-display" class="font-bold text-xl w-8 text-center dark:text-white">1</span>
                         <button onclick="changeQty(1)" class="w-10 h-10 rounded-xl bg-brand text-white hover:bg-indigo-600 font-bold transition shadow-lg shadow-indigo-500/20">+</button>
                     </div>
-                    <p class="text-[10px] text-gray-400 mt-1">Gunakan fitur ini untuk order banyak sekaligus ke target yang sama.</p>
                 </div>
 
+                <!-- Input Link (Di Bawah Quantity sesuai Request) -->
                 <div id="target-container">
                     <label id="target-label" class="block text-xs font-bold text-gray-500 mb-1">Link / Username Target</label>
                     <input type="text" id="target-input" placeholder="Masukkan Link atau Username..." class="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand dark:text-white">
