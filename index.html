@@ -70,6 +70,20 @@
         .dark .glass {
             background: rgba(15, 23, 42, 0.9);
         }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.3s ease-in-out;
+        }
+        
+        /* Draggable Handle Style */
+        .draggable-handle {
+            touch-action: none; /* Penting untuk drag di mobile */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-darkbg dark:text-gray-200 pb-32">
@@ -312,7 +326,7 @@
             renderProducts();
         }
 
-        // --- NEW SEARCH LOGIC WITH 'X' BUTTON ---
+        // --- NEW SEARCH LOGIC WITH 'X' BUTTON & TYPING MODE ---
         function handleSearch() {
             const searchInput = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search');
@@ -332,10 +346,13 @@
             const searchInput = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search');
             
-            searchInput.value = '';
-            searchQuery = '';
-            clearBtn.classList.add('hidden');
-            renderProducts();
+            searchInput.value = ''; // Hapus teks
+            searchQuery = ''; // Reset query
+            clearBtn.classList.add('hidden'); // Sembunyikan X
+            renderProducts(); // Refresh produk
+            
+            // Pertahankan fokus agar user bisa langsung ketik lagi
+            searchInput.focus(); 
         }
 
         function toggleFilterModal() {
@@ -379,7 +396,40 @@
             document.getElementById('warranty-modal').classList.add('hidden');
         }
 
-        // --- INPUT & DRAWER ---
+        // --- INPUT & DRAWER & DRAGGABLE LOGIC ---
+        let drawerStartY = 0;
+        let drawerCurrentY = 0;
+        const drawerContent = document.getElementById('input-content');
+
+        // Draggable Functions
+        function initDraggableDrawer() {
+            const content = document.getElementById('input-content');
+            const handle = document.getElementById('drawer-handle');
+
+            handle.addEventListener('touchstart', (e) => {
+                drawerStartY = e.touches[0].clientY;
+            });
+
+            handle.addEventListener('touchmove', (e) => {
+                drawerCurrentY = e.touches[0].clientY;
+                const diff = drawerCurrentY - drawerStartY;
+                if(diff > 0) { // Dragging down
+                    content.style.transform = `translateY(${diff}px)`;
+                }
+            });
+
+            handle.addEventListener('touchend', () => {
+                const diff = drawerCurrentY - drawerStartY;
+                if(diff > 100) { // Jika ditarik cukup jauh ke bawah, tutup
+                    closeInputDrawer();
+                } else { // Jika tidak, kembalikan ke posisi semula
+                    content.style.transform = '';
+                }
+                drawerStartY = 0;
+                drawerCurrentY = 0;
+            });
+        }
+
         function openInputDrawer(id) {
             tempProductId = id;
             currentQty = 1; 
@@ -389,6 +439,9 @@
             const drawer = document.getElementById('input-drawer');
             const content = document.getElementById('input-content');
             
+            // Reset position if previously dragged
+            content.style.transform = '';
+
             document.getElementById('input-product-name').innerText = product.name;
             document.getElementById('input-product-price').innerText = formatRupiah(product.price);
             
@@ -403,8 +456,11 @@
             inputTarget.classList.remove('border-red-500', 'animate-shake'); 
             document.getElementById('target-error').classList.add('hidden');
 
-            document.getElementById('custom-comment-area').value = '';
-            document.getElementById('custom-comment-area').classList.add('hidden');
+            const commentArea = document.getElementById('custom-comment-area');
+            commentArea.value = '';
+            commentArea.classList.add('hidden');
+            commentArea.classList.remove('border-red-500', 'animate-shake'); // Reset error
+            document.getElementById('comment-error').classList.add('hidden'); // Reset error text
             
             if (product.reqLink === false) {
                  document.getElementById('target-container').classList.add('hidden');
@@ -435,6 +491,7 @@
             const targetVal = targetInput.value;
             const errorText = document.getElementById('target-error');
 
+            // VALIDASI LINK TARGET
             if(product.reqLink !== false && !targetVal.trim()) {
                 targetInput.classList.add('border-red-500', 'animate-shake');
                 errorText.classList.remove('hidden');
@@ -448,14 +505,24 @@
             let commentType = 'N/A';
             let customComments = '';
 
+            // VALIDASI KOMENTAR CUSTOM
             if(product.isComment) {
                 const isCustom = document.getElementById('radio-custom').checked;
                 commentType = isCustom ? 'Custom' : 'Random';
                 if(isCustom) {
-                    customComments = document.getElementById('custom-comment-area').value;
+                    const commentArea = document.getElementById('custom-comment-area');
+                    const commentError = document.getElementById('comment-error');
+                    customComments = commentArea.value;
+                    
                     if(!customComments.trim()) {
-                        alert('Mohon isi daftar komentar custom anda!');
+                        commentArea.classList.remove('hidden'); // Ensure visible
+                        commentArea.classList.add('border-red-500', 'animate-shake');
+                        commentError.classList.remove('hidden');
+                        setTimeout(() => commentArea.classList.remove('animate-shake'), 300);
                         return;
+                    } else {
+                        commentArea.classList.remove('border-red-500');
+                        commentError.classList.add('hidden');
                     }
                 }
             }
@@ -502,7 +569,14 @@
 
         function toggleCommentType(type) {
             const area = document.getElementById('custom-comment-area');
-            type === 'custom' ? area.classList.remove('hidden') : area.classList.add('hidden');
+            const error = document.getElementById('comment-error');
+            if(type === 'custom') {
+                area.classList.remove('hidden');
+            } else {
+                area.classList.add('hidden');
+                error.classList.add('hidden'); // Hide error if switching to random
+                area.classList.remove('border-red-500');
+            }
         }
 
         // --- CART ---
@@ -590,12 +664,51 @@
             window.open(`https://wa.me/${NO_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
+        // --- CART MODAL DRAGGABLE ---
+        function initDraggableCart() {
+            const cartContent = document.getElementById('cart-content');
+            const cartHandle = document.getElementById('cart-handle');
+            let startY = 0;
+            let currentY = 0;
+
+            cartHandle.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+            });
+
+            cartHandle.addEventListener('touchmove', (e) => {
+                currentY = e.touches[0].clientY;
+                const diff = currentY - startY;
+                if(diff > 0) { // Dragging down
+                    cartContent.style.transform = `translateY(${diff}px)`;
+                }
+            });
+
+            cartHandle.addEventListener('touchend', () => {
+                const diff = currentY - startY;
+                if(diff > 100) {
+                    toggleCart(); // Close
+                } else {
+                    cartContent.style.transform = ''; // Revert
+                }
+                startY = 0;
+                currentY = 0;
+            });
+        }
+
         function toggleCart() {
             const modal = document.getElementById('cart-modal');
             const content = document.getElementById('cart-content');
-            if(modal.classList.contains('hidden')) { modal.classList.remove('hidden'); setTimeout(() => content.classList.remove('translate-y-full'), 10); } 
-            else { content.classList.add('translate-y-full'); setTimeout(() => modal.classList.add('hidden'), 300); }
+            content.style.transform = ''; // Reset transform style first
+            
+            if(modal.classList.contains('hidden')) { 
+                modal.classList.remove('hidden'); 
+                setTimeout(() => content.classList.remove('translate-y-full'), 10); 
+            } else { 
+                content.classList.add('translate-y-full'); 
+                setTimeout(() => modal.classList.add('hidden'), 300); 
+            }
         }
+
         function toggleTheme() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
@@ -616,6 +729,8 @@
             setFilter('all');
             renderTestimonials();
             updateCartUI(); 
+            initDraggableDrawer();
+            initDraggableCart(); // Enable drag for cart too
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun';
@@ -773,10 +888,13 @@
     <!-- DRAWER INPUT -->
     <div id="input-drawer" class="hidden fixed inset-0 z-50 flex items-end justify-center">
         <div onclick="closeInputDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-        <div id="input-content" class="relative w-full max-w-md bg-white dark:bg-cardbg rounded-t-[2rem] p-6 pb-8 transform translate-y-full transition-transform duration-300 shadow-2xl">
-            <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-6"></div>
+        <div id="input-content" class="relative w-full max-w-md bg-white dark:bg-cardbg rounded-t-[2rem] p-6 pb-8 transform translate-y-full transition-transform duration-300 shadow-2xl transition-transform ease-out">
+            <!-- DRAGGABLE HANDLE -->
+            <div id="drawer-handle" class="w-full h-8 absolute top-0 left-0 cursor-grab flex justify-center items-center draggable-handle">
+                <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+            </div>
             
-            <div class="mb-4 border-b border-gray-100 dark:border-gray-700 pb-4">
+            <div class="mt-4 mb-4 border-b border-gray-100 dark:border-gray-700 pb-4">
                 <h3 id="input-product-name" class="font-bold text-lg dark:text-white pr-8">Nama Produk</h3>
                 <p id="input-product-price" class="text-brand font-bold">Rp 0</p>
             </div>
@@ -819,6 +937,8 @@
                         </label>
                     </div>
                     <textarea id="custom-comment-area" rows="3" class="hidden w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-brand dark:text-white" placeholder="Tulis komentar..."></textarea>
+                    <!-- Error Text for Comment -->
+                    <p id="comment-error" class="hidden text-[10px] text-red-500 font-bold mt-1"><i class="fa-solid fa-circle-exclamation"></i> Harap isi komentar custom!</p>
                 </div>
 
                 <button onclick="confirmAddToCart()" class="w-full bg-brand hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-indigo-500/20 transition active:scale-95 mt-4">Tambahkan ke Keranjang</button>
@@ -842,13 +962,22 @@
         <div class="bg-brand px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2">Lihat Keranjang <i class="fa-solid fa-arrow-right"></i></div>
     </div>
 
-    <!-- MODAL CART -->
+    <!-- MODAL CART (DRAGGABLE) -->
     <div id="cart-modal" class="hidden fixed inset-0 z-[60]">
         <div onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-        <div id="cart-content" class="absolute bottom-0 w-full max-w-md left-1/2 -translate-x-1/2 bg-white dark:bg-cardbg rounded-t-3xl h-[80vh] flex flex-col transform translate-y-full transition-transform duration-300">
-            <div class="flex justify-center pt-3 pb-1" onclick="toggleCart()"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
-            <div class="px-5 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center"><h2 class="font-bold text-lg dark:text-white">Keranjang Kamu</h2><button onclick="toggleCart()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button></div>
+        <div id="cart-content" class="absolute bottom-0 w-full max-w-md left-1/2 -translate-x-1/2 bg-white dark:bg-cardbg rounded-t-3xl h-[80vh] flex flex-col transform translate-y-full transition-transform duration-300 shadow-2xl">
+            <!-- Handle Cart -->
+            <div id="cart-handle" class="w-full h-8 flex justify-center items-center cursor-grab draggable-handle">
+                <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+            </div>
+            
+            <div class="px-5 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <h2 class="font-bold text-lg dark:text-white">Keranjang Kamu</h2>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
             <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-3"></div>
+
             <div class="p-5 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-cardbg pb-8">
                 <div class="flex justify-between items-center mb-4"><span class="text-gray-500 text-sm">Total Tagihan</span><span id="cart-total" class="font-bold text-xl text-brand">Rp 0</span></div>
                 <button onclick="checkoutWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 transition active:scale-95"><i class="fa-brands fa-whatsapp text-lg"></i> Pesan Sekarang</button>
