@@ -82,7 +82,7 @@
         
         /* Draggable Handle Style */
         .draggable-handle {
-            touch-action: none; /* Penting untuk drag di mobile */
+            touch-action: none; 
         }
     </style>
 </head>
@@ -326,7 +326,7 @@
             renderProducts();
         }
 
-        // --- NEW SEARCH LOGIC WITH 'X' BUTTON & TYPING MODE ---
+        // --- NEW SEARCH LOGIC WITH 'X' BUTTON ---
         function handleSearch() {
             const searchInput = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search');
@@ -346,12 +346,11 @@
             const searchInput = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search');
             
-            searchInput.value = ''; // Hapus teks
-            searchQuery = ''; // Reset query
-            clearBtn.classList.add('hidden'); // Sembunyikan X
-            renderProducts(); // Refresh produk
+            searchInput.value = '';
+            searchQuery = '';
+            clearBtn.classList.add('hidden');
+            renderProducts();
             
-            // Pertahankan fokus agar user bisa langsung ketik lagi
             searchInput.focus(); 
         }
 
@@ -402,6 +401,37 @@
         const drawerContent = document.getElementById('input-content');
 
         // Draggable Functions
+        function initDraggableCart() {
+            const cartContent = document.getElementById('cart-content');
+            const cartHandle = document.getElementById('cart-handle');
+            let startY = 0;
+            let currentY = 0;
+
+            cartHandle.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+            });
+
+            cartHandle.addEventListener('touchmove', (e) => {
+                currentY = e.touches[0].clientY;
+                const diff = currentY - startY;
+                if(diff > 0) { // Dragging down
+                    // FIX: Keep translateX(-50%) to maintain center position
+                    cartContent.style.transform = `translateX(-50%) translateY(${diff}px)`;
+                }
+            });
+
+            cartHandle.addEventListener('touchend', () => {
+                const diff = currentY - startY;
+                if(diff > 100) {
+                    toggleCart(); // Close
+                } else {
+                    cartContent.style.transform = ''; // Revert to CSS class state
+                }
+                startY = 0;
+                currentY = 0;
+            });
+        }
+
         function initDraggableDrawer() {
             const content = document.getElementById('input-content');
             const handle = document.getElementById('drawer-handle');
@@ -420,9 +450,9 @@
 
             handle.addEventListener('touchend', () => {
                 const diff = drawerCurrentY - drawerStartY;
-                if(diff > 100) { // Jika ditarik cukup jauh ke bawah, tutup
+                if(diff > 100) { 
                     closeInputDrawer();
-                } else { // Jika tidak, kembalikan ke posisi semula
+                } else { 
                     content.style.transform = '';
                 }
                 drawerStartY = 0;
@@ -679,7 +709,8 @@
                 currentY = e.touches[0].clientY;
                 const diff = currentY - startY;
                 if(diff > 0) { // Dragging down
-                    cartContent.style.transform = `translateY(${diff}px)`;
+                    // FIX: Keep translateX(-50%) to maintain center position
+                    cartContent.style.transform = `translateX(-50%) translateY(${diff}px)`;
                 }
             });
 
