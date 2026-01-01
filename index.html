@@ -219,7 +219,7 @@
             { 
                 id: 301, category: 'fyp', type: 'ICIP-ICIP', name: 'Paket ICIP-ICIP', 
                 price: 1500, priceWarranty: 3000, 
-                packageContent: '1.000 View + 100 Like + (Tanpa Share, Save, Komentar)', 
+                packageContent: '1.000 View + 100 Like', 
                 desc: 'Paket paling murah cocok untuk tes ombak.', icon: 'fa-solid fa-fire', reqLink: true 
             },
             { 
@@ -541,7 +541,7 @@
                 let secondaryInfo = `<div class="flex items-center gap-1 text-xs text-yellow-400"><i class="fa-solid fa-star"></i><span class="text-gray-400 text-[10px] ml-1">(5.0)</span></div>`;
                 if(p.packageContent) {
                     // Shorten content for card view, full in drawer
-                    const shortContent = p.packageContent.split('<br>')[0] + '...';
+                    const shortContent = p.packageContent.split('<br>')[0] + '';
                     secondaryInfo = `<div class="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md mt-1 w-fit"><i class="fa-solid fa-box-open mr-1"></i>${shortContent}</div>`;
                 }
                 
