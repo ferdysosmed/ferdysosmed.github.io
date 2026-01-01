@@ -36,7 +36,7 @@
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'slide-up': 'slideUp 0.4s ease-out forwards',
                         'pop-in': 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-                        'shake': 'shake 0.3s ease-in-out',
+                        'shake': 'shake 0.5s ease-in-out', /* Durasi shake standar */
                         'fade-in-down': 'fadeInDown 0.5s ease-out',
                     },
                     keyframes: {
@@ -53,9 +53,9 @@
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
                         shake: {
-                            '0%, 100%': { transform: 'translateX(0)' },
-                            '25%': { transform: 'translateX(-5px)' },
-                            '75%': { transform: 'translateX(5px)' },
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(-10deg)' },
+                            '75%': { transform: 'rotate(10deg)' },
                         }
                     }
                 }
@@ -108,19 +108,82 @@
         // --- KONFIGURASI ---
         const NO_WHATSAPP = "6289676930992"; 
 
-        // --- DESKRIPSI MANFAAT (STATIC TEXTS) ---
-        const BENEFIT_SOSMED = `
+        // --- TEKS S&K DAN GARANSI (DATABASE TEKS) ---
+        const TEXT_SNK_PREMIUM = `
+            <div class="space-y-3 text-xs text-gray-600 dark:text-gray-300">
+                <p class="font-bold text-brand">📜 SYARAT & KETENTUAN (APK PREMIUM)</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li><strong>Dilarang Mengubah Data Akun:</strong> Pembeli DILARANG KERAS mengubah Email, Password, Username, atau Profil (untuk akun sharing). Mengubah data = Garansi HANGUS.</li>
+                    <li><strong>Aturan Login:</strong>
+                        <ul class="list-circle pl-4 mt-1">
+                            <li><em>Akun Sharing:</em> 1 Pembelian hanya untuk 1 Device (Perangkat). Dilarang login di banyak device.</li>
+                            <li><em>Akun Private:</em> Bebas login di device mana saja sesuai limit aplikasi.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Masa Aktif:</strong> Durasi dihitung sejak akun diberikan, bukan sejak pembeli login.</li>
+                    <li><strong>Resiko Aplikasi:</strong> Jika terjadi kendala teknis dari pusat (seperti backfree, on hold, atau banned massal dari aplikasi), mohon bersabar. Kami akan bantu proses klaim garansi secepatnya.</li>
+                </ul>
+            </div>`;
+
+        const TEXT_WARRANTY_PREMIUM = `
+            <div class="space-y-3 text-xs text-gray-600 dark:text-gray-300">
+                <p class="font-bold text-green-600">🛡️ SISTEM GARANSI (APK)</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li><strong>Jenis Garansi:</strong> Garansi yang kami berikan adalah GANTI AKUN BARU / PERBAIKAN AKUN, bukan Refund (Pengembalian Uang). Refund hanya dilakukan jika kami kehabisan stok pengganti.</li>
+                    <li><strong>Durasi Garansi (Full Garansi):</strong> Menjamin akun aktif selama durasi sewa (Misal beli 1 bulan, garansi 1 bulan). Jika mati di hari ke-15, akan diganti akun baru untuk sisa harinya.</li>
+                    <li><strong>Cara Klaim:</strong> Wajib kirim screenshot bukti error (logout/minta bayar) dan screenshot saat awal login sukses.</li>
+                </ul>
+            </div>`;
+
+        const TEXT_SNK_SOSMED = `
+            <div class="space-y-3 text-xs text-gray-600 dark:text-gray-300">
+                <p class="font-bold text-brand">📜 SYARAT & KETENTUAN (SUNTIK SOSMED)</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li><strong>Akun Wajib PUBLIC:</strong> Selama proses pengerjaan, akun DILARANG DI-PRIVATE/GEMBOK. Jika akun diprivate saat proses berjalan, pesanan dianggap SELESAI dan dana hangus (sistem server otomatis menolak).</li>
+                    <li><strong>Dilarang Ganti Username:</strong> Jangan mengganti username (nama pengguna) selama proses belum selesai.</li>
+                    <li><strong>Dilarang Double Order:</strong> Jangan membeli layanan yang sama di toko lain atau panel lain untuk target (link) yang sama secara bersamaan. Data akan bentrok dan garansi tidak berlaku.</li>
+                    <li><strong>Estimasi Masuk:</strong> Kecepatan masuk followers/likes tergantung antrian server dan update algoritma platform (Instagram/TikTok/dll). Estimasi 1x24 jam sampai 3x24 jam. Mohon tidak spam chat jika belum lewat estimasi.</li>
+                </ul>
+            </div>`;
+
+        const TEXT_WARRANTY_SOSMED = `
+            <div class="space-y-3 text-xs text-gray-600 dark:text-gray-300">
+                <p class="font-bold text-green-600">🛡️ SISTEM GARANSI & REFILL (ISI ULANG)</p>
+                
+                <p class="font-bold mt-2">A. Layanan NON-GARANSI (Murah)</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li>Tidak ada garansi jika followers/likes turun.</li>
+                    <li>Tidak ada refill (isi ulang) dan tidak ada refund.</li>
+                    <li>Membeli berarti siap dengan risiko penurunan jumlah.</li>
+                </ul>
+
+                <p class="font-bold mt-2">B. Layanan BERGARANSI (Refill)</p>
+                <ul class="list-disc pl-4 space-y-1">
+                    <li><strong>Syarat Refill:</strong> Garansi isi ulang berlaku jika penurunan melebihi 10-20% dari jumlah awal order.</li>
+                    <li><strong>Masa Garansi:</strong> Berlaku selama 30 Hari (atau sesuai server yang Anda pakai) sejak orderan status Success.</li>
+                    <li><strong>Cara Klaim:</strong> Kirim screenshot profil terkini. Proses refill membutuhkan waktu 1x24 jam hingga 3x24 jam.</li>
+                </ul>
+
+                <p class="font-bold mt-2 text-red-500">Garansi Hangus Jika:</p>
+                <ul class="list-disc pl-4 space-y-1 text-red-400">
+                    <li>Username diganti.</li>
+                    <li>Akun di-private.</li>
+                    <li>Jumlah followers turun dibawah jumlah awal (start count) sebelum order.</li>
+                </ul>
+            </div>`;
+
+
+        const BENEFIT_SOSMED_SHORT = `
             <div class="space-y-2 text-xs text-gray-600 dark:text-gray-300">
                 <p><strong>🚀 Keuntungan Jasa Suntik Sosmed:</strong></p>
                 <ul class="list-disc pl-4 space-y-1">
                     <li><strong>100% Aman Tanpa Password:</strong> Hanya butuh Username/Link.</li>
                     <li><strong>Proses Kilat:</strong> Order masuk, sistem langsung gas!</li>
                     <li><strong>Kualitas High Quality:</strong> Akun terlihat kredibel.</li>
-                    <li><strong>Garansi Refill:</strong> (Khusus layanan bergaransi) Isi ulang gratis jika drop.</li>
                 </ul>
             </div>`;
 
-        const BENEFIT_PREMIUM = `
+        const BENEFIT_PREMIUM_SHORT = `
             <div class="space-y-2 text-xs text-gray-600 dark:text-gray-300">
                 <p><strong>💸 Harga Pelajar, Fitur Sultan:</strong></p>
                 <ul class="list-disc pl-4 space-y-1">
@@ -152,19 +215,69 @@
             { id: 205, category: 'tiktok', type: 'Comment', name: '10 Komentar TikTok', price: 1500, priceWarranty: 3000, desc: 'Komentar video.', icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
             { id: 206, category: 'tiktok', type: 'View', name: '1.000 View TikTok', price: 500, priceWarranty: 1000, desc: 'Views video.', icon: 'fa-solid fa-eye', reqLink: true },
 
-            // --- PAKET FYP ---
-            { id: 301, category: 'fyp', type: 'ICIP-ICIP', name: 'Paket ICIP-ICIP', price: 1500, priceWarranty: 3000, packageContent: '1.000 View + 100 Like', desc: 'Cocok untuk tes ombak.', icon: 'fa-solid fa-fire', reqLink: true },
-            { id: 302, category: 'fyp', type: 'BASIC', name: 'Paket BASIC', price: 2000, priceWarranty: 4000, packageContent: '1.000 View + 100 Like + 100 Save', desc: 'Sinyal algoritma dasar.', icon: 'fa-solid fa-fire', reqLink: true },
-            { id: 303, category: 'fyp', type: 'LITE', name: 'Paket LITE', price: 3500, priceWarranty: 7000, packageContent: '2.000 View + 200 Like + 100 Save', desc: 'Boost ringan.', icon: 'fa-solid fa-fire', reqLink: true },
-            { id: 304, category: 'fyp', type: 'STARTER', name: 'Paket STARTER', price: 6000, priceWarranty: 11500, packageContent: '2K View + 200 Like + 100 Share/Save', desc: 'Mulai lengkap.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 305, category: 'fyp', type: 'MEDIUM', name: 'Paket MEDIUM', price: 7500, priceWarranty: 14500, packageContent: '3K View + 300 Like + 100 Share/Save', desc: 'Boost menengah.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 306, category: 'fyp', type: 'POPULAR', name: 'Paket POPULAR', price: 13500, priceWarranty: 26000, packageContent: '5K View + 500 Like + 200 Share/Save', desc: 'Best Seller.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 307, category: 'fyp', type: 'BOOSTER', name: 'Paket BOOSTER', price: 19500, priceWarranty: 37500, packageContent: '7K View + 700 Like + 300 Share/Save', desc: 'Boost tinggi.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 308, category: 'fyp', type: 'ADVANCED', name: 'Paket ADVANCED', price: 27500, priceWarranty: 52500, packageContent: '10K View + 1K Like + 500 Share/Save', desc: 'Semi viral.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 309, category: 'fyp', type: 'VIRAL', name: 'Paket VIRAL', price: 41500, priceWarranty: 80000, packageContent: '15K View + 1.5K Like + 800 Share/Save', desc: 'Viral mode on.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
-            { id: 310, category: 'fyp', type: 'SULTAN', name: 'Paket SULTAN', price: 52500, priceWarranty: 100000, packageContent: '20K View + 2K Like + 1K Share/Save', desc: 'Maximal boost.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true },
+            // --- PAKET FYP (FULL UPDATED CONTENT) ---
+            { 
+                id: 301, category: 'fyp', type: 'ICIP-ICIP', name: 'Paket ICIP-ICIP', 
+                price: 1500, priceWarranty: 3000, 
+                packageContent: '1.000 View + 100 Like', 
+                desc: 'Paket paling murah cocok untuk tes ombak.', icon: 'fa-solid fa-fire', reqLink: true 
+            },
+            { 
+                id: 302, category: 'fyp', type: 'BASIC', name: 'Paket BASIC', 
+                price: 2000, priceWarranty: 4000, 
+                packageContent: '1.000 View + 100 Like + 100 Save', 
+                desc: 'Sinyal algoritma dasar.', icon: 'fa-solid fa-fire', reqLink: true 
+            },
+            { 
+                id: 303, category: 'fyp', type: 'LITE', name: 'Paket LITE', 
+                price: 3500, priceWarranty: 7000, 
+                packageContent: '2.000 View + 200 Like + 100 Save', 
+                desc: 'Boost ringan.', icon: 'fa-solid fa-fire', reqLink: true 
+            },
+            { 
+                id: 304, category: 'fyp', type: 'STARTER', name: 'Paket STARTER', 
+                price: 6000, priceWarranty: 11500, 
+                packageContent: '2.000 View + 200 Like + 100 Share + 100 Save + 10 Komentar', 
+                desc: 'Mulai lengkap.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 305, category: 'fyp', type: 'MEDIUM', name: 'Paket MEDIUM', 
+                price: 7500, priceWarranty: 14500, 
+                packageContent: '3.000 View + 300 Like + 100 Share + 100 Save + 10 Komentar', 
+                desc: 'Boost menengah.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 306, category: 'fyp', type: 'POPULAR', name: 'Paket POPULAR', 
+                price: 13500, priceWarranty: 26000, 
+                packageContent: '5.000 View + 500 Like + 200 Share + 200 Save + 20 Komentar', 
+                desc: 'Best Seller.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 307, category: 'fyp', type: 'BOOSTER', name: 'Paket BOOSTER', 
+                price: 19500, priceWarranty: 37500, 
+                packageContent: '7.000 View + 700 Like + 300 Share + 300 Save + 30 Komentar', 
+                desc: 'Boost tinggi.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 308, category: 'fyp', type: 'ADVANCED', name: 'Paket ADVANCED', 
+                price: 27500, priceWarranty: 52500, 
+                packageContent: '10.000 View + 1.000 Like + 500 Share + 500 Save + 30 Komentar', 
+                desc: 'Semi viral.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 309, category: 'fyp', type: 'VIRAL', name: 'Paket VIRAL', 
+                price: 41500, priceWarranty: 80000, 
+                packageContent: '15.000 View + 1.500 Like + 800 Share + 800 Save + 40 Komentar', 
+                desc: 'Viral mode on.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
+            { 
+                id: 310, category: 'fyp', type: 'SULTAN', name: 'Paket SULTAN', 
+                price: 52500, priceWarranty: 100000, 
+                packageContent: '20.000 View + 2.000 Like + 1.000 Share + 1.000 Save + 50 Komentar', 
+                desc: 'Maximal boost.', icon: 'fa-solid fa-fire', reqLink: true, isComment: true 
+            },
 
-            // --- PREMIUM APPS (NEW UPDATED LIST) ---
+            // --- PREMIUM APPS ---
             { 
                 id: 501, category: 'premium', type: 'YT', name: 'YouTube Premium', 
                 desc: 'Bebas iklan, background play, download offline.', icon: 'fa-brands fa-youtube', reqLink: false,
@@ -321,12 +434,14 @@
         let currentSuperFilter = 'all'; 
         let searchQuery = '';
         let tempProductId = null; 
+        let currentProductCategory = null; // Store category for S&K logic
         let currentQty = 1;
         let activeTab = 'home';
         let tempMursunId = null;
         let mursunSelection = null; 
         let selectedWarranty = 'no'; 
         let selectedVariantIndex = 0; 
+        let shakeInterval = null; // Variable for shake interval
 
         function formatRupiah(angka) {
             if (angka === null || angka === undefined) return 'Stok Kosong';
@@ -350,6 +465,19 @@
                     container.scrollBy({ left: cardWidth, behavior: 'smooth' });
                 }
             }, 3000);
+        }
+
+        // --- INIT SHAKE ICON ---
+        function initCartShake() {
+            const cartIcon = document.getElementById('cart-icon-container');
+            if(shakeInterval) clearInterval(shakeInterval);
+            
+            shakeInterval = setInterval(() => {
+                if(cart.length > 0) {
+                    cartIcon.classList.add('animate-shake');
+                    setTimeout(() => cartIcon.classList.remove('animate-shake'), 500); // Remove after anim duration
+                }
+            }, 5000);
         }
 
         // --- RENDER PRODUK ---
@@ -412,7 +540,9 @@
 
                 let secondaryInfo = `<div class="flex items-center gap-1 text-xs text-yellow-400"><i class="fa-solid fa-star"></i><span class="text-gray-400 text-[10px] ml-1">(5.0)</span></div>`;
                 if(p.packageContent) {
-                    secondaryInfo = `<div class="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md mt-1 w-fit"><i class="fa-solid fa-box-open mr-1"></i>${p.packageContent}</div>`;
+                    // Shorten content for card view, full in drawer
+                    const shortContent = p.packageContent.split('<br>')[0] + '...';
+                    secondaryInfo = `<div class="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md mt-1 w-fit"><i class="fa-solid fa-box-open mr-1"></i>${shortContent}</div>`;
                 }
                 
                 const card = `
@@ -492,6 +622,8 @@
             document.getElementById('qty-display').innerText = currentQty;
 
             const product = products.find(p => p.id === id);
+            currentProductCategory = product.category; // Set category for S&K
+
             const drawer = document.getElementById('input-drawer');
             const content = document.getElementById('input-content');
             content.style.transform = '';
@@ -524,14 +656,15 @@
             updateVariantSelection();
 
             // DESKRIPSI & ISI PAKET
-            let benefitText = product.category === 'premium' ? BENEFIT_PREMIUM : BENEFIT_SOSMED;
+            let benefitText = product.category === 'premium' ? BENEFIT_PREMIUM_SHORT : BENEFIT_SOSMED_SHORT;
             
             let fypContentHtml = '';
             if(product.packageContent) {
+                // Show full content in drawer (with <br>)
                 fypContentHtml = `
                 <div class="mb-4 bg-indigo-50 dark:bg-slate-800 p-3 rounded-xl border border-indigo-100 dark:border-slate-700">
                     <p class="text-xs font-bold text-brand mb-1"><i class="fa-solid fa-box-open mr-1"></i> Isi Paket:</p>
-                    <p class="text-sm font-bold dark:text-white">${product.packageContent}</p>
+                    <p class="text-sm font-bold dark:text-white leading-relaxed">${product.packageContent}</p>
                 </div>`;
             }
 
@@ -566,8 +699,9 @@
                 commentSection.classList.add('hidden');
             }
 
-            // Reset Scroll
-            document.getElementById('drawer-scroll-area').scrollTop = 0;
+            // AUTO SCROLL TO TOP - REQUEST #1
+            const scrollArea = document.getElementById('drawer-scroll-area');
+            if(scrollArea) scrollArea.scrollTop = 0;
 
             drawer.classList.remove('hidden');
             setTimeout(() => content.classList.remove('translate-y-full'), 10);
@@ -748,6 +882,16 @@
             updateCartUI();
         }
 
+        // --- NEW: CLEAR ALL CART ---
+        function clearCart() {
+            if(cart.length === 0) return;
+            if(confirm('Yakin ingin menghapus semua item?')) {
+                cart = [];
+                updateCartUI();
+                showToast("Keranjang dikosongkan.");
+            }
+        }
+
         function updateCartUI() {
             const badge = document.getElementById('cart-badge');
             const cartList = document.getElementById('cart-items');
@@ -773,7 +917,9 @@
             
             if(cart.length === 0) {
                 cartList.innerHTML = `<div class="flex flex-col items-center justify-center py-12 text-gray-400 opacity-60"><i class="fa-solid fa-cart-arrow-down text-5xl mb-3"></i><p class="text-sm font-medium">Belum ada item.</p></div>`;
+                document.getElementById('btn-clear-cart').classList.add('hidden');
             } else {
+                document.getElementById('btn-clear-cart').classList.remove('hidden');
                 cart.forEach((item, index) => {
                     let itemTotal = item.finalPrice * item.qty;
                     total += itemTotal;
@@ -1014,13 +1160,43 @@
 
         function toggleFilterModal() { document.getElementById('filter-modal').classList.toggle('hidden'); }
         function applySuperFilter(type) { currentSuperFilter = type; setFilter('all'); toggleFilterModal(); }
-        function showWarranty() { document.getElementById('warranty-modal').classList.remove('hidden'); }
-        function showSnK() { document.getElementById('warranty-modal').classList.remove('hidden'); document.getElementById('warranty-title').innerText = "📜 SYARAT & KETENTUAN"; } // Simplified for brevity
+        
+        // --- NEW SHOW S&K / WARRANTY LOGIC ---
+        function showWarranty() { 
+            const modal = document.getElementById('warranty-modal');
+            modal.classList.remove('hidden');
+            
+            let content = '';
+            if (currentProductCategory === 'premium') {
+                content = TEXT_WARRANTY_PREMIUM;
+            } else {
+                content = TEXT_WARRANTY_SOSMED;
+            }
+            
+            document.getElementById('warranty-content').innerHTML = content;
+            document.getElementById('warranty-title').innerText = "🛡️ SISTEM GARANSI"; 
+        }
+
+        function showSnK() { 
+            const modal = document.getElementById('warranty-modal');
+            modal.classList.remove('hidden'); 
+            
+            let content = '';
+            if (currentProductCategory === 'premium') {
+                content = TEXT_SNK_PREMIUM;
+            } else {
+                content = TEXT_SNK_SOSMED;
+            }
+
+            document.getElementById('warranty-content').innerHTML = content;
+            document.getElementById('warranty-title').innerText = "📜 SYARAT & KETENTUAN"; 
+        } 
+
         function closeWarranty() { document.getElementById('warranty-modal').classList.add('hidden'); }
         function openAllTestimonials() { document.getElementById('testi-modal').classList.remove('hidden'); }
         function closeAllTestimonials() { document.getElementById('testi-modal').classList.add('hidden'); }
 
-        // RENDER TESTIMONIALS (Restored)
+        // RENDER TESTIMONIALS
         function renderTestimonials() {
             const container = document.getElementById('testi-container');
             if(!container) return;
@@ -1058,12 +1234,13 @@
 
         window.onload = () => {
             setFilter('all');
-            renderTestimonials(); // Ensure this is called
+            renderTestimonials(); 
             updateCartUI(); 
             renderHistory();
             renderMursun();
             initDraggableDrawer();
             initBannerScroll();
+            initCartShake(); // Start shake animation logic
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun';
@@ -1086,7 +1263,7 @@
                 <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:text-brand hover:bg-gray-100 dark:hover:bg-slate-700 transition">
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
-                <div class="relative cursor-pointer w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" onclick="toggleCart()">
+                <div id="cart-icon-container" class="relative cursor-pointer w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition origin-top" onclick="toggleCart()">
                     <i class="fa-solid fa-bag-shopping text-xl text-gray-700 dark:text-white"></i>
                     <span id="cart-badge" class="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300 border border-white dark:border-darkbg">0</span>
                 </div>
@@ -1129,7 +1306,7 @@
             <!-- BANNER SLIDER CONTAINER -->
             <div id="banner-container" class="flex overflow-x-auto snap-x no-scrollbar gap-3 pb-2 -mx-4 px-4 scroll-smooth">
                 
-                <!-- 1. YOUTUBE PREMIUM (Modified to Normal Banner & Direct Link) -->
+                <!-- 1. YOUTUBE PREMIUM -->
                 <div class="min-w-[85%] snap-center bg-gradient-to-r from-red-600 to-red-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-red-500/20 cursor-pointer group" onclick="openInputDrawer(501)">
                     <div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         <i class="fa-brands fa-youtube text-8xl"></i>
@@ -1427,10 +1604,10 @@
     <!-- WARRANTY MODAL -->
     <div id="warranty-modal" class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
         <div onclick="closeWarranty()" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-        <div class="relative bg-white dark:bg-cardbg w-full max-w-sm rounded-2xl p-6 shadow-2xl animate-slide-up">
-            <h3 id="warranty-title" class="text-lg font-bold mb-3 dark:text-white">Info Garansi</h3>
-            <div id="warranty-content" class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6"></div>
-            <button onclick="closeWarranty()" class="w-full bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-white font-bold py-2 rounded-xl hover:bg-gray-200 transition">Tutup</button>
+        <div class="relative bg-white dark:bg-cardbg w-full max-w-sm rounded-2xl p-6 shadow-2xl animate-slide-up max-h-[80vh] flex flex-col">
+            <h3 id="warranty-title" class="text-lg font-bold mb-3 dark:text-white flex-shrink-0">Info Garansi</h3>
+            <div id="warranty-content" class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4 overflow-y-auto pr-2"></div>
+            <button onclick="closeWarranty()" class="w-full bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-white font-bold py-2 rounded-xl hover:bg-gray-200 transition flex-shrink-0">Tutup</button>
         </div>
     </div>
 
@@ -1439,7 +1616,12 @@
         <div onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         <div id="cart-content" class="absolute bottom-0 w-full max-w-md left-1/2 -translate-x-1/2 bg-white dark:bg-cardbg rounded-t-3xl h-[85vh] flex flex-col transform translate-y-full transition-transform duration-300 shadow-2xl">
             <div id="cart-handle" class="w-full h-8 flex justify-center items-center cursor-grab draggable-handle"><div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div></div>
-            <div class="px-5 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center"><h2 class="font-bold text-lg dark:text-white">Keranjang Kamu</h2><button onclick="toggleCart()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button></div>
+            <div class="px-5 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <h2 class="font-bold text-lg dark:text-white">Keranjang Kamu</h2>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+            </div>
             <div id="cart-items" class="flex-1 overflow-y-auto p-5 space-y-3"></div>
             <div class="p-5 border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-cardbg pb-8"><div class="flex justify-between items-center mb-4"><span class="text-gray-500 text-sm">Total Tagihan</span><span id="cart-total" class="font-bold text-xl text-brand">Rp 0</span></div><button onclick="checkoutWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 transition active:scale-95"><i class="fa-brands fa-whatsapp text-lg"></i> Pesan Sekarang</button></div>
         </div>
