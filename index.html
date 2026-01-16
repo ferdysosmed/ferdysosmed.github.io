@@ -403,34 +403,18 @@ const TEXT_WARRANTY_PREMIUM = `
         ];
 
         // --- DATA MURSUN ---
-const mursunProducts = [
-    {
-        id: 801,
-        name: 'Murid Suntik Sosmed (MURSUN)',
-        desc: 'Kelas pelatihan cara suntik sosial media (Like, Follower, View) secara mandiri. Pilih jalur Gratisan (tanpa modal), Berbayar (harga pusat), atau VIP (Komplit).',
-        isMerged: true, // Flag bahwa ini produk dengan varian paket
-        options: [
-            { 
-                key: 'gratisan', 
-                name: 'Paket Gratisan', 
-                price: 10000, 
-                desc: 'Fokus trik suntik tanpa modal (Rp0). Bisa suntik sepuasnya (unlimited) tanpa biaya operasional. Termasuk grup private & tutorial.' 
+        const mursunProducts = [
+            {
+                id: 801,
+                name: 'Murid Suntik Sosmed',
+                desc: 'Gabung menjadi murid suntik sosmed dan pelajari cara berjualan kebutuhan digital. Pilih paket sesuai kebutuhanmu.',
+                isMerged: true, // Flag untuk item gabungan
+                options: [
+                    { key: 'gratisan', name: 'Gratisan', price: 10000, desc: 'Grup private gratisan, 1 bahan web, video tutorial, suntik sepuasnya tanpa modal.' },
+                    { key: 'berbayar', name: 'Berbayar', price: 10000, desc: 'Grup private berbayar, 1 bahan web berbayar, tutorial lengkap, full bimbingan.' },
+                    { key: 'vip', name: 'VIP', price: 15000, desc: 'Gabungan Gratisan & Berbayar, 2 bahan web, materi terlengkap, akses harga reseller termurah.' }
+                ]
             },
-            { 
-                key: 'berbayar', 
-                name: 'Paket Berbayar', 
-                price: 10000, 
-                desc: 'Akses website server pusat dengan harga termurah (di bawah harga reseller). Cocok untuk jualan/bisnis. Full bimbingan.' 
-            },
-            { 
-                key: 'vip', 
-                name: 'Paket VIP (Komplit)', 
-                price: 15000, 
-                desc: 'Rekomendasi! Gabungan materi Gratisan & Berbayar. Dapat 2 bahan web, materi terlengkap, dan akses harga reseller termurah.' 
-            }
-        ]
-    }
-];
             {
                 id: 802,
                 name: 'Tutorial Jualan Apk Premium',
