@@ -228,13 +228,14 @@ const TEXT_WARRANTY_PREMIUM = `
 
             // --- KATEGORI INSTAGRAM ---
             { id: 101, category: 'instagram', type: 'Like', name: '100 Like Instagram', price: 1000, priceWarranty: 2000, desc: 'Likes postingan IG.', icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 102, category: 'instagram', type: 'Follower', name: '100 Follower Instagram', price: 2500, priceWarranty: 3000, desc: 'Followers untuk akun IG.', icon: 'fa-solid fa-user-plus', reqLink: true },
+            { id: 102, category: 'instagram', type: 'Follower', name: '100 Follower Instagram', price: 3000, priceWarranty: 5000, desc: 'Followers untuk akun IG.', icon: 'fa-solid fa-user-plus', reqLink: true },
             { id: 103, category: 'instagram', type: 'Comment', name: '10 Komentar Instagram', price: 1500, priceWarranty: 3000, desc: 'Ramaikan komentar postingan.', icon: 'fa-solid fa-comment-dots', reqLink: true, isComment: true },
             { id: 104, category: 'instagram', type: 'View', name: '1.000 View Reel', price: 500, priceWarranty: 1000, desc: 'Views video reels.', icon: 'fa-solid fa-eye', reqLink: true },
+            { id: 105, category: 'instagram', type: 'View', name: '100 View All Story', price: 600, priceWarranty: 900, desc: 'Views All Story', icon: 'fa-solid fa-eye', reqLink: true },
 
             // --- KATEGORI TIKTOK ---
             { id: 201, category: 'tiktok', type: 'Like', name: '100 Like TikTok', price: 1000, priceWarranty: 2000, desc: 'Likes video TikTok.', icon: 'fa-solid fa-heart', reqLink: true },
-            { id: 202, category: 'tiktok', type: 'Follower', name: '100 Follower TikTok', price: 3500, priceWarranty: 4000, desc: 'Followers TikTok.', icon: 'fa-brands fa-tiktok', reqLink: true },
+            { id: 202, category: 'tiktok', type: 'Follower', name: '100 Follower TikTok', price: 7000, priceWarranty: 10000, desc: 'Followers TikTok.', icon: 'fa-brands fa-tiktok', reqLink: true },
             { id: 203, category: 'tiktok', type: 'Share', name: '100 Share TikTok', price: 1000, priceWarranty: 1500, desc: 'Share video (Salin Tautan).', icon: 'fa-solid fa-share', reqLink: true },
             { id: 204, category: 'tiktok', type: 'Save', name: '100 Save TikTok', price: 500, priceWarranty: 1000, desc: 'Save/Bookmark video.', icon: 'fa-solid fa-bookmark', reqLink: true },
             { id: 205, category: 'tiktok', type: 'Comment', name: '10 Komentar TikTok', price: 1500, priceWarranty: 3000, desc: 'Komentar video.', icon: 'fa-solid fa-comment', reqLink: true, isComment: true },
@@ -402,18 +403,34 @@ const TEXT_WARRANTY_PREMIUM = `
         ];
 
         // --- DATA MURSUN ---
-        const mursunProducts = [
-            {
-                id: 801,
-                name: 'Murid Suntik Sosmed',
-                desc: 'Gabung menjadi murid suntik sosmed dan pelajari cara berjualan kebutuhan digital. Pilih paket sesuai kebutuhanmu.',
-                isMerged: true, // Flag untuk item gabungan
-                options: [
-                    { key: 'gratisan', name: 'Gratisan', price: 10000, desc: 'Grup private gratisan, 1 bahan web, video tutorial, suntik sepuasnya tanpa modal.' },
-                    { key: 'berbayar', name: 'Berbayar', price: 10000, desc: 'Grup private berbayar, 1 bahan web berbayar, tutorial lengkap, full bimbingan.' },
-                    { key: 'vip', name: 'VIP', price: 15000, desc: 'Gabungan Gratisan & Berbayar, 2 bahan web, materi terlengkap, akses harga reseller termurah.' }
-                ]
+const mursunProducts = [
+    {
+        id: 801,
+        name: 'Murid Suntik Sosmed (MURSUN)',
+        desc: 'Kelas pelatihan cara suntik sosial media (Like, Follower, View) secara mandiri. Pilih jalur Gratisan (tanpa modal), Berbayar (harga pusat), atau VIP (Komplit).',
+        isMerged: true, // Flag bahwa ini produk dengan varian paket
+        options: [
+            { 
+                key: 'gratisan', 
+                name: 'Paket Gratisan', 
+                price: 10000, 
+                desc: 'Fokus trik suntik tanpa modal (Rp0). Bisa suntik sepuasnya (unlimited) tanpa biaya operasional. Termasuk grup private & tutorial.' 
             },
+            { 
+                key: 'berbayar', 
+                name: 'Paket Berbayar', 
+                price: 10000, 
+                desc: 'Akses website server pusat dengan harga termurah (di bawah harga reseller). Cocok untuk jualan/bisnis. Full bimbingan.' 
+            },
+            { 
+                key: 'vip', 
+                name: 'Paket VIP (Komplit)', 
+                price: 15000, 
+                desc: 'Rekomendasi! Gabungan materi Gratisan & Berbayar. Dapat 2 bahan web, materi terlengkap, dan akses harga reseller termurah.' 
+            }
+        ]
+    }
+];
             {
                 id: 802,
                 name: 'Tutorial Jualan Apk Premium',
