@@ -125,7 +125,7 @@
                 </ul>
             </div>`;
 
-const TEXT_WARRANTY_PREMIUM = `
+        const TEXT_WARRANTY_PREMIUM = `
             <div class="space-y-3 text-xs text-gray-600 dark:text-gray-300">
                 <p class="font-bold text-green-600">🛡️ INFO GARANSI & LAYANAN</p>
                 
@@ -493,6 +493,29 @@ const TEXT_WARRANTY_PREMIUM = `
             }, 3000);
         }
 
+        // --- NEW: TESTIMONI AUTO SCROLL ---
+        function initTestiScroll() {
+            const container = document.getElementById('testi-container');
+            if(!container) return;
+            
+            setInterval(() => {
+                if (container.matches(':hover')) return;
+
+                // Cek lebar item pertama untuk scroll distance
+                const item = container.querySelector('div');
+                if(!item) return;
+
+                const scrollAmt = item.offsetWidth + 12; // width + gap
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                if (container.scrollLeft >= maxScroll - 10) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+                }
+            }, 3000); // 3 detik
+        }
+
         // --- INIT SHAKE ICON ---
         function initCartShake() {
             const cartIcon = document.getElementById('cart-icon-container');
@@ -572,7 +595,7 @@ const TEXT_WARRANTY_PREMIUM = `
                 }
                 
                 const card = `
-                <div onclick="openInputDrawer(${p.id})" class="cursor-pointer bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div onclick="openInputDrawer(${p.id})" class="cursor-pointer bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border ${borderColor} flex flex-col relative overflow-hidden group hover:shadow-md transition-all duration-300 h-full">
                     <div class="absolute top-0 right-0 px-2 py-1 rounded-bl-lg text-[10px] font-bold uppercase ${typeBg}">${p.type}</div>
                     <div class="flex items-start gap-3 mb-2">
                         <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-xl ${iconColor}"><i class="${p.icon}"></i></div>
@@ -605,7 +628,7 @@ const TEXT_WARRANTY_PREMIUM = `
                 }
 
                 container.innerHTML += `
-                <div onclick="openMursunDrawer(${p.id})" class="cursor-pointer bg-white dark:bg-cardbg rounded-2xl p-5 shadow-sm border border-indigo-100 dark:border-slate-700 relative overflow-hidden group">
+                <div onclick="openMursunDrawer(${p.id})" class="cursor-pointer bg-white dark:bg-cardbg rounded-2xl p-5 shadow-sm border border-indigo-100 dark:border-slate-700 relative overflow-hidden group h-full">
                     <div class="absolute right-0 top-0 w-24 h-24 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-bl-full -mr-4 -mt-4 transition group-hover:scale-110"></div>
                     <div class="flex items-start gap-4 relative z-10">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-indigo-500/30">
@@ -984,20 +1007,20 @@ const TEXT_WARRANTY_PREMIUM = `
             const history = JSON.parse(localStorage.getItem('ferdy_order_history')) || [];
             container.innerHTML = '';
             if(history.length === 0) {
-                container.innerHTML = `<div class="text-center py-10 opacity-50"><i class="fa-solid fa-clock-rotate-left text-4xl mb-3 text-gray-300"></i><p class="text-sm">Belum ada riwayat pesanan.</p></div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-10 opacity-50"><i class="fa-solid fa-clock-rotate-left text-4xl mb-3 text-gray-300"></i><p class="text-sm">Belum ada riwayat pesanan.</p></div>`;
                 return;
             }
             history.forEach(order => {
                 let itemsHtml = '';
                 order.items.forEach(item => { itemsHtml += `<li class="text-xs text-gray-600 dark:text-gray-300 flex justify-between"><span>${item.qty}x ${item.name} (${item.warrantyType})</span> <span>${formatRupiah(item.finalPrice * item.qty)}</span></li>`; });
                 container.innerHTML += `
-                    <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div class="bg-white dark:bg-cardbg rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
                         <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-100 dark:border-gray-700">
                             <div><span class="text-[10px] font-bold bg-green-100 text-green-600 px-2 py-0.5 rounded">Sukses</span><p class="text-[10px] text-gray-400 mt-1">${order.date}</p></div>
                             <span class="font-bold text-brand text-sm">${formatRupiah(order.total)}</span>
                         </div>
-                        <ul class="space-y-1 mb-3">${itemsHtml}</ul>
-                        <button onclick="reorderHistory('${order.orderId}')" class="w-full text-xs font-bold text-brand bg-indigo-50 dark:bg-slate-800 py-2 rounded-lg hover:bg-indigo-100 dark:hover:bg-slate-700 transition">Order Lagi</button>
+                        <ul class="space-y-1 mb-3 flex-1">${itemsHtml}</ul>
+                        <button onclick="reorderHistory('${order.orderId}')" class="w-full text-xs font-bold text-brand bg-indigo-50 dark:bg-slate-800 py-2 rounded-lg hover:bg-indigo-100 dark:hover:bg-slate-700 transition mt-auto">Order Lagi</button>
                     </div>`;
             });
         }
@@ -1021,7 +1044,8 @@ const TEXT_WARRANTY_PREMIUM = `
             cart.forEach((item, index) => {
                 let itemTotal = item.finalPrice * item.qty;
                 total += itemTotal;
-                message += `*${index + 1}. ${item.name} (${item.qty}x)*\n`;
+                // NEW: Added price per item to text format
+                message += `*${index + 1}. ${item.name} (${item.qty}x)* - ${formatRupiah(itemTotal)}\n`;
                 message += `   🛡️ ${item.warrantyType}\n`;
                 if(item.target !== '-') message += `   🔗 Target: ${item.target}\n`;
                 if(item.isComment) {
@@ -1230,7 +1254,7 @@ const TEXT_WARRANTY_PREMIUM = `
             testimonials.forEach(t => {
                 let stars = ''; for(let i=0; i<5; i++) stars += `<i class="fa-solid fa-star text-yellow-400"></i>`; 
                 container.innerHTML += `
-                    <div class="min-w-[280px] bg-white dark:bg-cardbg p-4 rounded-xl border border-gray-100 dark:border-gray-700 snap-center shadow-sm">
+                    <div class="min-w-[280px] md:min-w-[350px] bg-white dark:bg-cardbg p-4 rounded-xl border border-gray-100 dark:border-gray-700 snap-center shadow-sm">
                         <div class="flex items-center gap-3 mb-2">
                             <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-md">${t.name.charAt(0)}</div>
                             <div><h4 class="font-bold text-xs dark:text-white line-clamp-1">${t.name}</h4><p class="text-[10px] text-gray-400 uppercase tracking-wide">${t.role}</p></div>
@@ -1266,7 +1290,8 @@ const TEXT_WARRANTY_PREMIUM = `
             renderMursun();
             initDraggableDrawer();
             initBannerScroll();
-            initCartShake(); // Start shake animation logic
+            initTestiScroll(); // New Scroll Testi
+            initCartShake(); 
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun';
@@ -1276,7 +1301,7 @@ const TEXT_WARRANTY_PREMIUM = `
 
     <!-- TOP NAV -->
     <nav class="fixed top-0 w-full z-40 glass border-b border-gray-200 dark:border-slate-800">
-        <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <img src="logo.png" alt="Logo" class="w-10 h-10 rounded-lg object-contain bg-white/50 dark:bg-slate-800 p-0.5">
                 <div>
@@ -1297,8 +1322,8 @@ const TEXT_WARRANTY_PREMIUM = `
         </div>
     </nav>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="max-w-md mx-auto pt-16 px-4 pb-24 min-h-screen relative">
+    <!-- MAIN CONTENT AREA - RESPONSIVE CONTAINER -->
+    <main class="w-full max-w-7xl mx-auto pt-16 px-4 pb-24 min-h-screen relative">
         
         <!-- === VIEW: HOME === -->
         <div id="view-home" class="tab-content active space-y-5">
@@ -1310,11 +1335,11 @@ const TEXT_WARRANTY_PREMIUM = `
                     <span class="text-[10px] font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">Terjual 10.000+ Pesanan</span>
                 </div>
                 <h2 class="text-3xl font-black text-gray-800 dark:text-white leading-tight">Bikin Sosmedmu <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-500">Makin Keren!</span></h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Pusat kebutuhan digital terlengkap. Layanan suntik sosmed instan & aplikasi premium murah, high quality dan bergaransi.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Pusat kebutuhan digital terlengkap. Layanan suntik sosmed instan & aplikasi premium murah, high quality dan bergaransi.</p>
             </div>
 
             <!-- 3 FITUR UTAMA -->
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-3 max-w-4xl mx-auto">
                 <div class="bg-blue-50 dark:bg-slate-800 p-3 rounded-xl border border-blue-100 dark:border-slate-700 text-center shadow-sm">
                     <i class="fa-solid fa-bolt text-blue-500 text-lg mb-1"></i>
                     <p class="text-[10px] font-bold text-gray-700 dark:text-gray-300">Proses Cepat</p>
@@ -1333,7 +1358,7 @@ const TEXT_WARRANTY_PREMIUM = `
             <div id="banner-container" class="flex overflow-x-auto snap-x no-scrollbar gap-3 pb-2 -mx-4 px-4 scroll-smooth">
                 
                 <!-- 1. YOUTUBE PREMIUM -->
-                <div class="min-w-[85%] snap-center bg-gradient-to-r from-red-600 to-red-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-red-500/20 cursor-pointer group" onclick="openInputDrawer(501)">
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center bg-gradient-to-r from-red-600 to-red-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-red-500/20 cursor-pointer group" onclick="openInputDrawer(501)">
                     <div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         <i class="fa-brands fa-youtube text-8xl"></i>
                     </div>
@@ -1348,7 +1373,7 @@ const TEXT_WARRANTY_PREMIUM = `
                 </div>
 
                 <!-- 2. BANNER PROMO -->
-                <div class="min-w-[85%] snap-center bg-gradient-to-br from-orange-400 to-pink-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-orange-500/20 cursor-pointer group" onclick="setFilter('promo')">
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center bg-gradient-to-br from-orange-400 to-pink-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-orange-500/20 cursor-pointer group" onclick="setFilter('promo')">
                     <div class="absolute -right-6 -bottom-6 opacity-20 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         <i class="fa-solid fa-fire text-8xl"></i>
                     </div>
@@ -1363,7 +1388,7 @@ const TEXT_WARRANTY_PREMIUM = `
                 </div>
 
                 <!-- 3. PAKET FYP -->
-                <div class="min-w-[85%] snap-center bg-gradient-to-br from-gray-900 to-black rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-gray-500/20 cursor-pointer group border border-gray-800" onclick="setFilter('fyp')">
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center bg-gradient-to-br from-gray-900 to-black rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-gray-500/20 cursor-pointer group border border-gray-800" onclick="setFilter('fyp')">
                     <div class="absolute -right-4 -bottom-4 opacity-30 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         <i class="fa-brands fa-tiktok text-8xl text-gray-600"></i>
                     </div>
@@ -1381,7 +1406,7 @@ const TEXT_WARRANTY_PREMIUM = `
                 </div>
 
                 <!-- 4. APK PREMIUM -->
-                <div class="min-w-[85%] snap-center bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-yellow-500/20 cursor-pointer group" onclick="setFilter('premium')">
+                <div class="min-w-[85%] md:min-w-[45%] lg:min-w-[30%] snap-center bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-yellow-500/20 cursor-pointer group" onclick="setFilter('premium')">
                     <div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         <i class="fa-solid fa-crown text-8xl"></i>
                     </div>
@@ -1418,7 +1443,8 @@ const TEXT_WARRANTY_PREMIUM = `
                 </div>
             </div>
 
-            <div id="product-container" class="grid grid-cols-1 gap-3 min-h-[300px]"></div>
+            <!-- RESPONSIVE PRODUCT GRID -->
+            <div id="product-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-h-[300px]"></div>
 
             <section class="bg-white dark:bg-cardbg rounded-2xl p-5 border border-gray-100 dark:border-gray-700">
                 <div onclick="toggleAccordion('tut-order')" class="flex items-center justify-between cursor-pointer">
@@ -1448,14 +1474,14 @@ const TEXT_WARRANTY_PREMIUM = `
                 <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl -mr-10 -mt-10"></div>
                 <div class="absolute bottom-0 left-0 w-24 h-24 bg-black opacity-10 rounded-full blur-2xl -ml-10 -mb-10"></div>
             </div>
-            <div id="mursun-container" class="space-y-4"></div>
+            <div id="mursun-container" class="space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3"></div>
             <div class="h-10"></div>
         </div>
 
         <div id="view-history" class="tab-content hidden space-y-4">
             <h2 class="font-bold text-xl dark:text-white">Riwayat Pesanan</h2>
             <div class="bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl border border-blue-100 dark:border-slate-700 flex gap-3 items-start"><i class="fa-solid fa-circle-info text-blue-500 mt-0.5"></i><p class="text-xs text-gray-600 dark:text-gray-300">Riwayat ini tersimpan lokal di perangkat ini.</p></div>
-            <div id="history-list" class="space-y-3"></div>
+            <div id="history-list" class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0"></div>
         </div>
 
         <div id="view-contact" class="tab-content hidden space-y-6">
@@ -1540,7 +1566,7 @@ const TEXT_WARRANTY_PREMIUM = `
 
     <!-- BOTTOM NAVIGATION -->
     <div class="fixed bottom-0 w-full z-40 glass-nav pb-safe border-t border-gray-200 dark:border-slate-800">
-        <div class="max-w-md mx-auto grid grid-cols-4 h-16">
+        <div class="max-w-md md:max-w-lg mx-auto grid grid-cols-4 h-16">
             <button onclick="switchTab('home')" class="flex flex-col items-center justify-center gap-1 group"><i id="nav-home" class="fa-solid fa-house text-xl text-brand dark:text-white transition group-hover:-translate-y-1 nav-item"></i><span class="text-[9px] font-medium text-gray-500 dark:text-gray-400">Beranda</span></button>
             <button onclick="switchTab('mursun')" class="flex flex-col items-center justify-center gap-1 group"><i id="nav-mursun" class="fa-solid fa-graduation-cap text-xl text-gray-400 transition group-hover:-translate-y-1 nav-item"></i><span class="text-[9px] font-medium text-gray-500 dark:text-gray-400">Murid Suntik</span></button>
             <button onclick="switchTab('history')" class="flex flex-col items-center justify-center gap-1 group"><i id="nav-history" class="fa-solid fa-clock-rotate-left text-xl text-gray-400 transition group-hover:-translate-y-1 nav-item"></i><span class="text-[9px] font-medium text-gray-500 dark:text-gray-400">Riwayat</span></button>
